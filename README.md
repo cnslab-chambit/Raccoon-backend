@@ -1,4 +1,6 @@
-![image](https://user-images.githubusercontent.com/85841791/221329070-b28a58e9-2aab-4e9c-b2e7-568839fa424e.png)
+<p align="center">
+<img src="https://user-images.githubusercontent.com/85841791/221329070-b28a58e9-2aab-4e9c-b2e7-568839fa424e.png" width="70%">
+</p>
 
 
 # AI기반 이상형 추천 애플리케이션
@@ -23,6 +25,8 @@
 
 김성지(kim-sung-jee)
 
+---
 
-
-![image](https://user-images.githubusercontent.com/85841791/221329325-42524824-138f-4e2d-b370-512163691569.png)
+<p align="center">
+<img src="https://user-images.githubusercontent.com/85841791/221329325-42524824-138f-4e2d-b370-512163691569.png">
+</p>
