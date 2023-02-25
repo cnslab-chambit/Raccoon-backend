@@ -1,5 +1,4 @@
-# RecommendedByGPT
-2023 소프트웨어학과 졸업작품 (팀명미정) 팀
+![image](https://user-images.githubusercontent.com/85841791/221329070-b28a58e9-2aab-4e9c-b2e7-568839fa424e.png)
 
 
 # AI기반 이상형 추천 애플리케이션
