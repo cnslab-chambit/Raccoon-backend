@@ -14,3 +14,12 @@
 ## 일정
 
 ## 팀원
+
+천민재(minjae88)
+김세민(seminss)
+최우석(0wschoi0)
+김성지(kim-sung-jee)
+
+
+
+![image](https://user-images.githubusercontent.com/85841791/221329325-42524824-138f-4e2d-b370-512163691569.png)
