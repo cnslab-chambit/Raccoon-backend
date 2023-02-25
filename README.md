@@ -16,8 +16,11 @@
 ## 팀원
 
 천민재(minjae88)
+
 김세민(seminss)
+
 최우석(0wschoi0)
+
 김성지(kim-sung-jee)
 
 
