@@ -25,13 +25,13 @@
 
 ## 팀원
 
-천민재(minjae88)
+천민재[(minjae88)](https://github.com/minjae88)
 
-김세민(seminss)
+김세민[(seminss)](https://github.com/seminss)
 
-최우석(0wschoi0)
+최우석[(0wschoi0)](https://github.com/0wschoi0)
 
-김성지(kim-sung-jee)
+김성지[(kim-sung-jee)](https://github.com/kim-sung-jee)
 
 ---
 
