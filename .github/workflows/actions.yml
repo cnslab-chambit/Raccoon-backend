@@ -30,22 +30,25 @@ jobs:
 
     - name: yml-api
       run: |
-        cd raccoon-api/src/main/resources
-        touch ./application.properties
+        cd raccoon-api/src/main/
+        mkdir /resources
+        touch ./resources/application.properties
         echo "${{ secrets.PROPERTIES_API }}" > ./application.properties
       shell: bash
     
     - name: yml-domain
       run: |
-        cd ../../../../raccoon-domain/src/main/resources
-        touch ./application-domain.properties
+        cd ../../../../raccoon-domain/src/main/
+        mkdir /resources
+        touch ./resources/application-domain.properties
         echo "${{ secrets.PROPERTIES_DOMAIN }}" > ./application-domain.properties
       shell: bash
       
     - name: yml-infra
       run: |
-        cd ../../../../raccoon-infra/src/main/resources
-        touch ./application-infra.properties
+        cd ../../../../raccoon-infra/src/main/
+        mkdir /resources
+        touch ./resources/application-infra.properties
         echo "${{ secrets.PROPERTIES_INFRA }}" > ./application-infra.properties
       shell: bash
   
