@@ -1,31 +1,5 @@
 server:
   shutdown: graceful
-spring:
-  lifecycle:
-    timeout-per-shutdown-phase: 20s
-  profiles:
-    include: domain, core
-
----
-spring:
-  config:
-    activate:
-      on-profile: local
-  servlet:
-    multipart:
-      maxFileSize: 50MB
-      maxRequestSize: 50MB
----
-spring:
-  config:
-    activate:
-      on-profile: prod
-  servlet:
-    multipart:
-      maxFileSize: 50MB
-      maxRequestSize: 50MB
-
-server:
   tomcat:
     basedir: .
     accesslog:
@@ -36,3 +10,23 @@ server:
       suffix: .log
       rotate: true
       rename-on-rotate: true
+---
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 20s
+  servlet:
+    multipart:
+      maxFileSize: 50MB
+      maxRequestSize: 50MB
+---
+
+jwt:
+  secret: agalkseo8agilskdjglkaioAioSeofsklfkalsklfkllkasdgioAEKLklkaegklLJF90S
+  ttl: 3600000000
+
+logging:
+  level:
+    org.hibernate:
+      type.descriptor.sql: trace #show parameter binding
+      SQL: DEBUG
+

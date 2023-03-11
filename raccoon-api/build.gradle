@@ -1,6 +1,0 @@
-dependencies {
-    implementation project(path:':raccoon-domain')
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-}
-
-

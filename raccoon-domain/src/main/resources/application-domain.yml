@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://raccoon-db-1.csj0izwnwgqx.ap-northeast-2.rds.amazonaws.com:3306/raccoon?allowPublicKeyRetrieval=true&useSSL=false
+    username: raccoon
+    password: raccoon2023!
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true #To beautify or pretty print the SQL
+        show_sql: true #show sql
