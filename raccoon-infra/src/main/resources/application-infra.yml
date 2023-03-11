@@ -1,4 +1,0 @@
-kakao:
-  client-id: 94991ae1814571abf174694435c028a7
-  redirect-url: http://localhost:8080/login/oauth2/code/kakao
-  secret: bngjCeiyke2hqpIloXHRfIsPvDKKS296
