@@ -28,6 +28,16 @@ subprojects{
 		mavenCentral()
 	}
 
+	ext {
+		springCloudVersion = "2021.0.1"
+	}
+
+	dependencyManagement {
+		imports {
+			mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+		}
+	}
+
 	dependencies {
 		compileOnly 'org.projectlombok:lombok'
 		annotationProcessor 'org.projectlombok:lombok'
@@ -41,3 +51,63 @@ subprojects{
 
 }
 
+project(':raccoon-api'){
+	dependencies {
+		implementation project(path:':raccoon-common')
+		implementation project(path:':raccoon-domain')
+		implementation 'org.springframework.boot:spring-boot-starter-web'
+		implementation 'org.springframework.boot:spring-boot-starter-security'
+		implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+		implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+		runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+		runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+
+		testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+		testImplementation 'com.epages:restdocs-api-spec-mockmvc:0.16.2'
+		testImplementation 'org.springframework.security:spring-security-test'
+
+	}
+}
+project(':raccoon-domain'){
+	bootJar {
+		enabled = true
+	}
+
+	jar {
+		enabled = true
+	}
+	dependencies {
+		implementation project(path:':raccoon-common')
+		implementation project(path:':raccoon-infra')
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+		implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
+	}
+}
+
+project(':raccoon-infra'){
+	bootJar {
+		enabled = false
+	}
+
+	jar {
+		enabled = true
+	}
+	dependencies {
+		implementation project(path:':raccoon-common')
+		implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+		implementation 'com.amazonaws:aws-java-sdk-s3:1.12.362'
+		implementation group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
+	}
+}
+
+project(':raccoon-common'){
+	bootJar {
+		enabled = false
+	}
+	jar {
+		enabled = true
+	}
+	dependencies {
+	}
+}
