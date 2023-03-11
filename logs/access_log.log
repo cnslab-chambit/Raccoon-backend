@@ -34,3 +34,17 @@ API-access_log 2023-03-11 12:52:45.356 - GET /api/v1/oauth/kakao HTTP/1.1 302 - 
 API-access_log 2023-03-11 12:52:49.134 - GET /login/oauth2/code/kakao?code=I3Cthyiqfz934JDKXK7F4rXCG99NHMagnrweYCJaSZaEVR9HDLu_iDShGQQsPw8QBJM19go9dGkAAAGGzsyyMA HTTP/1.1 200 - 107
 API-access_log 2023-03-11 14:33:37.349 - GET /api/v1/oauth/kakao HTTP/1.1 302 - 233
 API-access_log 2023-03-11 14:33:41.134 - GET /login/oauth2/code/kakao?code=VOHndrJPzUMi1CBq94Zs4vfIKtFVfN00GQ5g4ebfsSO06dOVkJNOezCNymUgFIgZozYaVwo9dZsAAAGGzykNOg HTTP/1.1 200 - 635
+API-access_log 2023-03-11 15:08:43.192 - GET /login/oauth2/code/kakao?code=ZV8KIhj-v-Kt_FyVWDCPt_bPEjrhCPlIFY84Mg0lKUCcRg4eZb2XMXPZ4ul4kfppahTKTwoqJRAAAAGGz0keqg HTTP/1.1 500 287 1035
+API-access_log 2023-03-11 15:08:56.788 - GET /api/v1/oauth/kakao HTTP/1.1 302 - 3
+API-access_log 2023-03-11 15:08:57.133 - GET /login/oauth2/code/kakao?code=0v4VPPKgnPUmYKV2rXs9C4ZyjGRnCh6WHNec_6F9HhmD0tS8Dte3w8qnyp3NxyuY0kN3vQoqJRAAAAGGz0lYQw HTTP/1.1 200 54 283
+API-access_log 2023-03-11 15:08:57.668 - GET /login/oauth2/code/kakao?code=IMwvYWV9DVSwyazU13bETGNRjA8HSMXMxUJSM85inZsdciUKV3OpF9XehPBOfBTsJTB0IwoqJRAAAAGGz0la8A HTTP/1.1 200 54 131
+API-access_log 2023-03-11 15:09:49.397 - GET /api/v1/oauth/kakao HTTP/1.1 302 - 2
+API-access_log 2023-03-11 15:09:49.676 - GET /login/oauth2/code/kakao?code=cNEJIaGcItfRPZ-hkw-agfvCw0lGmoSHFZSNGKL8EDwXy-ajfN2qRg7sJeaPuPvOm-QL3Ao9c00AAAGGz0ol0A HTTP/1.1 500 287 217
+API-access_log 2023-03-11 15:10:45.977 - GET /api/v1/oauth/kakao HTTP/1.1 302 - 99
+API-access_log 2023-03-11 15:10:46.873 - GET /login/oauth2/code/kakao?code=adulZm7FdrM9cDWnEDdEg3MTvrVEYPWXnHYmEUAlkObKvNt2QRaEMIl0KYVhNz5tFHneBgo9c04AAAGGz0sC0w HTTP/1.1 500 287 836
+API-access_log 2023-03-11 15:11:38.113 - GET /api/v1/oauth/kakao HTTP/1.1 302 - 93
+API-access_log 2023-03-11 15:11:39.113 - GET /login/oauth2/code/kakao?code=qZ-WrXKlXFRsqoopLKMoHsp4kSSYPxuCcH5M7YFrnPEQFVDmnfn7gw8ABlKsDpfHZaOc8go9dNoAAAGGz0vOkw HTTP/1.1 200 243 908
+API-access_log 2023-03-11 15:13:17.604 - GET /api/v1/oauth/kakao HTTP/1.1 302 - 94
+API-access_log 2023-03-11 15:13:18.512 - GET /login/oauth2/code/kakao?code=reuK1shFMgbTcdTEU358areeZdai8Bpm_qYbT7i6dfaEpfvrXq0HncgPOqVm5nN4VqPGgQo9dVoAAAGGz01TJw HTTP/1.1 200 243 840
+API-access_log 2023-03-11 15:13:28.248 - GET /api/v1/oauth/kakao HTTP/1.1 302 - 2
+API-access_log 2023-03-11 15:13:28.550 - GET /login/oauth2/code/kakao?code=y_ebTLeDfmduTURIRUaWMSpSB3qnD1kdjQLx1Trt1SWN5UJDW4OUMQ7-RpXGLO70dXMx9Qo9dVoAAAGGz018pg HTTP/1.1 200 243 239

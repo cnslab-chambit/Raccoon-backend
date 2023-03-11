@@ -7,6 +7,6 @@ import lombok.Data;
 @AllArgsConstructor(staticName = "of")
 public class UserSignUpResponse {
     private Long userId;
-    private boolean isAlreadySignedUp;
     private String accessToken;
+    private boolean isAlreadySignedUp;
 }

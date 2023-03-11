@@ -25,4 +25,13 @@ public class ApiResponse<T> {
         );
     }
 
+    public static<T> ApiResponse<T> ok(T data){
+        return new ApiResponse<>(
+                RetConsts.NRM000,
+                RetConsts.NRM000.getDescription(),
+                RetConsts.NRM000.getCode(),
+                data
+        );
+    }
+
 }

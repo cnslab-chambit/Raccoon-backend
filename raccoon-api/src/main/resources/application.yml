@@ -19,6 +19,11 @@ spring:
       maxFileSize: 50MB
       maxRequestSize: 50MB
 ---
+
+jwt:
+  secret: agalkseo8agilskdjglkaioAioSeofsklfkalsklfkllkasdgioAEKLklkaegklLJF90S
+  ttl: 3600000000
+
 logging:
   level:
     org.hibernate:

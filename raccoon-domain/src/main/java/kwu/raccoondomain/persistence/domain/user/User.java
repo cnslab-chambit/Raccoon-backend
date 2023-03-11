@@ -1,5 +1,6 @@
 package kwu.raccoondomain.persistence.domain.user;
 
+import kwu.raccoondomain.dto.UserSignUpDto;
 import kwu.raccoondomain.persistence.domain.user.enums.Gender;
 import kwu.raccoondomain.persistence.domain.user.enums.VendorType;
 import lombok.AccessLevel;
@@ -18,6 +19,9 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
+    @Column(name = "vendor_id")
+    private String vendorId;
+
     @Column(name = "vendor_type")
     @Enumerated(value = EnumType.STRING)
     private VendorType vendorType;
@@ -34,4 +38,14 @@ public class User {
 
     @Column(name = "age")
     private Long age;
+
+    public static User from(UserSignUpDto userSignUpDto){
+        User user = new User();
+        user.vendorId = userSignUpDto.getVendorId();
+        user.vendorType = userSignUpDto.getVendorType();
+        user.email = userSignUpDto.getEmail();
+
+        return user;
+    }
+
 }
