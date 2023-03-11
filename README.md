@@ -6,7 +6,7 @@
  
 [//]: # ()
 [//]: # (---)
-# MSA 아키텍처에 기반한 이상형 추천 AI 서비스 
+# 클라우드네이티브 아키텍처에 기반한 이상형 추천 AI 서비스 
 
 > ##  프로젝트 개요
 ### 1. 프로젝트 명
@@ -37,8 +37,6 @@ AI 기반 이상형 추천 소개팅 어플리케이션
 
 [![애플리케이션 설계도](https://user-images.githubusercontent.com/85841791/221388949-2063f05b-81bb-4d9d-96ec-1967dddecf6d.png)
 ](https://user-images.githubusercontent.com/85841791/221388824-3de3e2ec-e214-44be-a501-d11d98c2a12d.jpg)
-
-> ## 클라우드 아키텍쳐(aws사용)
 
 
 > ## To-do List
