@@ -31,6 +31,7 @@ jobs:
     - name: yml-api
       run: |
         cd raccoon-api/src/main/
+        mkdir /resources
         touch ./resources/application.properties
         echo "${{ secrets.PROPERTIES_API }}" > ./application.properties
       shell: bash
@@ -38,6 +39,7 @@ jobs:
     - name: yml-domain
       run: |
         cd ../../../../raccoon-domain/src/main/
+        mkdir /resources
         touch ./resources/application-domain.properties
         echo "${{ secrets.PROPERTIES_DOMAIN }}" > ./application-domain.properties
       shell: bash
@@ -45,6 +47,7 @@ jobs:
     - name: yml-infra
       run: |
         cd ../../../../raccoon-infra/src/main/
+        mkdir /resources
         touch ./resources/application-infra.properties
         echo "${{ secrets.PROPERTIES_INFRA }}" > ./application-infra.properties
       shell: bash
