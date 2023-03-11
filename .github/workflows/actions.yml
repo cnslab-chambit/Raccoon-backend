@@ -31,8 +31,8 @@ jobs:
     - name: yml-api
       run: |
         cd raccoon-api/src/main/resources/
-        touch ./application.properties
-        echo "${{ secrets.PROPERTIES_API }}" > ./application.properties
+        touch ./application-api.properties
+        echo "${{ secrets.PROPERTIES_API }}" > ./application-api.properties
       shell: bash
     
     - name: yml-domain
