@@ -38,9 +38,10 @@ AI 기반 이상형 추천 소개팅 어플리케이션
 [![애플리케이션 설계도](https://user-images.githubusercontent.com/85841791/221388949-2063f05b-81bb-4d9d-96ec-1967dddecf6d.png)
 ](https://user-images.githubusercontent.com/85841791/221388824-3de3e2ec-e214-44be-a501-d11d98c2a12d.jpg)
 
+![img.png](img.png)
 
 > ## To-do List
-> 
+
 > ## 일정
 4주차: 스토리보드 작성, 클라우드 환경 및 설계, Figma를 활용한 UI/UX 설계, 기본 틀 작성
 

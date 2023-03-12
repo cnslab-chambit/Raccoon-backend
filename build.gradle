@@ -51,6 +51,7 @@ subprojects{
 
 }
 
+//서로 다른 모듈 간에 의존 관계 주입
 project(':raccoon-api'){
 	dependencies {
 		implementation project(path:':raccoon-common')
