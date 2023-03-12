@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 @RestController
 @RequiredArgsConstructor
 @Slf4j
@@ -20,7 +23,7 @@ public class UserSignUpController {
 //    }
 
     @GetMapping("/login/oauth2/code/kakao")
-    public String aaa(@RequestParam String code){
-        return "redirect:com.raccoon.sign://success?code="+code;
+    public void aaa(@RequestParam String code, HttpServletResponse response) throws IOException {
+        response.sendRedirect("com.raccoon.sign://success?code="+code);
     }
 }
