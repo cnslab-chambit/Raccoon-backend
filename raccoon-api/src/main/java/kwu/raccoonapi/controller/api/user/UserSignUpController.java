@@ -21,6 +21,6 @@ public class UserSignUpController {
 
     @GetMapping("/login/oauth2/code/kakao")
     public String aaa(@RequestParam String code){
-        return code;
+        return "redirect:com.raccoon.sign://success?code="+code;
     }
 }
