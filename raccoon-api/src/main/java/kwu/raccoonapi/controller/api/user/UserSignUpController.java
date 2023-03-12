@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class UserSignUpController {
     private final UserFacadeService userFacadeService;
+//    @GetMapping("/login/oauth2/code/kakao")
+//    public ApiResponse<?> signUpWithKakaoLocal(@RequestParam String code){
+//        return ApiResponse.ok(userFacadeService.signupWithOauth(code,VendorType.KAKAO));
+//    }
+
     @GetMapping("/login/oauth2/code/kakao")
-    public ApiResponse<?> signUpWithKakao(@RequestParam String code){
-        return ApiResponse.ok(userFacadeService.signupWithOauth(code,VendorType.KAKAO));
+    public String aaa(@RequestParam String code){
+        return code;
     }
 }

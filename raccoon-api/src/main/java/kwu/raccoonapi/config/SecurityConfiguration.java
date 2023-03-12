@@ -24,17 +24,13 @@ public class SecurityConfiguration {
     private final String SIGNUP_URL = "/api/v1/oauth/**";
 
 
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer(){
-        return web -> web.ignoring()
-                .antMatchers(HttpMethod.GET,SIGNUP_URL);
-    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         return http.authorizeRequests()
                 .antMatchers(SIGNUP_URL).permitAll()
+                .antMatchers("/login/**").permitAll()
                 .and().build();
     }
 

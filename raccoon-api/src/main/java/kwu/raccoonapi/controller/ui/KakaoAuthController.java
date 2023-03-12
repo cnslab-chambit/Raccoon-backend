@@ -41,7 +41,6 @@ public class KakaoAuthController {
 
     @GetMapping("/api/v1/oauth/kakao")
     public void redirect(HttpServletResponse response) throws IOException{
-        System.out.println(authRequestUrl);
         response.sendRedirect(authRequestUrl);
     }
 }
