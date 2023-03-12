@@ -34,6 +34,7 @@ public class KakaoInfraService {
     }
 
     public String getAccessToken(String code){
+        System.out.println(code+"code"+"코드입니다");
         return kakaoAuthApi.getAccessToken(AUTH_CODE,clientId,redirectUrl,code,clientSecret).getAccessToken();
     }
 

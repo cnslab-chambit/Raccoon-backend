@@ -19,6 +19,7 @@ public class UserSignUpController {
     private final UserFacadeService userFacadeService;
     @GetMapping("/login/oauth2/code/kakao")
     public ApiResponse<?> signUpWithKakaoLocal(@RequestParam String code){
+        System.out.println(code+"코드입니다.");
         return ApiResponse.ok(userFacadeService.signupWithOauth(code,VendorType.KAKAO));
     }
 
