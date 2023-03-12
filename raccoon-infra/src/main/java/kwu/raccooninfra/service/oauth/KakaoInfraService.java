@@ -29,6 +29,7 @@ public class KakaoInfraService {
     private String clientSecret;
 
     public KakaoProfileResponse getKakaoAccount(String accessToken){
+        System.out.println(accessToken+"accessToken입니다@@@@@@@@@@@@");
         return kakaoProfileApi.getKakaoUser(BEARER.concat(" "+accessToken));
     }
 
