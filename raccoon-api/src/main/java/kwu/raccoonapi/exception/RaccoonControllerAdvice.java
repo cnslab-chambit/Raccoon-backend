@@ -1,5 +1,6 @@
 package kwu.raccoonapi.exception;
 
+import kwu.raccoonapi.dto.ApiResponse;
 import kwu.raccooncommon.exception.RaccoonException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,13 +13,13 @@ public class RaccoonControllerAdvice {
 
     @ExceptionHandler(RaccoonException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String errorHandler(RaccoonException e) {
-        return e.getRetConsts().getDescription();
+    public ApiResponse<?> errorHandler(RaccoonException e) {
+        return ApiResponse.failure(e.getRetConsts(),e.getMessage());
     }
 
     @ExceptionHandler(RaccoonAuthException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String authErrorHandler(RaccoonAuthException e){
-        return e.getRetConsts().getDescription();
+    public ApiResponse<?> authErrorHandler(RaccoonAuthException e){
+        return ApiResponse.failure(e.getRetConsts(),e.getMessage());
     }
 }
