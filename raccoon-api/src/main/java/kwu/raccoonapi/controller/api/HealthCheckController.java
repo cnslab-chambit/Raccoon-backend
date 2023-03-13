@@ -1,6 +1,7 @@
 package kwu.raccoonapi.controller.api;
 
-import lombok.RequiredArgsConstructor;
+import kwu.raccoonapi.config.UserPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,5 +10,12 @@ public class HealthCheckController {
     @GetMapping("/ping")
     public String check(){
         return "pong";
+    }
+
+    @GetMapping("/ping/user")
+    public String userCheck(){
+        UserPrincipal principal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(principal.getUser().getId()+"마마");
+        return principal.getUser().getId().toString();
     }
 }

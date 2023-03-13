@@ -5,7 +5,9 @@ import lombok.Getter;
 @Getter
 public enum RetConsts {
 
-    NRM000(RetStatus.Success,200,"성공");
+    NRM000(RetStatus.Success,200,"성공"),
+    ERR401(RetStatus.Auth,401,"토큰이 휴효하지 않음"),
+    ERR403(RetStatus.Auth,403,"토큰누락");
 
     private RetStatus retStatus;
     private int code;
