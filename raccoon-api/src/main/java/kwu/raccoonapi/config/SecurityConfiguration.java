@@ -29,8 +29,9 @@ import static org.springframework.http.HttpMethod.GET;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
 
-    private final String SIGNUP_URL = "/api/v1/oauth/**";
+    private final String SIGNUP_LOCAL_URL = "/oauth/**";
     private final String PING_PONG_URL = "/ping";
+    private final String SIGNUP_SCHEMA_URL = "/login/**";
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtProvider jwtProvider;
     private final CustomUserDetailsService customUserDetailsService;
@@ -39,7 +40,7 @@ public class SecurityConfiguration {
     public WebSecurityCustomizer webSecurityCustomizer(){
         return web -> web.ignoring()
                 .antMatchers(GET,PING_PONG_URL)
-                .antMatchers(SIGNUP_URL);
+                .antMatchers(SIGNUP_LOCAL_URL,SIGNUP_SCHEMA_URL);
     }
 
     @Bean
