@@ -1,6 +1,6 @@
 package kwu.raccoonapi.config.jwt;
 
-import kwu.raccoonapi.exception.AuthException;
+import kwu.raccoonapi.exception.RaccoonAuthException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONObject;
@@ -19,9 +19,9 @@ import java.io.IOException;
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        commence(response,(AuthException) authException);
+        commence(response,(RaccoonAuthException) authException);
     }
-    private void commence(HttpServletResponse response, AuthException ex) throws IOException {
+    private void commence(HttpServletResponse response, RaccoonAuthException ex) throws IOException {
         response.setContentType("application/json;charset=UTF-8");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         JSONObject body = new JSONObject();

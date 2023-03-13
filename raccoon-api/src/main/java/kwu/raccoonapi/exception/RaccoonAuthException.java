@@ -5,8 +5,8 @@ import lombok.Getter;
 import org.springframework.security.core.AuthenticationException;
 
 @Getter
-public class AuthException extends AuthenticationException {
-    public AuthException(RetConsts retConsts){
+public class RaccoonAuthException extends AuthenticationException {
+    public RaccoonAuthException(RetConsts retConsts){
         super(retConsts.getDescription());
         this.retConsts = retConsts;
     }
