@@ -24,13 +24,21 @@ public class ApiResponse<T> {
                 null
         );
     }
-
     public static<T> ApiResponse<T> ok(T data){
         return new ApiResponse<>(
                 RetConsts.NRM000,
                 RetConsts.NRM000.getDescription(),
                 RetConsts.NRM000.getCode(),
                 data
+        );
+    }
+
+    public static <T> ApiResponse<T> failure(RetConsts status,String message){
+        return new ApiResponse<>(
+                status,
+                message,
+                status.getCode(),
+                null
         );
     }
 
