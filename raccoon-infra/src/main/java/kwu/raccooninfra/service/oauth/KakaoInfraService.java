@@ -29,14 +29,11 @@ public class KakaoInfraService {
     private String clientSecret;
 
     public KakaoProfileResponse getKakaoAccount(String accessToken){
-        System.out.println(accessToken+"accessToken입니다@@@@@@@@@@@@");
         return kakaoProfileApi.getKakaoUser(BEARER.concat(" "+accessToken));
     }
 
     public String getAccessToken(String code){
-        System.out.println(code+"code"+"코드입니다");
         String accessToken = kakaoAuthApi.getAccessToken(AUTH_CODE,clientId,code,clientSecret).getAccessToken();
-        System.out.println(accessToken+"accessToken입니다.");
         return accessToken;
     }
 

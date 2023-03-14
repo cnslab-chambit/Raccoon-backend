@@ -39,7 +39,7 @@ public class SecurityConfiguration {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer(){
         return web -> web.ignoring()
-                .antMatchers(GET,PING_PONG_URL)
+                .antMatchers(PING_PONG_URL)
                 .antMatchers(SIGNUP_LOCAL_URL,SIGNUP_SCHEMA_URL);
     }
 
