@@ -63,9 +63,6 @@ project(':raccoon-api'){
 		implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 		implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 
-//		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//		implementation 'mysql:mysql-connector-java'
-
 		runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
 		runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
 
@@ -87,7 +84,7 @@ project(':raccoon-domain'){
 		implementation project(path:':raccoon-common')
 		implementation project(path:':raccoon-infra')
 		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-		implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
+		implementation 'mysql:mysql-connector-java'
 	}
 }
 

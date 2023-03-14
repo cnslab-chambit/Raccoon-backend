@@ -1,16 +1,21 @@
 package kwu.raccooninfra.service.s3;
 
-import com.amazonaws.AmazonServiceException;
-import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.*;
+import kwu.raccooncommon.consts.ret.RetConsts;
+import kwu.raccooncommon.exception.RaccoonException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLDecoder;
+
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -19,51 +24,44 @@ public class S3Service {
     private String bucket;
     private final AmazonS3 amazonS3;
 
-    public String uploadFile(MultipartFile multipartFile) throws IOException {
-        String fileName = multipartFile.getOriginalFilename();
 
-        //파일 형식 구하기
-        String ext = fileName.split("\\.")[1];
-        String contentType = "";
-
-        //content type을 지정해서 올려주지 않으면 자동으로 "application/octet-stream"으로 고정이 되서 링크 클릭시 웹에서 열리는게 아니라 자동 다운이 시작됨.
-        switch (ext) {
-            case "jpeg":
-                contentType = "image/jpeg";
-                break;
-            case "png":
-                contentType = "image/png";
-                break;
-            case "txt":
-                contentType = "text/plain";
-                break;
-            case "csv":
-                contentType = "text/csv";
-                break;
-        }
-
+    public String upload(MultipartFile multipartFile) {
         try {
-            ObjectMetadata metadata = new ObjectMetadata();
-            metadata.setContentType(contentType);
-
-            //버킷 이름, 저장할 파일 이름, multipartFile을 InputStream 형태로 반환, 메타데이터
-            amazonS3.putObject(new PutObjectRequest(bucket, fileName, multipartFile.getInputStream(), metadata)
-                    .withCannedAcl(CannedAccessControlList.PublicRead));
-        } catch (AmazonServiceException e) {
-            e.printStackTrace();
-        } catch (SdkClientException e) {
-            e.printStackTrace();
+            return this.upload(multipartFile.getInputStream(), multipartFile.getOriginalFilename());
+        } catch (IOException e) {
+            throw new RaccoonException(RetConsts.ERR500);
         }
-
-        //object 정보 가져오기
-        ListObjectsV2Result listObjectsV2Result = amazonS3.listObjectsV2(bucket);
-        List<S3ObjectSummary> objectSummaries = listObjectsV2Result.getObjectSummaries();
-
-        for (S3ObjectSummary object: objectSummaries) {
-            System.out.println("object = " + object.toString());
-        }
-
-        //객체 url 반환
-        return amazonS3.getUrl(bucket, fileName).toString();
     }
+
+    public void delete(String url) {
+        amazonS3.deleteObject(bucket, urlToS3Key(url));
+    }
+
+    private String urlToS3Key(String url) {
+        URL urlObject = null;
+        try {
+            urlObject = new URL(url);
+        } catch (MalformedURLException e) {
+            throw new RaccoonException(RetConsts.ERR501);
+        }
+
+        return URLDecoder.decode(urlObject.getPath().substring(1));
+    }
+    private String upload(InputStream inputStream, String fileName) {
+        String s3FileName = createFileName(fileName);
+        try {
+            ObjectMetadata objMeta = new ObjectMetadata();
+            objMeta.setContentLength(inputStream.available());
+            amazonS3.putObject(bucket, s3FileName, inputStream, objMeta);
+        } catch (IOException e) {
+            throw new RaccoonException(RetConsts.ERR500);
+        }
+
+        return amazonS3.getUrl(bucket, s3FileName).toString();
+    }
+
+    private String createFileName(String originalFileName) {
+        return UUID.randomUUID() + "-" + originalFileName;
+    }
+
 }

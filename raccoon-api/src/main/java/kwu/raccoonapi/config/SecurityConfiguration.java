@@ -31,8 +31,6 @@ public class SecurityConfiguration {
 
     private final String SIGNUP_LOCAL_URL = "/oauth/**";
     private final String PING_PONG_URL = "/ping";
-
-    private final String IMAGE_URL="/image";
     private final String SIGNUP_SCHEMA_URL = "/login/**";
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtProvider jwtProvider;
@@ -41,9 +39,8 @@ public class SecurityConfiguration {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer(){
         return web -> web.ignoring()
-                .antMatchers(GET,PING_PONG_URL)
-                .antMatchers(SIGNUP_LOCAL_URL,SIGNUP_SCHEMA_URL)
-                .antMatchers(IMAGE_URL);
+                .antMatchers(PING_PONG_URL)
+                .antMatchers(SIGNUP_LOCAL_URL,SIGNUP_SCHEMA_URL);
     }
 
     @Bean
