@@ -61,6 +61,10 @@ project(':raccoon-api'){
 		implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
 		implementation 'org.springframework.boot:spring-boot-starter-validation'
 		implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+		implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+
+//		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//		implementation 'mysql:mysql-connector-java'
 
 		runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
 		runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
@@ -100,6 +104,9 @@ project(':raccoon-infra'){
 		implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 		implementation 'com.amazonaws:aws-java-sdk-s3:1.12.362'
 		implementation group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
+//		api 'org.apache.httpcomponents:httpclient:4.5.7'
+		implementation 'org.apache.commons:commons-lang3:3.5'
+
 	}
 }
 
