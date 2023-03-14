@@ -62,7 +62,7 @@ AI 기반 이상형 추천 소개팅 어플리케이션
 
 김성지[(kim-sung-jee)](https://github.com/kim-sung-jee)
 
----
+--- 
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/85841791/221329325-42524824-138f-4e2d-b370-512163691569.png">
