@@ -23,7 +23,7 @@ public class UserSignUpController {
     }
 
     @GetMapping("/login/oauth2/schema/kakao")
-    public void aaa(@RequestParam String code, HttpServletResponse response) throws IOException {
+    public void signUpClientSchema(@RequestParam String code, HttpServletResponse response) throws IOException {
         response.sendRedirect("com.raccoon.sign://success?code="+code);
     }
 }

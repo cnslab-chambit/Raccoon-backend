@@ -1,7 +1,8 @@
 package kwu.raccoonapi.facade.user;
 
 import kwu.raccoonapi.config.jwt.JwtProvider;
-import kwu.raccoonapi.dto.user.UserSignUpResponse;
+import kwu.raccoonapi.dto.user.response.UserSignUpResponse;
+import kwu.raccoonapi.facade.user.assembler.UserAssembler;
 import kwu.raccooncommon.dto.OauthResponse;
 import kwu.raccoondomain.persistence.domain.user.User;
 import kwu.raccoondomain.persistence.domain.user.enums.VendorType;

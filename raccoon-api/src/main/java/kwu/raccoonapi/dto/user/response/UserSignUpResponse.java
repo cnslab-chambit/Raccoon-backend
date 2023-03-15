@@ -1,4 +1,4 @@
-package kwu.raccoonapi.dto.user;
+package kwu.raccoonapi.dto.user.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

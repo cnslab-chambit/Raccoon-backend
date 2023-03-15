@@ -1,15 +1,8 @@
-package kwu.raccoondomain.dto;
+package kwu.raccoondomain.dto.user;
 
-import com.sun.istack.NotNull;
-import kwu.raccoondomain.persistence.domain.user.enums.Gender;
-import kwu.raccoondomain.persistence.domain.user.enums.UserRole;
 import kwu.raccoondomain.persistence.domain.user.enums.VendorType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 
 @Data
 @AllArgsConstructor(staticName = "of")

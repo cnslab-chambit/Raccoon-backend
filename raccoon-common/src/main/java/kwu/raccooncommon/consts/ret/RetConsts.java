@@ -10,7 +10,8 @@ public enum RetConsts {
     ERR403(RetStatus.Auth,403,"토큰누락"),
 
     ERR500(RetStatus.INFRA,500,"파일 업로드 에러"),
-    ERR501(RetStatus.INFRA,501,"파일 url 이상함");
+    ERR501(RetStatus.INFRA,501,"파일 url 이상함"),
+    ERR600(RetStatus.BUSINESS,601,"해당 유저가 없어요");
     private RetStatus retStatus;
     private int code;
     private String description;
