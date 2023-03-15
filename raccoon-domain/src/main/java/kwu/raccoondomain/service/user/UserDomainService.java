@@ -1,7 +1,7 @@
 package kwu.raccoondomain.service.user;
 
 import kwu.raccooncommon.dto.OauthResponse;
-import kwu.raccoondomain.dto.UserSignUpDto;
+import kwu.raccoondomain.dto.user.UserSignUpDto;
 import kwu.raccoondomain.persistence.domain.user.User;
 import kwu.raccoondomain.persistence.domain.user.enums.VendorType;
 import kwu.raccoondomain.persistence.query.UserRepository;
@@ -49,7 +49,7 @@ public class UserDomainService {
     }
 
     public User save(UserSignUpDto userSignUpDto){
-        return userRepository.save(User.from(userSignUpDto));
+        return userRepository.save(User.fromSignUpDto(userSignUpDto));
     }
 
     public User getUserByIdOrElseThrow(Long userId){

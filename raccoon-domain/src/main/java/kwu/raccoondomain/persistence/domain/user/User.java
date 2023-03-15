@@ -1,15 +1,12 @@
 package kwu.raccoondomain.persistence.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
-import kwu.raccoondomain.dto.UserSignUpDto;
-import kwu.raccoondomain.persistence.domain.user.enums.Gender;
-import kwu.raccoondomain.persistence.domain.user.enums.UserRole;
-import kwu.raccoondomain.persistence.domain.user.enums.VendorType;
+import kwu.raccoondomain.dto.user.UserProfileUpdateDto;
+import kwu.raccoondomain.dto.user.UserSignUpDto;
+import kwu.raccoondomain.persistence.domain.user.enums.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -32,13 +29,8 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private VendorType vendorType;
 
-    @Column(name = "use_email")
+    @Column(name = "user_email")
     private String email;
-
-    @Column
-    @Enumerated(EnumType.STRING)
-    @NotNull
-    private UserRole role;
 
     @Column(name = "user_nickname")
     private String nickname;
@@ -47,10 +39,7 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
 
-    @Column(name = "user_location")
-    private String location;
-
-    @Column(name = "use_age")
+    @Column(name = "user_age")
     private Long age;
 
     @Column(name = "user_height")
@@ -64,22 +53,39 @@ public class User {
     private String selfDescription;
 
     @Column(name="smoking_or_not")
-    private boolean smokingStatus;
+    private Boolean smokingStatus;
 
     @Column(name = "user_mbti")
-    private String mbti;
+    @Enumerated(value = EnumType.STRING)
+    private Mbti mbti;
 
-    @Column(name = "what_animal")
-    private String animal;
+    @Column(name = "user_animal")
+    @Enumerated(value = EnumType.STRING)
+    private Animal animal;
 
+    @Column(name = "wanted_animal")
+    @Enumerated(value = EnumType.STRING)
+    private Animal wantedAnimal;
 
-    public static User from(UserSignUpDto userSignUpDto){
+    public static User fromSignUpDto(UserSignUpDto userSignUpDto){
         User user = new User();
         user.vendorId = userSignUpDto.getVendorId();
         user.vendorType = userSignUpDto.getVendorType();
         user.email = userSignUpDto.getEmail();
-
         return user;
+    }
+
+    public void initProfile(UserProfileUpdateDto userProfileUpdateDto,String profileImageUrl){
+        this.nickname = userProfileUpdateDto.getNickname();
+        this.gender = userProfileUpdateDto.getGender();
+        this.age = userProfileUpdateDto.getAge();
+        this.height = userProfileUpdateDto.getHeight();
+        this.profileImageUrl = profileImageUrl;
+        this.selfDescription = userProfileUpdateDto.getSelfDescription();
+        this.smokingStatus = userProfileUpdateDto.getSmokingStatus();
+        this.mbti = userProfileUpdateDto.getMbti();
+        this.animal = userProfileUpdateDto.getAnimal();
+        this.wantedAnimal = userProfileUpdateDto.getWantedAnimal();
     }
 
 }
