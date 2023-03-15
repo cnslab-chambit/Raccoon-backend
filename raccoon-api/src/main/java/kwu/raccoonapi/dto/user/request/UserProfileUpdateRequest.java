@@ -1,5 +1,6 @@
 package kwu.raccoonapi.dto.user.request;
 
+import kwu.raccoondomain.dto.user.UserProfileUpdateDto;
 import kwu.raccoondomain.persistence.domain.user.enums.Animal;
 import kwu.raccoondomain.persistence.domain.user.enums.Gender;
 import kwu.raccoondomain.persistence.domain.user.enums.Mbti;
@@ -7,7 +8,8 @@ import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 @Data
-public class UserOnboardProfileRequest {
+public class UserProfileUpdateRequest {
+    //TODO validation
     private MultipartFile profileImage;
     private String nickname;
     private Gender gender;
@@ -18,4 +20,19 @@ public class UserOnboardProfileRequest {
     private Mbti mbti;
     private Animal animal;
     private Animal wantedAnimal;
+
+    public UserProfileUpdateDto toUserProfileUpdateDto(){
+        return UserProfileUpdateDto.of(
+                profileImage,
+                nickname,
+                gender,
+                age,
+                height,
+                selfDescription,
+                smokingStatus,
+                mbti,
+                animal,
+                wantedAnimal
+        );
+    }
 }

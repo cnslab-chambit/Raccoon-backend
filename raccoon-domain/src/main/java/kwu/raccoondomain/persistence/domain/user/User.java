@@ -75,17 +75,17 @@ public class User {
         return user;
     }
 
-    public void initProfile(UserProfileUpdateDto userProfileUpdateDto,String profileImageUrl){
-        this.nickname = userProfileUpdateDto.getNickname();
-        this.gender = userProfileUpdateDto.getGender();
-        this.age = userProfileUpdateDto.getAge();
-        this.height = userProfileUpdateDto.getHeight();
-        this.profileImageUrl = profileImageUrl;
-        this.selfDescription = userProfileUpdateDto.getSelfDescription();
-        this.smokingStatus = userProfileUpdateDto.getSmokingStatus();
-        this.mbti = userProfileUpdateDto.getMbti();
-        this.animal = userProfileUpdateDto.getAnimal();
-        this.wantedAnimal = userProfileUpdateDto.getWantedAnimal();
+    public void updateProfile(UserProfileUpdateDto userProfileUpdateDto,String profileImageUrl){
+        if(userProfileUpdateDto.getNickname() != null) this.nickname = userProfileUpdateDto.getNickname();
+        if(userProfileUpdateDto.getGender() != null) this.gender = userProfileUpdateDto.getGender();
+        if(userProfileUpdateDto.getAge() != null) this.age = userProfileUpdateDto.getAge();
+        if(userProfileUpdateDto.getHeight() != null) this.height = userProfileUpdateDto.getHeight();
+        if(userProfileUpdateDto.getProfileImage() != null) this.profileImageUrl = profileImageUrl;
+        if(userProfileUpdateDto.getSelfDescription() != null) this.selfDescription = userProfileUpdateDto.getSelfDescription();
+        if(userProfileUpdateDto.getSmokingStatus() != null) this.smokingStatus = userProfileUpdateDto.getSmokingStatus();
+        if(userProfileUpdateDto.getMbti() != null) this.mbti = userProfileUpdateDto.getMbti();
+        if(userProfileUpdateDto.getAnimal() != null) this.animal = userProfileUpdateDto.getAnimal();
+        if(userProfileUpdateDto.getWantedAnimal() != null) this.wantedAnimal = userProfileUpdateDto.getWantedAnimal();
     }
 
 }

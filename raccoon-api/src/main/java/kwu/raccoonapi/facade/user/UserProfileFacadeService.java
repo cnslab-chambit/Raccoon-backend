@@ -1,7 +1,7 @@
 package kwu.raccoonapi.facade.user;
 
-import kwu.raccoonapi.dto.user.request.UserOnboardProfileRequest;
-import kwu.raccoonapi.dto.user.response.UserOnboardProfileResponse;
+import kwu.raccoonapi.dto.user.request.UserProfileUpdateRequest;
+import kwu.raccoonapi.dto.user.response.UserProfileUpdateResponse;
 import kwu.raccoonapi.facade.user.assembler.UserProfileAssembler;
 import kwu.raccoonapi.utils.SecurityUtils;
 import kwu.raccoondomain.service.user.UserProfileDomainService;
@@ -13,10 +13,10 @@ import org.springframework.stereotype.Service;
 public class UserProfileFacadeService {
     private final UserProfileAssembler userProfileAssembler;
     private final UserProfileDomainService userProfileDomainService;
-    public UserOnboardProfileResponse onBoardProfile(UserOnboardProfileRequest request){
+    public UserProfileUpdateResponse updateProfile(UserProfileUpdateRequest request){
         Long userId = userProfileDomainService
-                .onBoardProfile(SecurityUtils.getUser().getId(), userProfileAssembler.toUserOnboardProfileDto(request));
-        return userProfileAssembler.toUserOnboardProfileResponse(userId);
+                .updateProfile(SecurityUtils.getUser().getId(), request.toUserProfileUpdateDto());
+        return userProfileAssembler.toUserProfileUpdateResponse(userId);
     }
 
 }

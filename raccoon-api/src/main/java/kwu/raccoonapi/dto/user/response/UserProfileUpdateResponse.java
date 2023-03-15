@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor(staticName = "of")
-public class UserOnboardProfileResponse {
+public class UserProfileUpdateResponse {
     private Long userId;
 }
