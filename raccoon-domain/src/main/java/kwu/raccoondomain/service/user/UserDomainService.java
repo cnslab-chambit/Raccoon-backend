@@ -52,7 +52,6 @@ public class UserDomainService {
         return userRepository.save(User.from(userSignUpDto));
     }
 
-
     public User getUserByIdOrElseThrow(Long userId){
         //TODO excpetion
         return userRepository.findById(userId).orElseThrow(()->new RuntimeException());
