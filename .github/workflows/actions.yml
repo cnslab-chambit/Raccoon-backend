@@ -77,8 +77,8 @@ jobs:
               docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
               sudo docker pull ${{ secrets.DOCKER_USERNAME }}/raccoon
               docker stop raccoon
-              docker rm nft
-              docker run -d --name nft -p 80:8080 ${{ secrets.DOCKER_USERNAME }}/raccoon
+              docker rm raccoon
+              docker run -d --name raccoon -p 80:8080 ${{ secrets.DOCKER_USERNAME }}/raccoon
               docker logout
 
               
