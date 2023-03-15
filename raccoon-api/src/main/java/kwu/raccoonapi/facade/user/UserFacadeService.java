@@ -44,7 +44,7 @@ public class UserFacadeService {
         return jwtProvider.createToken(userId, List.of());
     }
 
-    private User signupWithOauth(String vendorId,VendorType vendorType,String email){
-        return userDomainService.save(userAssembler.toUserSignUpDto(vendorId, vendorType, email));
+    private User signupWithOauth(String vendorId, VendorType vendorType, String email){
+        return userDomainService.save(userAssembler.toUserSignUpDto(vendorId,vendorType,email));
     }
 }
