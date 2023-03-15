@@ -16,10 +16,10 @@ public class UserProfileDomainService {
     private final UserRepository userRepository;
     private final S3Service s3Service;
     @Transactional
-    public Long onBoardProfile(Long userId, UserProfileUpdateDto userProfileUpdateDto){
+    public Long updateProfile(Long userId, UserProfileUpdateDto userProfileUpdateDto){
         String profileImgUrl = s3Service.upload(userProfileUpdateDto.getProfileImage());
         User user = userRepository.findById(userId).orElseThrow(() -> new RaccoonException(RetConsts.ERR600));
-        user.initProfile(userProfileUpdateDto,profileImgUrl);
+        user.updateProfile(userProfileUpdateDto,profileImgUrl);
         return user.getId();
     }
 }
