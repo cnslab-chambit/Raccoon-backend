@@ -5,6 +5,7 @@ import kwu.raccoonapi.dto.user.response.UserProfileGetResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileUpdateResponse;
 import kwu.raccoonapi.facade.user.assembler.UserProfileAssembler;
 import kwu.raccoonapi.utils.SecurityUtils;
+import kwu.raccoondomain.persistence.domain.user.User;
 import kwu.raccoondomain.service.user.UserProfileDomainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,10 +21,9 @@ public class UserProfileFacadeService {
         return userProfileAssembler.toUserProfileUpdateResponse(userId);
     }
 
-    //User 반환하면 안되고 DTO로 바꿔야 한다.
     public UserProfileGetResponse getResponse(Long request){
-        Long userId= userProfileDomainService.getProfile(request);
-        return userProfileAssembler.toUserProfileGetResponse(userId);
+        User user= userProfileDomainService.getProfile(request);
+        return userProfileAssembler.toUserProfileResponse(user);
     }
 
 }

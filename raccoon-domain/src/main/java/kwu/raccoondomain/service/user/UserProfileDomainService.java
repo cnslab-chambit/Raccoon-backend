@@ -24,8 +24,8 @@ public class UserProfileDomainService {
     }
 
     @Transactional
-    public Long getProfile(Long userId){
+    public User getProfile(Long userId){
         User user = userRepository.findById(userId).orElseThrow(() -> new RaccoonException(RetConsts.ERR600));
-        return user.getId();
+        return user;
     }
 }

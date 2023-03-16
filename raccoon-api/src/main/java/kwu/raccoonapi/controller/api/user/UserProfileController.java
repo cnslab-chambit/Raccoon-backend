@@ -2,6 +2,7 @@ package kwu.raccoonapi.controller.api.user;
 
 import kwu.raccoonapi.dto.ApiResponse;
 import kwu.raccoonapi.dto.user.request.UserProfileUpdateRequest;
+import kwu.raccoonapi.dto.user.response.UserProfileGetResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileUpdateResponse;
 import kwu.raccoonapi.facade.user.UserProfileFacadeService;
 import kwu.raccoondomain.persistence.domain.user.User;
@@ -21,6 +22,7 @@ public class UserProfileController {
     }
     
     @GetMapping(path="/user/{userId}")
-    public User userBean(@PathVariable Long userId){
+    public UserProfileGetResponse userBean(@PathVariable Long userId){
+        return userProfileFacadeService.getResponse(userId);
     }
 }
