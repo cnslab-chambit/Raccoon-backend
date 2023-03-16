@@ -29,18 +29,18 @@ public class UserProfileGetResponse {
     public static UserProfileGetResponse of(User user) {
         UserProfileGetResponse userProfileGetResponse = new UserProfileGetResponse();
 
-        userProfileGetResponse.profileImageUrl= user.getProfileImageUrl();
-        userProfileGetResponse.nickname= user.getNickname();
-        userProfileGetResponse.gender=user.getGender();
-        userProfileGetResponse.age=user.getAge();
-        userProfileGetResponse.height=user.getHeight();
-        userProfileGetResponse.job=user.getJob();
-        userProfileGetResponse.location=user.getLocation();
-        userProfileGetResponse.selfDescription=user.getSelfDescription();
-        userProfileGetResponse.smokingStatus=user.getSmokingStatus();
-        userProfileGetResponse.mbti=user.getMbti();
-        userProfileGetResponse.animal=user.getAnimal();
-        userProfileGetResponse.wantedAnimal=user.getWantedAnimal();
+//        userProfileGetResponse.profileImageUrl= user.getProfileImageUrl();
+//        userProfileGetResponse.nickname= user.getNickname();
+//        userProfileGetResponse.gender=user.getGender();
+//        userProfileGetResponse.age=user.getAge();
+//        userProfileGetResponse.height=user.getHeight();
+//        userProfileGetResponse.job=user.getJob();
+//        userProfileGetResponse.location=user.getLocation();
+//        userProfileGetResponse.selfDescription=user.getSelfDescription();
+//        userProfileGetResponse.smokingStatus=user.getSmokingStatus();
+//        userProfileGetResponse.mbti=user.getMbti();
+//        userProfileGetResponse.animal=user.getAnimal();
+//        userProfileGetResponse.wantedAnimal=user.getWantedAnimal();
 
         return userProfileGetResponse;
     }
