@@ -6,6 +6,7 @@ import kwu.raccoonapi.dto.user.response.UserProfileUpdateResponse;
 import kwu.raccoonapi.facade.user.assembler.UserProfileAssembler;
 import kwu.raccoonapi.utils.SecurityUtils;
 import kwu.raccoondomain.persistence.domain.user.User;
+import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import kwu.raccoondomain.service.user.UserProfileDomainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,9 +22,9 @@ public class UserProfileFacadeService {
         return userProfileAssembler.toUserProfileUpdateResponse(userId);
     }
 
-    public UserProfileGetResponse getResponse(Long request){
-        User user= userProfileDomainService.getProfile(request);
-        return userProfileAssembler.toUserProfileResponse(user);
+    public UserProfileGetResponse getProfile(Long userId){
+        UserProfile userProfile= userProfileDomainService.getProfile(userId);
+        return userProfileAssembler.toUserProfileResponse(userProfile);
     }
 
 }

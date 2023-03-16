@@ -27,13 +27,15 @@ public class UserProfileDomainService {
         UserProfile userProfile = userProfileRepository
                 .findUserProfileByUser(user).orElseThrow(() -> new RaccoonException(RetConsts.ERR600));
 
-        userProfile.updateProfile(userProfileUpdateDto,profileImgUrl);
+        userProfile.updateProfile(user,userProfileUpdateDto,profileImgUrl);
         return user.getId();
     }
 
     @Transactional(readOnly = true)
-    public User getProfile(Long userId){
+    public UserProfile getProfile(Long userId){
         User user = userRepository.findById(userId).orElseThrow(() -> new RaccoonException(RetConsts.ERR600));
-        return user;
+        UserProfile userProfile = userProfileRepository
+                .findUserProfileByUser(user).orElseThrow(() -> new RaccoonException(RetConsts.ERR600));
+        return userProfile;
     }
 }

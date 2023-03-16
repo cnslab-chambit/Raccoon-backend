@@ -22,7 +22,7 @@ public class UserProfileController {
     }
     
     @GetMapping(path="/user/{userId}")
-    public UserProfileGetResponse userBean(@PathVariable Long userId){
-        return userProfileFacadeService.getResponse(userId);
+    public ApiResponse<UserProfileGetResponse> getProfile(@PathVariable Long userId){
+        return ApiResponse.ok(userProfileFacadeService.getProfile(userId));
     }
 }

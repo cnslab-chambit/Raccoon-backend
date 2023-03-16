@@ -1,6 +1,7 @@
 package kwu.raccoonapi.dto.user.response;
 
 import kwu.raccoondomain.persistence.domain.user.User;
+import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import kwu.raccoondomain.persistence.domain.user.enums.Animal;
 import kwu.raccoondomain.persistence.domain.user.enums.Gender;
 import kwu.raccoondomain.persistence.domain.user.enums.Mbti;
@@ -26,21 +27,21 @@ public class UserProfileGetResponse {
     private Animal wantedAnimal;
 
     //user를 parameter로 받아서 response로 바꿔서 반환
-    public static UserProfileGetResponse of(User user) {
+    public static UserProfileGetResponse of(UserProfile userProfile) {
         UserProfileGetResponse userProfileGetResponse = new UserProfileGetResponse();
 
-//        userProfileGetResponse.profileImageUrl= user.getProfileImageUrl();
-//        userProfileGetResponse.nickname= user.getNickname();
-//        userProfileGetResponse.gender=user.getGender();
-//        userProfileGetResponse.age=user.getAge();
-//        userProfileGetResponse.height=user.getHeight();
-//        userProfileGetResponse.job=user.getJob();
-//        userProfileGetResponse.location=user.getLocation();
-//        userProfileGetResponse.selfDescription=user.getSelfDescription();
-//        userProfileGetResponse.smokingStatus=user.getSmokingStatus();
-//        userProfileGetResponse.mbti=user.getMbti();
-//        userProfileGetResponse.animal=user.getAnimal();
-//        userProfileGetResponse.wantedAnimal=user.getWantedAnimal();
+        userProfileGetResponse.profileImageUrl= userProfile.getProfileImageUrl();
+        userProfileGetResponse.nickname= userProfile.getNickname();
+        userProfileGetResponse.gender=userProfile.getGender();
+        userProfileGetResponse.age=userProfile.getAge();
+        userProfileGetResponse.height=userProfile.getHeight();
+        userProfileGetResponse.job=userProfile.getJob();
+        userProfileGetResponse.location=userProfile.getLocation();
+        userProfileGetResponse.selfDescription=userProfile.getSelfDescription();
+        userProfileGetResponse.smokingStatus=userProfile.getSmokingStatus();
+        userProfileGetResponse.mbti=userProfile.getMbti();
+        userProfileGetResponse.animal=userProfile.getAnimal();
+        userProfileGetResponse.wantedAnimal=userProfile.getWantedAnimal();
 
         return userProfileGetResponse;
     }

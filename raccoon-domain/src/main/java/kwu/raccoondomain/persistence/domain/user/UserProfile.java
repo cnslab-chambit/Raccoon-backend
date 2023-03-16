@@ -68,7 +68,8 @@ public class UserProfile {
     @Enumerated(value = EnumType.STRING)
     private Animal wantedAnimal;
 
-    public void updateProfile(UserProfileUpdateDto userProfileUpdateDto,String profileImageUrl){
+    public void updateProfile(User user,UserProfileUpdateDto userProfileUpdateDto,String profileImageUrl){
+        this.user = user;
         if(userProfileUpdateDto.getNickname() != null) this.nickname = userProfileUpdateDto.getNickname();
         if(userProfileUpdateDto.getGender() != null) this.gender = userProfileUpdateDto.getGender();
         if(userProfileUpdateDto.getAge() != null) this.age = userProfileUpdateDto.getAge();
