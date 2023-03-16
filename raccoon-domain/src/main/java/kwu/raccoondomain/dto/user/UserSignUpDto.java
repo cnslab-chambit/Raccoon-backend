@@ -11,8 +11,4 @@ public class UserSignUpDto {
     private VendorType vendorType;
     private String email;
 
-/*    private UserRole role;
-    private String location;
-    private Gender gender;
-    private String profileImageUrl;*/
 }

@@ -49,6 +49,12 @@ public class User {
     @Column(name = "profile_image_url")
     private String profileImageUrl;
 
+    @Column(name="user_job")
+    private String job;
+
+    @Column(name="user_location")
+    private String location;
+
     @Column(name = "self_description")
     private String selfDescription;
 

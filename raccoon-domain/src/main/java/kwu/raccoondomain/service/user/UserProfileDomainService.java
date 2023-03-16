@@ -22,4 +22,10 @@ public class UserProfileDomainService {
         user.updateProfile(userProfileUpdateDto,profileImgUrl);
         return user.getId();
     }
+
+    @Transactional
+    public User getProfile(Long userId){
+        User user = userRepository.findById(userId).orElseThrow(() -> new RaccoonException(RetConsts.ERR600));
+        return user;
+    }
 }
