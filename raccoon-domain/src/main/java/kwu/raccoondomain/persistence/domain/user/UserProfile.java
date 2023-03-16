@@ -24,7 +24,7 @@ public class UserProfile {
     @Column(name = "user_profile_id")
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "userProfile",fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 

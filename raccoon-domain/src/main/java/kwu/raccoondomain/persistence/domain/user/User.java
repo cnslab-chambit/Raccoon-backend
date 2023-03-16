@@ -32,7 +32,7 @@ public class User {
     @Column(name = "user_email")
     private String email;
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "profile_id")
     private UserProfile userProfile;
 
