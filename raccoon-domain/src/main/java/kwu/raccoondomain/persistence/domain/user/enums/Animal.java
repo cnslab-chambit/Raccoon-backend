@@ -1,5 +1,5 @@
 package kwu.raccoondomain.persistence.domain.user.enums;
 
 public enum Animal {
-    DOG,
+    DOG, RABBIT, CAT, DEER, FOX, DINOSAUR, BEAR
 }
