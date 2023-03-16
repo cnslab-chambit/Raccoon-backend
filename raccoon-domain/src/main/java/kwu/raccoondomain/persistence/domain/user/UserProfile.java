@@ -6,6 +6,7 @@ import kwu.raccoondomain.persistence.domain.user.enums.Animal;
 import kwu.raccoondomain.persistence.domain.user.enums.Gender;
 import kwu.raccoondomain.persistence.domain.user.enums.Mbti;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -68,8 +69,12 @@ public class UserProfile {
     @Enumerated(value = EnumType.STRING)
     private Animal wantedAnimal;
 
-    public void updateProfile(User user,UserProfileUpdateDto userProfileUpdateDto,String profileImageUrl){
+
+    public UserProfile(User user){
         this.user = user;
+    }
+
+    public void updateProfile(UserProfileUpdateDto userProfileUpdateDto,String profileImageUrl){
         if(userProfileUpdateDto.getNickname() != null) this.nickname = userProfileUpdateDto.getNickname();
         if(userProfileUpdateDto.getGender() != null) this.gender = userProfileUpdateDto.getGender();
         if(userProfileUpdateDto.getAge() != null) this.age = userProfileUpdateDto.getAge();

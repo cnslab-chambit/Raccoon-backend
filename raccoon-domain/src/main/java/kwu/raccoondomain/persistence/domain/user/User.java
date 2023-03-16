@@ -42,7 +42,7 @@ public class User {
         user.vendorType = userSignUpDto.getVendorType();
         user.email = userSignUpDto.getEmail();
 
-        UserProfile profile = new UserProfile();
+        UserProfile profile = new UserProfile(user);
         user.userProfile = profile;
 
         return user;

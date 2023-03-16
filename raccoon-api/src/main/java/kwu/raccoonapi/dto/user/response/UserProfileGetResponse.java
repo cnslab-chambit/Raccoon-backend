@@ -30,8 +30,8 @@ public class UserProfileGetResponse {
     public static UserProfileGetResponse of(UserProfile userProfile) {
         UserProfileGetResponse userProfileGetResponse = new UserProfileGetResponse();
 
-        userProfileGetResponse.profileImageUrl= userProfile.getProfileImageUrl();
-        userProfileGetResponse.nickname= userProfile.getNickname();
+        userProfileGetResponse.profileImageUrl=userProfile.getProfileImageUrl();
+        userProfileGetResponse.nickname=userProfile.getNickname();
         userProfileGetResponse.gender=userProfile.getGender();
         userProfileGetResponse.age=userProfile.getAge();
         userProfileGetResponse.height=userProfile.getHeight();

@@ -27,7 +27,7 @@ public class UserProfileDomainService {
         UserProfile userProfile = userProfileRepository
                 .findUserProfileByUser(user).orElseThrow(() -> new RaccoonException(RetConsts.ERR600));
 
-        userProfile.updateProfile(user,userProfileUpdateDto,profileImgUrl);
+        userProfile.updateProfile(userProfileUpdateDto,profileImgUrl);
         return user.getId();
     }
 
