@@ -53,6 +53,6 @@ public class UserFacadeService {
     }
 
     public void deleteUser(Long userId) {
-        userDomainService.deleteById(userId);
+        userDomainService.deleteUserById(userId);
     }
 }
