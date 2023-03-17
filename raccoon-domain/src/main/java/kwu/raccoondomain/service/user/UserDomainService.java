@@ -57,4 +57,13 @@ public class UserDomainService {
         return userRepository.findById(userId).orElseThrow(()->new RuntimeException());
     }
 
+    public void deleteById(Long userId){
+        try{
+            userRepository.deleteById(userId);
+        }catch (Exception e) {
+            throw new RuntimeException();
+        }
+//        userRepository.deleteById(userId);
+    }
+
 }
