@@ -3,6 +3,7 @@ package kwu.raccoonapi.facade.user;
 import kwu.raccoonapi.config.jwt.JwtProvider;
 import kwu.raccoonapi.dto.user.response.UserSignUpResponse;
 import kwu.raccoonapi.facade.user.assembler.UserAssembler;
+import kwu.raccoonapi.utils.SecurityUtils;
 import kwu.raccooncommon.dto.OauthResponse;
 import kwu.raccoondomain.persistence.domain.user.User;
 import kwu.raccoondomain.persistence.domain.user.enums.VendorType;
@@ -47,5 +48,9 @@ public class UserFacadeService {
 
     private User signupWithOauth(String vendorId, VendorType vendorType, String email){
         return userDomainService.save(userAssembler.toUserSignUpDto(vendorId,vendorType,email));
+    }
+
+    public void deleteUser() {
+        userDomainService.deleteUserByIdOrElseThrow(SecurityUtils.getUser().getId());
     }
 }
