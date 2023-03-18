@@ -1,18 +1,16 @@
 package kwu.raccoonapi.facade.user;
 
 import kwu.raccoonapi.config.jwt.JwtProvider;
-import kwu.raccoonapi.dto.user.response.UserProfileGetResponse;
 import kwu.raccoonapi.dto.user.response.UserSignUpResponse;
 import kwu.raccoonapi.facade.user.assembler.UserAssembler;
+import kwu.raccoonapi.utils.SecurityUtils;
 import kwu.raccooncommon.dto.OauthResponse;
 import kwu.raccoondomain.persistence.domain.user.User;
-import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import kwu.raccoondomain.persistence.domain.user.enums.VendorType;
 import kwu.raccoondomain.service.user.UserDomainService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -52,7 +50,7 @@ public class UserFacadeService {
         return userDomainService.save(userAssembler.toUserSignUpDto(vendorId,vendorType,email));
     }
 
-    public void deleteUser(Long userId) {
-        userDomainService.deleteUserById(userId);
+    public void deleteUser() {
+        userDomainService.deleteUserByIdOrElseThrow(SecurityUtils.getUser().getId());
     }
 }

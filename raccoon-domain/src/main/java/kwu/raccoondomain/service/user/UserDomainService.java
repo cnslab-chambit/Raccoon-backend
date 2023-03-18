@@ -1,6 +1,8 @@
 package kwu.raccoondomain.service.user;
 
+import kwu.raccooncommon.consts.ret.RetConsts;
 import kwu.raccooncommon.dto.OauthResponse;
+import kwu.raccooncommon.exception.RaccoonException;
 import kwu.raccoondomain.dto.user.UserSignUpDto;
 import kwu.raccoondomain.persistence.domain.user.User;
 import kwu.raccoondomain.persistence.domain.user.enums.VendorType;
@@ -57,13 +59,12 @@ public class UserDomainService {
         return userRepository.findById(userId).orElseThrow(()->new RuntimeException());
     }
 
-    public void deleteUserById(Long userId){
+    public void deleteUserByIdOrElseThrow(Long userId){
         try{
             userRepository.deleteById(userId);
         }catch (Exception e) {
-            throw new RuntimeException();
+            throw new RaccoonException(RetConsts.ERR600);
         }
-//        userRepository.deleteById(userId);
     }
 
 }
