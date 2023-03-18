@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -20,7 +21,6 @@ public class UserProfileDomainService {
     private final UserRepository userRepository;
     private final UserProfileRepository userProfileRepository;
     private final S3Service s3Service;
-    @Transactional
     public Long updateProfile(Long userId, UserProfileUpdateDto userProfileUpdateDto){
         String profileImgUrl = s3Service.upload(userProfileUpdateDto.getProfileImage());
         User user = userRepository.findById(userId).orElseThrow(() -> new RaccoonException(RetConsts.ERR600));
@@ -31,11 +31,15 @@ public class UserProfileDomainService {
         return user.getId();
     }
 
-    @Transactional(readOnly = true)
     public UserProfile getProfile(Long userId){
         User user = userRepository.findById(userId).orElseThrow(() -> new RaccoonException(RetConsts.ERR600));
         UserProfile userProfile = userProfileRepository
                 .findUserProfileByUser(user).orElseThrow(() -> new RaccoonException(RetConsts.ERR600));
         return userProfile;
     }
+    public List<UserProfile> findAllProfile(){
+        List<UserProfile> all = userProfileRepository.findAll();
+        return all;
+    }
+
 }

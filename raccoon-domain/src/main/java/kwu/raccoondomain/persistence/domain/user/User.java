@@ -32,8 +32,10 @@ public class User {
     @Column(name = "user_email")
     private String email;
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL,orphanRemoval = true)
-    @JoinColumn(name = "profile_id")
+    @OneToOne(mappedBy = "user",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private UserProfile userProfile;
 
     public static User fromSignUpDto(UserSignUpDto userSignUpDto){

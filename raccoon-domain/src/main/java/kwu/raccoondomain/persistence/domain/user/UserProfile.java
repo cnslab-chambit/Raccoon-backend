@@ -24,7 +24,7 @@ public class UserProfile {
     @Column(name = "user_profile_id")
     private Long id;
 
-    @OneToOne(mappedBy = "userProfile",fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -85,5 +85,7 @@ public class UserProfile {
         if(userProfileUpdateDto.getMbti() != null) this.mbti = userProfileUpdateDto.getMbti();
         if(userProfileUpdateDto.getAnimal() != null) this.animal = userProfileUpdateDto.getAnimal();
         if(userProfileUpdateDto.getWantedAnimal() != null) this.wantedAnimal = userProfileUpdateDto.getWantedAnimal();
+        if(userProfileUpdateDto.getJob() != null ) this.job = userProfileUpdateDto.getJob();
+        if(userProfileUpdateDto.getLocation() != null) this.location = userProfileUpdateDto.getLocation();
     }
 }

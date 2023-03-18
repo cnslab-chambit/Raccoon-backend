@@ -20,4 +20,6 @@ public class UserProfileUpdateDto {
     private Mbti mbti;
     private Animal animal;
     private Animal wantedAnimal;
+    private String job;
+    private String location;
 }
