@@ -21,6 +21,10 @@ public class UserProfileUpdateRequest {
     private Animal animal;
     private Animal wantedAnimal;
 
+    private String job;
+
+    private String location;
+
     public UserProfileUpdateDto toUserProfileUpdateDto(){
         return UserProfileUpdateDto.of(
                 profileImage,
@@ -32,7 +36,9 @@ public class UserProfileUpdateRequest {
                 smokingStatus,
                 mbti,
                 animal,
-                wantedAnimal
+                wantedAnimal,
+                job,
+                location
         );
     }
 }
