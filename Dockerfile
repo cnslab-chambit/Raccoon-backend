@@ -4,3 +4,4 @@ COPY ${JAR_FILE} app.jar
 ENTRYPOINT ["java","-Dcom.amazonaws.sdk.disableEc2Metadata=true","-jar","app.jar"] 
  
  
+ 
