@@ -44,6 +44,7 @@ subprojects{
 
 		implementation 'org.springframework.boot:spring-boot-starter-aop'
 		implementation 'org.springframework.boot:spring-boot-starter-web'
+		implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 		testCompileOnly 'org.projectlombok:lombok'
 		testAnnotationProcessor 'org.projectlombok:lombok'
 		testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -86,7 +87,6 @@ project(':raccoon-domain'){
 		implementation project(path:':raccoon-infra')
 		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 		implementation 'mysql:mysql-connector-java'
-		implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	}
 }
 

@@ -49,12 +49,14 @@ public class RedisConfig {
     @Bean(name = "cacheManager")
     public RedisCacheManager cacheManager(RedisConnectionFactory redisConnectionFactory){
         RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig()
-                .disableCachingNullValues() // null value 캐시안함
-                .entryTtl(Duration.ofSeconds(CacheKey.DEFAULT_EXPIRE_SEC)) // 캐시의 기본 유효시간 설정
+                .disableCachingNullValues()
+                .entryTtl(Duration.ofSeconds(CacheKey.DEFAULT_EXPIRE_SEC))
                 .computePrefixWith(CacheKeyPrefix.simple())
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()));
         Map<String, RedisCacheConfiguration> cacheConfigurations = new HashMap<>();
 
+        cacheConfigurations.put(CacheKey.JWT,RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofSeconds(CacheKey.JWT_EXPIRE_SEC)));
 
 
         return RedisCacheManager.RedisCacheManagerBuilder.fromConnectionFactory(redisConnectionFactory).cacheDefaults(configuration)

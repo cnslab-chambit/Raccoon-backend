@@ -32,7 +32,7 @@ public class User {
     @Column(name = "user_email")
     private String email;
 
-    @OneToOne(mappedBy = "user",
+    @OneToOne(
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             orphanRemoval = true)
