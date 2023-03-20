@@ -1,5 +1,6 @@
 package kwu.raccoondomain.service.user;
 
+import kwu.raccooncommon.consts.cache.CacheKey;
 import kwu.raccooncommon.consts.ret.RetConsts;
 import kwu.raccooncommon.dto.OauthResponse;
 import kwu.raccooncommon.exception.RaccoonException;
@@ -11,6 +12,8 @@ import kwu.raccooninfra.dto.KakaoProfileResponse;
 import kwu.raccooninfra.service.oauth.KakaoInfraService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -22,6 +25,7 @@ public class UserDomainService {
 
     private final KakaoInfraService kakaoInfraService;
     private final UserRepository userRepository;
+    private final RedisTemplate<String,Object> redisTemplate;
 
     public <T extends OauthResponse> T getOauthProfile(String code, VendorType vendorType){
         
@@ -54,8 +58,8 @@ public class UserDomainService {
         return userRepository.save(User.fromSignUpDto(userSignUpDto));
     }
 
+
     public User getUserByIdOrElseThrow(Long userId){
-        //TODO excpetion
         return userRepository.findById(userId).orElseThrow(()->new RuntimeException());
     }
 
