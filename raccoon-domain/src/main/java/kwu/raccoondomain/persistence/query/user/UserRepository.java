@@ -1,4 +1,4 @@
-package kwu.raccoondomain.persistence.query;
+package kwu.raccoondomain.persistence.query.user;
 
 import kwu.raccoondomain.persistence.domain.user.User;
 import kwu.raccoondomain.persistence.domain.user.enums.VendorType;

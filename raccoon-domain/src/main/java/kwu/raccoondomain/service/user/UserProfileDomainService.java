@@ -5,15 +5,13 @@ import kwu.raccooncommon.exception.RaccoonException;
 import kwu.raccoondomain.dto.user.UserProfileUpdateDto;
 import kwu.raccoondomain.persistence.domain.user.User;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
-import kwu.raccoondomain.persistence.query.UserProfileRepository;
-import kwu.raccoondomain.persistence.query.UserRepository;
+import kwu.raccoondomain.persistence.query.user.UserProfileRepository;
+import kwu.raccoondomain.persistence.query.user.UserRepository;
 import kwu.raccooninfra.service.s3.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -23,7 +21,9 @@ public class UserProfileDomainService {
     private final S3Service s3Service;
     public Long updateProfile(Long userId, UserProfileUpdateDto userProfileUpdateDto){
         String profileImgUrl = s3Service.upload(userProfileUpdateDto.getProfileImage());
+
         User user = userRepository.findById(userId).orElseThrow(() -> new RaccoonException(RetConsts.ERR600));
+
         UserProfile userProfile = userProfileRepository
                 .findUserProfileByUser(user).orElseThrow(() -> new RaccoonException(RetConsts.ERR600));
 

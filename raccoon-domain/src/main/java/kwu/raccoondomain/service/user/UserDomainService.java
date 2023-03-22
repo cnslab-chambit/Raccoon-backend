@@ -1,19 +1,17 @@
 package kwu.raccoondomain.service.user;
 
-import kwu.raccooncommon.consts.cache.CacheKey;
 import kwu.raccooncommon.consts.ret.RetConsts;
 import kwu.raccooncommon.dto.OauthResponse;
 import kwu.raccooncommon.exception.RaccoonException;
 import kwu.raccoondomain.dto.user.UserSignUpDto;
 import kwu.raccoondomain.persistence.domain.user.User;
 import kwu.raccoondomain.persistence.domain.user.enums.VendorType;
-import kwu.raccoondomain.persistence.query.UserRepository;
+import kwu.raccoondomain.persistence.query.user.UserRepository;
 import kwu.raccooninfra.dto.KakaoProfileResponse;
 import kwu.raccooninfra.service.oauth.KakaoInfraService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
