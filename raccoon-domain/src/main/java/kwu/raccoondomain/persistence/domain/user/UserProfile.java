@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import kwu.raccoondomain.dto.user.UserProfileUpdateDto;
 import kwu.raccoondomain.persistence.domain.user.enums.Animal;
 import kwu.raccoondomain.persistence.domain.user.enums.Gender;
+import kwu.raccoondomain.persistence.domain.user.enums.Location;
 import kwu.raccoondomain.persistence.domain.user.enums.Mbti;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -49,7 +50,8 @@ public class UserProfile {
     private String job;
 
     @Column(name="user_location")
-    private String location;
+    @Enumerated(value = EnumType.STRING)
+    private Location location;
 
     @Column(name = "self_description")
     private String selfDescription;

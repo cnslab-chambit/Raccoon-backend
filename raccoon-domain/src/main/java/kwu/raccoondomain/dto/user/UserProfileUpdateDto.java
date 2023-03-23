@@ -2,6 +2,7 @@ package kwu.raccoondomain.dto.user;
 
 import kwu.raccoondomain.persistence.domain.user.enums.Animal;
 import kwu.raccoondomain.persistence.domain.user.enums.Gender;
+import kwu.raccoondomain.persistence.domain.user.enums.Location;
 import kwu.raccoondomain.persistence.domain.user.enums.Mbti;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,5 +22,5 @@ public class UserProfileUpdateDto {
     private Animal animal;
     private Animal wantedAnimal;
     private String job;
-    private String location;
+    private Location location;
 }
