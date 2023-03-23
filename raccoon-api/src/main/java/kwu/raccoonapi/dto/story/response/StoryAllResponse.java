@@ -8,7 +8,7 @@ import lombok.Data;
 @AllArgsConstructor(staticName = "of")
 public class StoryAllResponse {
     private Long id;
-    private UserProfile userProfile;
+    private Long userProfileId;
     private String contents;
     private Long likeCount;
     private String storyImageUrl;
