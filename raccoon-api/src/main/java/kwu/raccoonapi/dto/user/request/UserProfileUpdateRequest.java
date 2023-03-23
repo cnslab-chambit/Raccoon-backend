@@ -3,6 +3,7 @@ package kwu.raccoonapi.dto.user.request;
 import kwu.raccoondomain.dto.user.UserProfileUpdateDto;
 import kwu.raccoondomain.persistence.domain.user.enums.Animal;
 import kwu.raccoondomain.persistence.domain.user.enums.Gender;
+import kwu.raccoondomain.persistence.domain.user.enums.Location;
 import kwu.raccoondomain.persistence.domain.user.enums.Mbti;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +24,7 @@ public class UserProfileUpdateRequest {
 
     private String job;
 
-    private String location;
+    private Location location;
 
     public UserProfileUpdateDto toUserProfileUpdateDto(){
         return UserProfileUpdateDto.of(
