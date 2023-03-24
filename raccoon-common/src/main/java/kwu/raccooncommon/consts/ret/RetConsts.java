@@ -11,7 +11,7 @@ public enum RetConsts {
 
     ERR500(RetStatus.INFRA,500,"파일 업로드 에러"),
     ERR501(RetStatus.INFRA,501,"파일 url 이상함"),
-    ERR600(RetStatus.BUSINESS,601,"해당 유저가 없어요"),
+    ERR600(RetStatus.BUSINESS,600,"해당 유저가 없어요"),
     ERR601(RetStatus.BUSINESS,601,"회원 정보가 일치하지 않습니다.");
     private RetStatus retStatus;
     private int code;
