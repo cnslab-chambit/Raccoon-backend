@@ -29,9 +29,6 @@ public class StoryAssembler {
     public StoryAllResponse toAllStoryResponse(Story story){
         return StoryAllResponse.of(
                 story.getId(),
-                story.getUserProfile().getId(),
-                story.getContents(),
-                story.getLikeCount(),
                 story.getStoryImageUrl()
         );
     }
