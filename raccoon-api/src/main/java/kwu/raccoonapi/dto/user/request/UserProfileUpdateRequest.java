@@ -21,9 +21,7 @@ public class UserProfileUpdateRequest {
     private Mbti mbti;
     private Animal animal;
     private Animal wantedAnimal;
-
     private String job;
-
     private Location location;
 
     public UserProfileUpdateDto toUserProfileUpdateDto(){

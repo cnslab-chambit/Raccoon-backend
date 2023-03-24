@@ -6,6 +6,7 @@ import kwu.raccoonapi.dto.user.response.UserProfileAllResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileDetailsResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileUpdateResponse;
 import kwu.raccoonapi.facade.user.UserProfileFacadeService;
+import kwu.raccoonapi.utils.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

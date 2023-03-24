@@ -3,15 +3,18 @@ package kwu.raccoonapi.facade.story.assembler;
 import kwu.raccoonapi.dto.story.request.StoryCreateRequest;
 import kwu.raccoonapi.dto.story.response.StoryAllResponse;
 import kwu.raccoonapi.dto.story.response.StoryCreateResponse;
-import kwu.raccoonapi.dto.user.response.UserProfileAllResponse;
+import kwu.raccoonapi.dto.story.response.StoryUpdateResponse;
 import kwu.raccoonapi.utils.SecurityUtils;
 import kwu.raccoondomain.dto.story.StoryCreateDto;
 import kwu.raccoondomain.persistence.domain.story.Story;
-import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import org.springframework.stereotype.Component;
 
 @Component
 public class StoryAssembler {
+
+    public StoryUpdateResponse toStoryUpdateResponse(Long StoryId){
+        return StoryUpdateResponse.of(StoryId);
+    }
 
     public StoryCreateDto toStoryCreateDto(StoryCreateRequest request){
         return StoryCreateDto.of(SecurityUtils.getUser().getUserProfile(),
@@ -26,9 +29,6 @@ public class StoryAssembler {
     public StoryAllResponse toAllStoryResponse(Story story){
         return StoryAllResponse.of(
                 story.getId(),
-                story.getUserProfile().getId(),
-                story.getContents(),
-                story.getLikeCount(),
                 story.getStoryImageUrl()
         );
     }
