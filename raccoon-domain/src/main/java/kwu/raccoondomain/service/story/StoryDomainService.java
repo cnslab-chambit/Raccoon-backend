@@ -26,10 +26,11 @@ public class StoryDomainService {
         if (story.getUserProfile()!=userProfile){
             throw new RaccoonException(RetConsts.ERR601);
         }
+        String storyImgUrl = "";
         if(storyUpdateDto.getStoryImage()!=null){
-            String storyImgUrl=s3Service.upload(storyUpdateDto.getStoryImage());
-            story.updateStory(storyUpdateDto,storyImgUrl);
+            storyImgUrl=s3Service.upload(storyUpdateDto.getStoryImage());
         }
+        story.updateStory(storyUpdateDto,storyImgUrl);
         return story.getId();
     }
 
