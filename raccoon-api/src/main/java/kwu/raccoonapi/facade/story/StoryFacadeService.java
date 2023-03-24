@@ -6,8 +6,11 @@ import kwu.raccoonapi.dto.story.response.StoryAllResponse;
 import kwu.raccoonapi.dto.story.response.StoryCreateResponse;
 import kwu.raccoonapi.dto.story.response.StoryUpdateResponse;
 import kwu.raccoonapi.facade.story.assembler.StoryAssembler;
+import kwu.raccoonapi.utils.SecurityUtils;
 import kwu.raccoondomain.persistence.domain.story.Story;
+import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import kwu.raccoondomain.service.story.StoryDomainService;
+import kwu.raccoondomain.service.user.UserProfileDomainService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,9 +27,12 @@ public class StoryFacadeService {
     private final StoryDomainService storyDomainService;
     private final StoryAssembler storyAssembler;
 
+    private final UserProfileDomainService userProfileDomainService;
+
     @Transactional
     public StoryUpdateResponse updateStory(StoryUpdateRequest request){
-        Long storyId = storyDomainService.updateStory(request.toStoryUpdateDto().getStoryId(),request.toStoryUpdateDto());
+        UserProfile userProfile = userProfileDomainService.getProfile(SecurityUtils.getUser().getId());
+        Long storyId = storyDomainService.updateStory(userProfile,request.toStoryUpdateDto());
         return storyAssembler.toStoryUpdateResponse(storyId);
 
     }

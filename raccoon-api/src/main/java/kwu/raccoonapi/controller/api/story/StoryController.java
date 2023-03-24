@@ -20,6 +20,11 @@ public class StoryController {
 
     private final StoryFacadeService storyFacadeService;
 
+    @PatchMapping("/story")
+    public ApiResponse<StoryUpdateResponse> updateStory(@ModelAttribute StoryUpdateRequest request){
+        return ApiResponse.ok(storyFacadeService.updateStory(request));
+    }
+
     @PostMapping("/story")
     public ApiResponse<StoryCreateResponse> create(@ModelAttribute StoryCreateRequest request){
         return ApiResponse.ok(storyFacadeService.create(request));
@@ -28,11 +33,6 @@ public class StoryController {
     @GetMapping("/story/all")
     public ApiResponse<List<StoryAllResponse>> getAllStories(){
         return ApiResponse.ok(storyFacadeService.getAllStory());
-    }
-
-    @PatchMapping("/story")
-    public ApiResponse<StoryUpdateResponse> updateStory(@ModelAttribute StoryUpdateRequest request){
-        return ApiResponse.ok(storyFacadeService.updateStory(request));
     }
 
 }

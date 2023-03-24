@@ -5,6 +5,7 @@ import kwu.raccooncommon.exception.RaccoonException;
 import kwu.raccoondomain.dto.story.StoryCreateDto;
 import kwu.raccoondomain.dto.story.StoryUpdateDto;
 import kwu.raccoondomain.persistence.domain.story.Story;
+import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import kwu.raccoondomain.persistence.query.story.StoryRepository;
 import kwu.raccooninfra.service.s3.S3Service;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +21,15 @@ public class StoryDomainService {
     private final StoryRepository storyRepository;
     private final S3Service s3Service;
 
-    public Long updateStory(Long storyId, StoryUpdateDto storyUpdateDto){
-        String storyImgUrl=s3Service.upload(storyUpdateDto.getStoryImageUrl());
-        Story story=storyRepository.findById(storyId).orElseThrow(()->new RaccoonException(RetConsts.ERR600));
-        story.updateStory(storyUpdateDto,storyImgUrl);
+    public Long updateStory(UserProfile userProfile, StoryUpdateDto storyUpdateDto){
+        Story story=storyRepository.findById(storyUpdateDto.getStoryId()).orElseThrow(()->new RaccoonException(RetConsts.ERR600));
+        if (story.getUserProfile()!=userProfile){
+            throw new RaccoonException(RetConsts.ERR601);
+        }
+        if(storyUpdateDto.getStoryImage()!=null){
+            String storyImgUrl=s3Service.upload(storyUpdateDto.getStoryImage());
+            story.updateStory(storyUpdateDto,storyImgUrl);
+        }
         return story.getId();
     }
 

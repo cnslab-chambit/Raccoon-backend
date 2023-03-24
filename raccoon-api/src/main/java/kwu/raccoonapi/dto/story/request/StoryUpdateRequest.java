@@ -11,13 +11,13 @@ import javax.persistence.Column;
 public class StoryUpdateRequest {
     private Long storyId;
     private String contents;
-    private MultipartFile storyImageUrl;
+    private MultipartFile storyImage;
 
     public StoryUpdateDto toStoryUpdateDto(){
         return StoryUpdateDto.of(
                 storyId,
                 contents,
-                storyImageUrl
+                storyImage
         );
     }
 }

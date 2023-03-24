@@ -46,7 +46,7 @@ public class Story {
     }
     public void updateStory(StoryUpdateDto storyUpdateDto, String storyImageUrl){
         if(storyUpdateDto.getContents() != null )this.contents=storyUpdateDto.getContents();
-        if(storyUpdateDto.getStoryImageUrl() != null )this.storyImageUrl=storyImageUrl;
+        if(storyUpdateDto.getStoryImage() != null )this.storyImageUrl=storyImageUrl;
     }
 
 }

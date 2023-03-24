@@ -9,5 +9,5 @@ import org.springframework.web.multipart.MultipartFile;
 public class StoryUpdateDto {
     private Long storyId;
     private String contents;
-    private MultipartFile storyImageUrl;
+    private MultipartFile storyImage;
 }
