@@ -2,16 +2,14 @@ package kwu.raccoonapi.controller.api.story;
 
 import kwu.raccoonapi.dto.ApiResponse;
 import kwu.raccoonapi.dto.story.request.StoryCreateRequest;
+import kwu.raccoonapi.dto.story.request.StoryUpdateRequest;
 import kwu.raccoonapi.dto.story.response.StoryAllResponse;
 import kwu.raccoonapi.dto.story.response.StoryCreateResponse;
-import kwu.raccoonapi.dto.user.response.UserProfileAllResponse;
+import kwu.raccoonapi.dto.story.response.StoryUpdateResponse;
 import kwu.raccoonapi.facade.story.StoryFacadeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,6 +28,11 @@ public class StoryController {
     @GetMapping("/story/all")
     public ApiResponse<List<StoryAllResponse>> getAllStories(){
         return ApiResponse.ok(storyFacadeService.getAllStory());
+    }
+
+    @PatchMapping("/story")
+    public ApiResponse<StoryUpdateResponse> updateStory(@ModelAttribute StoryUpdateRequest request){
+        return ApiResponse.ok(storyFacadeService.updateStory(request));
     }
 
 }

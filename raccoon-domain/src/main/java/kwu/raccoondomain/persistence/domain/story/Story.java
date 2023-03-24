@@ -2,6 +2,7 @@ package kwu.raccoondomain.persistence.domain.story;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import kwu.raccoondomain.dto.story.StoryCreateDto;
+import kwu.raccoondomain.dto.story.StoryUpdateDto;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -43,6 +44,9 @@ public class Story {
         story.likeCount = 0L;
         return story;
     }
-
+    public void updateStory(StoryUpdateDto storyUpdateDto, String storyImageUrl){
+        if(storyUpdateDto.getContents() != null )this.contents=storyUpdateDto.getContents();
+        if(storyUpdateDto.getStoryImageUrl() != null )this.storyImageUrl=storyImageUrl;
+    }
 
 }
