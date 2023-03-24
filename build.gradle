@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.1'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id "org.asciidoctor.jvm.convert" version "3.3.2"
 }
 
 repositories {
@@ -53,8 +54,16 @@ subprojects{
 
 }
 
-//서로 다른 모듈 간에 의존 관계 주입
 project(':raccoon-api'){
+	ext {
+		asciidocVersion = "2.0.6.RELEASE"
+		snippetsDir = file('build/generated-snippets')
+	}
+
+	configurations {
+		asciidoctorExt
+	}
+
 	dependencies {
 		implementation project(path:':raccoon-common')
 		implementation project(path:':raccoon-domain')
@@ -65,15 +74,43 @@ project(':raccoon-api'){
 		implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-
 		runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
 		runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
 
 		testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-		testImplementation 'com.epages:restdocs-api-spec-mockmvc:0.16.2'
+		testImplementation "org.springframework.restdocs:spring-restdocs-mockmvc:${asciidocVersion}"
+		asciidoctorExt "org.springframework.restdocs:spring-restdocs-asciidoctor:${asciidocVersion}"
 		testImplementation 'org.springframework.security:spring-security-test'
-
 	}
+
+	test {
+		outputs.dir snippetsDir
+	}
+
+	asciidoctor {
+		inputs.dir snippetsDir
+		configurations 'asciidoctorExt'
+		dependsOn test
+	}
+
+
+	task copyDocument(type: Copy) {
+		dependsOn asciidoctor
+
+		from file("build/asciidoc/html5/")
+		into file("src/main/resources/static/docs")
+	}
+
+
+	bootJar {
+		dependsOn asciidoctor
+		copy {
+			from asciidoctor.outputDir
+			into "src/main/resources/static/docs"
+		}
+	}
+
+
 }
 project(':raccoon-domain'){
 	bootJar {
@@ -104,7 +141,6 @@ project(':raccoon-infra'){
 		implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 		implementation 'com.amazonaws:aws-java-sdk-s3:1.12.362'
 		implementation group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
-//		api 'org.apache.httpcomponents:httpclient:4.5.7'
 		implementation 'org.apache.commons:commons-lang3:3.5'
 
 	}
