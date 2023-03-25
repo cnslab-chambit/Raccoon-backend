@@ -92,14 +92,6 @@ project(':raccoon-api'){
 		}
 	}
 
-//	test {
-//		doFirst {
-//			delete file('build/generated-snippets')
-//			delete file('build/api-spec')
-//		}
-//		finalizedBy(copyTest)
-//	}
-
 	openapi3 {
 		server = 'http://localhost:8080' // 자신 서버의 URL 작성
 		title = 'RestDocs to Swagger 변환 테스트' // Swagger 작동시 페이지에 나오는 제목

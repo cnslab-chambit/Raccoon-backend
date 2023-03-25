@@ -7,6 +7,99 @@ servers:
 - url: http://localhost:8080
 tags: []
 paths:
+  /user/profile:
+    patch:
+      tags:
+      - UserProfile
+      summary: 프로필 변경 API
+      description: 프로필 변경 API
+      operationId: user-profile-controller-test/프로필_업데이트
+      parameters:
+      - name: nickname
+        in: query
+        description: 닉네임
+        required: true
+        schema:
+          type: string
+      - name: gender
+        in: query
+        description: 성별
+        required: true
+        schema:
+          type: string
+      - name: age
+        in: query
+        description: 나이
+        required: true
+        schema:
+          type: string
+      - name: height
+        in: query
+        description: 키
+        required: true
+        schema:
+          type: string
+      - name: selfDescription
+        in: query
+        description: 자기소개
+        required: true
+        schema:
+          type: string
+      - name: smokingStatus
+        in: query
+        description: 흡연여부
+        required: true
+        schema:
+          type: string
+      - name: mbti
+        in: query
+        description: mbti
+        required: true
+        schema:
+          type: string
+      - name: animal
+        in: query
+        description: 유저의 동물상
+        required: true
+        schema:
+          type: string
+      - name: wantedAnimal
+        in: query
+        description: 원하는 동물상
+        required: true
+        schema:
+          type: string
+      - name: job
+        in: query
+        description: 직업
+        required: true
+        schema:
+          type: string
+      - name: location
+        in: query
+        description: 사는 곳
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: JWT
+        required: true
+        schema:
+          type: string
+        example: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOltdLCJpYXQiOjE2Nzk0NzIzMTAsImV4cCI6MTY4MzA3MjMxMH0.z_oE-pzcvdIaUqLxULlfBZf6dadfq2btSLsSrhqvcvI
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/user-profile-748640380'
+              examples:
+                user-profile-controller-test/프로필_업데이트:
+                  value: "{\"message\":\"성공\",\"code\":200,\"data\":{\"userId\":1}}"
+      security:
+      - bearerAuthJWT: []
   /user/{userId}:
     get:
       tags:
@@ -47,6 +140,21 @@ paths:
       - bearerAuthJWT: []
 components:
   schemas:
+    user-profile-748640380:
+      type: object
+      properties:
+        code:
+          type: number
+          description: 응답 코드
+        data:
+          type: object
+          properties:
+            userId:
+              type: number
+              description: 유저의 프로필 id
+        message:
+          type: string
+          description: 메시지
     user-userId-461205012:
       type: object
       properties:
