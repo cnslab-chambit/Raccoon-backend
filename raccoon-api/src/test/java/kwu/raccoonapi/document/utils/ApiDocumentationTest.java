@@ -1,14 +1,12 @@
-package kwu.raccoonapi;
+package kwu.raccoonapi.document.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
@@ -21,32 +19,31 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @Disabled
-@AutoConfigureMockMvc
-@AutoConfigureRestDocs(uriScheme = "https",uriHost = "com.kwu.raccoonapi",uriPort = 443)
+@Import(RestDocsConfig.class)
 @ExtendWith({RestDocumentationExtension.class, MockitoExtension.class})
-public class RestDocsTest {
+public class ApiDocumentationTest {
 
-    @Autowired
     protected MockMvc mockMvc;
 
-    @Autowired
+    @Spy
     protected ObjectMapper objectMapper;
-    protected static RestDocumentationResultHandler restDocumentationResultHandler;
 
-    protected static String JWT = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOltdLCJpYXQiOjE2Nzk2MzQ3ODAsImV4cCI6MTY4MzIzNDc4MH0.B1xbi3-lvKGYPf3hk73OTIUa7wtebzvvy8xI2tmYjW8";
+    protected static RestDocumentationResultHandler restDocs;
+
+    protected static String JWT = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOltdLCJpYXQiOjE2Nzk0NzIzMTAsImV4cCI6MTY4MzA3MjMxMH0.z_oE-pzcvdIaUqLxULlfBZf6dadfq2btSLsSrhqvcvI";
 
     @BeforeAll
-    static void restDocSetup(){restDocumentationResultHandler = MockMvcRestDocumentation.document("{class-name}/{method-name}");}
+    static void restDocSetup() {
+        restDocs = MockMvcRestDocumentation.document("{class-name}/{method-name}");
+    }
 
-
-    public void setup(Object controller, RestDocumentationContextProvider provider){
+    public void setup(Object controller, RestDocumentationContextProvider provider) {
         mockMvc = MockMvcBuilders.standaloneSetup(controller)
                 .apply(MockMvcRestDocumentation.documentationConfiguration(provider))
                 .setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver())
                 .alwaysDo(print())
-                .alwaysDo(restDocumentationResultHandler)
-                .addFilter(new CharacterEncodingFilter("UTF-8",true))
+                .alwaysDo(restDocs)
+                .addFilters(new CharacterEncodingFilter("UTF-8", true))
                 .build();
     }
-
 }

@@ -2,13 +2,20 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.1'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id "org.asciidoctor.jvm.convert" version "3.3.2"
+	id 'com.epages.restdocs-api-spec' version '0.16.2'
 }
 
 repositories {
 	mavenCentral()
 }
 
+bootJar {
+	enabled = false
+}
+
+jar {
+	enabled = true
+}
 
 subprojects{
 	apply plugin: 'java'
@@ -55,14 +62,8 @@ subprojects{
 }
 
 project(':raccoon-api'){
-	ext {
-		asciidocVersion = "2.0.6.RELEASE"
-		snippetsDir = file('build/generated-snippets')
-	}
+	apply plugin: 'com.epages.restdocs-api-spec'
 
-	configurations {
-		asciidoctorExt
-	}
 
 	dependencies {
 		implementation project(path:':raccoon-common')
@@ -74,47 +75,46 @@ project(':raccoon-api'){
 		implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
+
 		runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
 		runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
 
 		testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-		testImplementation "org.springframework.restdocs:spring-restdocs-mockmvc:${asciidocVersion}"
-		asciidoctorExt "org.springframework.restdocs:spring-restdocs-asciidoctor:${asciidocVersion}"
+		testImplementation 'com.epages:restdocs-api-spec-mockmvc:0.16.2'
 		testImplementation 'org.springframework.security:spring-security-test'
 	}
 
-	test {
-		outputs.dir snippetsDir
-	}
-
-	asciidoctor {
-		inputs.dir snippetsDir
-		configurations 'asciidoctorExt'
-		dependsOn test
-	}
-
-
-	task copyDocument(type: Copy) {
-		dependsOn asciidoctor
-
-		from file("build/asciidoc/html5/")
-		into file("src/main/resources/static/docs")
-	}
-
-
-	bootJar {
-		dependsOn asciidoctor
+	task copyTest {
+		dependsOn("openapi3")
 		copy {
-			from asciidoctor.outputDir
-			into "src/main/resources/static/docs"
+			from "$buildDir/api-spec/openapi3.yaml"
+			into "src/main/resources/static/docs/."
 		}
 	}
 
+//	test {
+//		doFirst {
+//			delete file('build/generated-snippets')
+//			delete file('build/api-spec')
+//		}
+//		finalizedBy(copyTest)
+//	}
+
+	openapi3 {
+		server = 'http://localhost:8080' // 자신 서버의 URL 작성
+		title = 'RestDocs to Swagger 변환 테스트' // Swagger 작동시 페이지에 나오는 제목
+		description = 'Restdocs로 API 문서 작성 후 이를 Swagger로 변환하는 페이지' // Swagger 페이지 제목 밑에 설명란에 추가되는 메세지
+		version = '0.0.1-SNAPSHOT' // 애플리케이션 버전 정보
+		format = 'yaml' // json으로도 가능
+	}
 
 }
 project(':raccoon-domain'){
+
+	apply plugin: 'com.epages.restdocs-api-spec'
+
 	bootJar {
-		enabled = true
+		enabled = false
 	}
 
 	jar {
