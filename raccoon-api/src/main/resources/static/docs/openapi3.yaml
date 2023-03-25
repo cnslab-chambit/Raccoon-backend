@@ -1,0 +1,102 @@
+openapi: 3.0.1
+info:
+  title: RestDocs to Swagger 변환 테스트
+  description: Restdocs로 API 문서 작성 후 이를 Swagger로 변환하는 페이지
+  version: 0.0.1-SNAPSHOT
+servers:
+- url: http://localhost:8080
+tags: []
+paths:
+  /user/{userId}:
+    get:
+      tags:
+      - UserProfile
+      summary: 유저프로필 조회 API
+      description: 유저프로필 조회 API
+      operationId: user-profile-controller-test/프로필_조회
+      parameters:
+      - name: userId
+        in: path
+        description: 대상 유저의Id
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 요청보낸 사람 ACCESS TOKEN
+        required: true
+        schema:
+          type: string
+        example: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOltdLCJpYXQiOjE2Nzk0NzIzMTAsImV4cCI6MTY4MzA3MjMxMH0.z_oE-pzcvdIaUqLxULlfBZf6dadfq2btSLsSrhqvcvI
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/user-userId-461205012'
+              examples:
+                user-profile-controller-test/프로필_조회:
+                  value: "{\"message\":\"성공\",\"code\":200,\"data\":{\"nickname\"\
+                    :\"오어어엉\",\"profileImageUrl\":\"https://www.google.com/imgres?imgurl=https%3A%2F%2Ftalkimg.imbc.com%2FTVianUpload%2Ftvian%2FTViews%2Fimage%2F2023%2F01%2F03%2F7eec0933-d37b-4939-afb4-f1488ebc0d68.jpg&tbnid=A4jvGsqs01f0aM&vet=12ahUKEwiFrPSB9vT9AhWCdt4KHSIgABUQMygHegUIARDZAQ..i&imgrefurl=https%3A%2F%2Fimnews.imbc.com%2Fnews%2F2023%2Fenter%2Farticle%2F6442122_36161.html&docid=xWL2UuU60SIGKM&w=800&h=1119&q=%ED%95%B4%EB%A6%B0&ved=2ahUKEwiFrPSB9vT9AhWCdt4KHSIgABUQMygHegUIARDZAQ\"\
+                    ,\"gender\":\"WOMAN\",\"age\":18,\"height\":167,\"job\":\"모름\"\
+                    ,\"location\":\"GANDONG\",\"selfDescription\":\"안녕하세요\",\"smokingStatus\"\
+                    :false,\"mbti\":\"INTP\",\"animal\":\"CAT\",\"wantedAnimal\":\"\
+                    DEER\"}}"
+      security:
+      - bearerAuthJWT: []
+components:
+  schemas:
+    user-userId-461205012:
+      type: object
+      properties:
+        code:
+          type: number
+          description: 응답 코드
+        data:
+          type: object
+          properties:
+            gender:
+              type: string
+              description: 프로필 닉네임
+            wantedAnimal:
+              type: string
+              description: 프로필 닉네임
+            nickname:
+              type: string
+              description: 프로필 닉네임
+            animal:
+              type: string
+              description: 프로필 닉네임
+            mbti:
+              type: string
+              description: 프로필 닉네임
+            location:
+              type: string
+              description: 프로필 닉네임
+            smokingStatus:
+              type: boolean
+              description: 프로필 닉네임
+            job:
+              type: string
+              description: 프로필 닉네임
+            profileImageUrl:
+              type: string
+              description: 프로필 닉네임
+            age:
+              type: number
+              description: 프로필 닉네임
+            selfDescription:
+              type: string
+              description: 프로필 닉네임
+            height:
+              type: number
+              description: 프로필 닉네임
+        message:
+          type: string
+          description: 결과 메시지
+  securitySchemes:
+    bearerAuthJWT:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

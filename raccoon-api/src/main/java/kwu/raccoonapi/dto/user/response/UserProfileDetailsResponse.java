@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor(staticName = "of")
 @NoArgsConstructor()
 public class UserProfileDetailsResponse {
-    private String profileImageUrl;
     private String nickname;
+    private String profileImageUrl;
     private Gender gender;
     private Long age;
     private Long height;

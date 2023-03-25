@@ -28,7 +28,7 @@ import static org.springframework.http.HttpMethod.GET;
 @RequiredArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
-
+    private final String[] SWAGGER_URL = {"/docs/**", "/docs/openapi3.yaml", "/favicon.ico","/static/**"};
     private final String SIGNUP_LOCAL_URL = "/oauth/**";
     private final String PING_PONG_URL = "/ping";
     private final String SIGNUP_SCHEMA_URL = "/login/**";
@@ -40,7 +40,8 @@ public class SecurityConfiguration {
     public WebSecurityCustomizer webSecurityCustomizer(){
         return web -> web.ignoring()
                 .antMatchers(PING_PONG_URL)
-                .antMatchers(SIGNUP_LOCAL_URL,SIGNUP_SCHEMA_URL);
+                .antMatchers(SIGNUP_LOCAL_URL,SIGNUP_SCHEMA_URL)
+                .antMatchers(SWAGGER_URL);
     }
 
     @Bean

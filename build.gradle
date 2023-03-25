@@ -2,12 +2,20 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.1'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'com.epages.restdocs-api-spec' version '0.16.2'
 }
 
 repositories {
 	mavenCentral()
 }
 
+bootJar {
+	enabled = false
+}
+
+jar {
+	enabled = true
+}
 
 subprojects{
 	apply plugin: 'java'
@@ -53,8 +61,10 @@ subprojects{
 
 }
 
-//서로 다른 모듈 간에 의존 관계 주입
 project(':raccoon-api'){
+	apply plugin: 'com.epages.restdocs-api-spec'
+
+
 	dependencies {
 		implementation project(path:':raccoon-common')
 		implementation project(path:':raccoon-domain')
@@ -72,12 +82,39 @@ project(':raccoon-api'){
 		testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 		testImplementation 'com.epages:restdocs-api-spec-mockmvc:0.16.2'
 		testImplementation 'org.springframework.security:spring-security-test'
-
 	}
+
+	task copyTest {
+		dependsOn("openapi3")
+		copy {
+			from "$buildDir/api-spec/openapi3.yaml"
+			into "src/main/resources/static/docs/."
+		}
+	}
+
+//	test {
+//		doFirst {
+//			delete file('build/generated-snippets')
+//			delete file('build/api-spec')
+//		}
+//		finalizedBy(copyTest)
+//	}
+
+	openapi3 {
+		server = 'http://localhost:8080' // 자신 서버의 URL 작성
+		title = 'RestDocs to Swagger 변환 테스트' // Swagger 작동시 페이지에 나오는 제목
+		description = 'Restdocs로 API 문서 작성 후 이를 Swagger로 변환하는 페이지' // Swagger 페이지 제목 밑에 설명란에 추가되는 메세지
+		version = '0.0.1-SNAPSHOT' // 애플리케이션 버전 정보
+		format = 'yaml' // json으로도 가능
+	}
+
 }
 project(':raccoon-domain'){
+
+	apply plugin: 'com.epages.restdocs-api-spec'
+
 	bootJar {
-		enabled = true
+		enabled = false
 	}
 
 	jar {
@@ -104,7 +141,6 @@ project(':raccoon-infra'){
 		implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 		implementation 'com.amazonaws:aws-java-sdk-s3:1.12.362'
 		implementation group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
-//		api 'org.apache.httpcomponents:httpclient:4.5.7'
 		implementation 'org.apache.commons:commons-lang3:3.5'
 
 	}
