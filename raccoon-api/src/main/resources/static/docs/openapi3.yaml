@@ -15,72 +15,6 @@ paths:
       description: 프로필 변경 API
       operationId: user-profile-controller-test/프로필_업데이트
       parameters:
-      - name: nickname
-        in: query
-        description: 닉네임
-        required: true
-        schema:
-          type: string
-      - name: gender
-        in: query
-        description: 성별
-        required: true
-        schema:
-          type: string
-      - name: age
-        in: query
-        description: 나이
-        required: true
-        schema:
-          type: string
-      - name: height
-        in: query
-        description: 키
-        required: true
-        schema:
-          type: string
-      - name: selfDescription
-        in: query
-        description: 자기소개
-        required: true
-        schema:
-          type: string
-      - name: smokingStatus
-        in: query
-        description: 흡연여부
-        required: true
-        schema:
-          type: string
-      - name: mbti
-        in: query
-        description: mbti
-        required: true
-        schema:
-          type: string
-      - name: animal
-        in: query
-        description: 유저의 동물상
-        required: true
-        schema:
-          type: string
-      - name: wantedAnimal
-        in: query
-        description: 원하는 동물상
-        required: true
-        schema:
-          type: string
-      - name: job
-        in: query
-        description: 직업
-        required: true
-        schema:
-          type: string
-      - name: location
-        in: query
-        description: 사는 곳
-        required: true
-        schema:
-          type: string
       - name: Authorization
         in: header
         description: JWT
@@ -88,6 +22,18 @@ paths:
         schema:
           type: string
         example: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOltdLCJpYXQiOjE2Nzk0NzIzMTAsImV4cCI6MTY4MzA3MjMxMH0.z_oE-pzcvdIaUqLxULlfBZf6dadfq2btSLsSrhqvcvI
+      requestBody:
+        content:
+          multipart/form-data;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/user-profile1052611802'
+            examples:
+              user-profile-controller-test/프로필_업데이트:
+                value: "{\"gender\":\"MAN\",\"wantedAnimal\":\"CAT\",\"nickname\"\
+                  :\"유저닉네임\",\"mbti\":\"INTP\",\"animal\":\"CAT\",\"location\":\"\
+                  GANDONG\",\"profileImage\":\"org.springframework.mock.web.MockMultipartFile@a03529c\"\
+                  ,\"smokingStatus\":false,\"job\":\"대학생이에요\",\"age\":25,\"height\"\
+                  :175,\"selfDescription\":\"안녕하세요 자기소개입니다.\"}"
       responses:
         "200":
           description: "200"
@@ -138,8 +84,78 @@ paths:
                     DEER\"}}"
       security:
       - bearerAuthJWT: []
+  /user/profile/all:
+    get:
+      tags:
+      - UserProfile
+      summary: 프로필 전체 조회 API
+      description: 프로필 전체 조회 API
+      operationId: user-profile-controller-test/프로필_전체조회
+      parameters:
+      - name: Authorization
+        in: header
+        description: 요청자의 JWT
+        required: true
+        schema:
+          type: string
+        example: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOltdLCJpYXQiOjE2Nzk0NzIzMTAsImV4cCI6MTY4MzA3MjMxMH0.z_oE-pzcvdIaUqLxULlfBZf6dadfq2btSLsSrhqvcvI
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/user-profile-all-1103448983'
+              examples:
+                user-profile-controller-test/프로필_전체조회:
+                  value: "{\"message\":\"성공\",\"code\":200,\"data\":[{\"profileId\"\
+                    :1,\"nickname\":\"김성지1\",\"gender\":\"MAN\",\"age\":25,\"height\"\
+                    :175,\"profileImageUrl\":\"http://\",\"location\":\"GANGSEO\"\
+                    ,\"animal\":\"CAT\"},{\"profileId\":2,\"nickname\":\"김성지2\",\"\
+                    gender\":\"MAN\",\"age\":25,\"height\":175,\"profileImageUrl\"\
+                    :\"http://\",\"location\":\"GANGBUK\",\"animal\":\"DOG\"}]}"
+      security:
+      - bearerAuthJWT: []
 components:
   schemas:
+    user-profile-all-1103448983:
+      type: object
+      properties:
+        code:
+          type: number
+          description: 응답코드
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              gender:
+                type: string
+                description: 유저의 성별
+              profileId:
+                type: number
+                description: 유저의 프로파일 ID
+              nickname:
+                type: string
+                description: 유저의 닉네임
+              animal:
+                type: string
+                description: 유저의 동물상
+              location:
+                type: string
+                description: 유저의 지역
+              profileImageUrl:
+                type: string
+                description: 유저의 프로필이미지 URL
+              age:
+                type: number
+                description: 유저의 나이
+              height:
+                type: number
+                description: 유저의 키
+        message:
+          type: string
+          description: 메시지
     user-profile-748640380:
       type: object
       properties:
@@ -155,6 +171,45 @@ components:
         message:
           type: string
           description: 메시지
+    user-profile1052611802:
+      type: object
+      properties:
+        gender:
+          type: string
+          description: 성별
+        wantedAnimal:
+          type: string
+          description: 원하는 동물상
+        nickname:
+          type: string
+          description: 유저닉네임
+        animal:
+          type: string
+          description: 유저의 동물상
+        mbti:
+          type: string
+          description: mbti
+        location:
+          type: string
+          description: 사는 곳
+        profileImage:
+          type: string
+          description: 이미지파일
+        job:
+          type: string
+          description: 직업
+        smokingStatus:
+          type: boolean
+          description: 흡연여부
+        age:
+          type: number
+          description: 나이
+        selfDescription:
+          type: string
+          description: 자기소개
+        height:
+          type: number
+          description: 키
     user-userId-461205012:
       type: object
       properties:

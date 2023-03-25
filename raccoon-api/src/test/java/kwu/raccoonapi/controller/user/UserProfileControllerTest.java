@@ -1,26 +1,30 @@
-package kwu.raccoonapi.controller;
+package kwu.raccoonapi.controller.user;
 
 import com.epages.restdocs.apispec.ResourceSnippetParameters;
+import com.epages.restdocs.apispec.SimpleType;
 import kwu.raccoonapi.controller.api.user.UserProfileController;
 import kwu.raccoonapi.document.utils.ApiDocumentationTest;
 import kwu.raccoonapi.dto.user.response.UserProfileDetailsResponse;
+import kwu.raccoonapi.dto.user.response.UserProfileResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileUpdateResponse;
 import kwu.raccoonapi.facade.user.UserProfileFacadeService;
 import kwu.raccoondomain.persistence.domain.user.enums.Animal;
 import kwu.raccoondomain.persistence.domain.user.enums.Gender;
 import kwu.raccoondomain.persistence.domain.user.enums.Location;
 import kwu.raccoondomain.persistence.domain.user.enums.Mbti;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMultipartHttpServletRequestBuilder;
+
+import java.util.List;
 
 import static com.epages.restdocs.apispec.ResourceDocumentation.*;
 import static kwu.raccooncommon.consts.CommonConsts.BEARER;
@@ -33,6 +37,7 @@ import static org.springframework.http.MediaType.MULTIPART_FORM_DATA;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.multipart;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestPartBody;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class UserProfileControllerTest extends ApiDocumentationTest {
@@ -105,33 +110,47 @@ public class UserProfileControllerTest extends ApiDocumentationTest {
     @Test
     @DisplayName("프로필 업데이트")
     void 프로필_업데이트() throws Exception{
+        String nickname =  "유저닉네임";
+        Gender gender = Gender.MAN;
+        Long age = 25L;
+        Long height = 175L;
+        String selfDescription = "안녕하세요 자기소개입니다.";
+        Boolean smokingStatus = false;
+        Mbti mbti = Mbti.INTP;
+        Animal animal = Animal.CAT;
+        Animal wantedAnimal = Animal.CAT;
+        String job = "대학생이에요";
+        Location location = Location.GANDONG;
+        JSONObject request = new JSONObject();
+
+        MockMultipartFile profileImage = new MockMultipartFile("profileImage","image.jpg".getBytes());
+
+        request.put("nickname",nickname)
+                .put("gender",gender)
+                .put("age",age)
+                .put("height",height)
+                .put("selfDescription",selfDescription)
+                .put("smokingStatus",smokingStatus)
+                .put("mbti",mbti)
+                .put("animal",animal)
+                .put("wantedAnimal",wantedAnimal)
+                .put("job",job)
+                .put("location",location)
+                .put("profileImage",profileImage);
+
         UserProfileUpdateResponse response = UserProfileUpdateResponse.of(1L);
 
         when(userProfileFacadeService.updateProfile(any()))
                 .thenReturn(response);
 
         MockMultipartHttpServletRequestBuilder builder = multipart("/user/profile");
-        builder.with(request -> {
-            request.setMethod(PATCH.name());
-            return request;
+        builder.with(req -> {
+            req.setMethod(PATCH.name());
+            return req;
         });
-
-        MockMultipartFile profileImage = new MockMultipartFile("profileImage","image.jpg".getBytes());
-
         ResultActions resultActions = mockMvc.perform(builder
-                .file(profileImage)
-                .param("nickname","닉네임")
-                .param("gender",Gender.MAN.name())
-                .param("age","24")
-                .param("height","175")
-                .param("selfDescription","안녕하세요 자기소개입니다.")
-                .param("smokingStatus","false")
-                .param("mbti",Mbti.INTP.name())
-                .param("animal",Animal.BEAR.name())
-                .param("wantedAnimal",Animal.BEAR.name())
-                .param("job","직업은 이래요")
-                .param("location",Location.DONGJAK.name())
                 .header(AUTHORIZATION,BEARER+" "+JWT)
+                        .content(request.toString())
                 .contentType(MULTIPART_FORM_DATA))
                 .andExpect(status().isOk());
 
@@ -139,18 +158,19 @@ public class UserProfileControllerTest extends ApiDocumentationTest {
                 ResourceSnippetParameters.builder()
                         .description("프로필 변경 API")
                         .summary("프로필 변경 API")
-                        .requestParameters(
-                                parameterWithName("nickname").description("닉네임"),
-                                parameterWithName("gender").description("성별"),
-                                parameterWithName("age").description("나이"),
-                                parameterWithName("height").description("키"),
-                                parameterWithName("selfDescription").description("자기소개"),
-                                parameterWithName("smokingStatus").description("흡연여부"),
-                                parameterWithName("mbti").description("mbti"),
-                                parameterWithName("animal").description("유저의 동물상"),
-                                parameterWithName("wantedAnimal").description("원하는 동물상"),
-                                parameterWithName("job").description("직업"),
-                                parameterWithName("location").description("사는 곳")
+                        .requestFields(
+                                fieldWithPath("nickname").description("유저닉네임"),
+                                fieldWithPath("profileImage").description("프로필 이미지파일"),
+                                fieldWithPath("gender").description("성별"),
+                                fieldWithPath("age").type(SimpleType.NUMBER).description("나이"),
+                                fieldWithPath("height").type(SimpleType.NUMBER).description("키"),
+                                fieldWithPath("selfDescription").description("자기소개"),
+                                fieldWithPath("smokingStatus").type(SimpleType.BOOLEAN).description("흡연여부"),
+                                fieldWithPath("mbti").description("mbti"),
+                                fieldWithPath("animal").description("유저의 동물상"),
+                                fieldWithPath("wantedAnimal").description("원하는 동물상"),
+                                fieldWithPath("job").description("직업"),
+                                fieldWithPath("location").description("사는 곳")
                         )
                         .requestHeaders(
                                 headerWithName(AUTHORIZATION).description("JWT")
@@ -163,4 +183,44 @@ public class UserProfileControllerTest extends ApiDocumentationTest {
                         .build()
         )));
     }
+
+    @Test
+    @DisplayName("프로필_전체조회")
+    void 프로필_전체조회() throws Exception{
+        UserProfileResponse res1 = UserProfileResponse.of(1L,"김성지1",Gender.MAN,25L,175L,"http://",Location.GANGSEO,Animal.CAT);
+        UserProfileResponse res2 = UserProfileResponse.of(2L,"김성지2",Gender.MAN,25L,175L,"http://",Location.GANGBUK,Animal.DOG);
+
+        when(userProfileFacadeService.getAllProfile()).thenReturn(List.of(res1,res2));
+
+        ResultActions resultActions = mockMvc.perform(
+                get("/user/profile/all")
+                        .header(AUTHORIZATION,BEARER+" "+JWT)
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isOk());
+
+        resultActions.andDo(restDocs.document(resource(
+                ResourceSnippetParameters.builder()
+                        .description("프로필 전체 조회 API")
+                        .summary("프로필 전체 조회 API")
+                        .requestHeaders(
+                                headerWithName(AUTHORIZATION).description("요청자의 JWT")
+                        )
+                        .responseFields(
+                                fieldWithPath("message").description("메시지"),
+                                fieldWithPath("code").description("응답코드"),
+                                fieldWithPath("data[].profileId").description("유저의 프로파일 ID"),
+                                fieldWithPath("data[].nickname").description("유저의 닉네임"),
+                                fieldWithPath("data[].gender").description("유저의 성별"),
+                                fieldWithPath("data[].age").description("유저의 나이"),
+                                fieldWithPath("data[].height").description("유저의 키"),
+                                fieldWithPath("data[].profileImageUrl").description("유저의 프로필이미지 URL"),
+                                fieldWithPath("data[].location").description("유저의 지역"),
+                                fieldWithPath("data[].animal").description("유저의 동물상")
+                        )
+                        .tag("UserProfile")
+                        .build()
+        )));
+
+    }
+
 }

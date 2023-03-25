@@ -8,7 +8,8 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor(staticName = "of")
-public class UserProfileAllResponse {
+public class UserProfileResponse {
+    private Long profileId;
     private String nickname;
     private Gender gender;
     private Long age;

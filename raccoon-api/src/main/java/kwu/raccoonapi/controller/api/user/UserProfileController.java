@@ -2,11 +2,10 @@ package kwu.raccoonapi.controller.api.user;
 
 import kwu.raccoonapi.dto.ApiResponse;
 import kwu.raccoonapi.dto.user.request.UserProfileUpdateRequest;
-import kwu.raccoonapi.dto.user.response.UserProfileAllResponse;
+import kwu.raccoonapi.dto.user.response.UserProfileResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileDetailsResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileUpdateResponse;
 import kwu.raccoonapi.facade.user.UserProfileFacadeService;
-import kwu.raccoonapi.utils.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +29,7 @@ public class UserProfileController {
     }
 
     @GetMapping("/user/profile/all")
-    public ApiResponse<List<UserProfileAllResponse>> getAllProfiles(){
+    public ApiResponse<List<UserProfileResponse>> getAllProfiles(){
         return ApiResponse.ok(userProfileFacadeService.getAllProfile());
     }
 

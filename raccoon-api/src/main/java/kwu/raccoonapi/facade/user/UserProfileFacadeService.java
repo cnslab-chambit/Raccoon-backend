@@ -1,7 +1,7 @@
 package kwu.raccoonapi.facade.user;
 
 import kwu.raccoonapi.dto.user.request.UserProfileUpdateRequest;
-import kwu.raccoonapi.dto.user.response.UserProfileAllResponse;
+import kwu.raccoonapi.dto.user.response.UserProfileResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileDetailsResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileUpdateResponse;
 import kwu.raccoonapi.facade.user.assembler.UserProfileAssembler;
@@ -33,7 +33,7 @@ public class UserProfileFacadeService {
         return userProfileAssembler.toUserProfileResponse(userProfile);
     }
     @Transactional(readOnly = true)
-    public List<UserProfileAllResponse> getAllProfile(){
+    public List<UserProfileResponse> getAllProfile(){
         List<UserProfile> allProfile = userProfileDomainService.findAllProfile();
         return allProfile.stream()
                 .map(profile -> userProfileAssembler.toAllUserProfileResponse(profile))
