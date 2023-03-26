@@ -2,7 +2,7 @@ package kwu.raccoonapi.facade.story;
 
 import kwu.raccoonapi.dto.story.request.StoryCreateRequest;
 import kwu.raccoonapi.dto.story.request.StoryUpdateRequest;
-import kwu.raccoonapi.dto.story.response.StoryAllResponse;
+import kwu.raccoonapi.dto.story.response.StoryResponse;
 import kwu.raccoonapi.dto.story.response.StoryCreateResponse;
 import kwu.raccoonapi.dto.story.response.StoryUpdateResponse;
 import kwu.raccoonapi.facade.story.assembler.StoryAssembler;
@@ -43,7 +43,7 @@ public class StoryFacadeService {
     }
 
     @Transactional(readOnly = true)
-    public List<StoryAllResponse> getAllStory() {
+    public List<StoryResponse> getAllStory() {
         List<Story> allStory= storyDomainService.findAllStory();
         return allStory.stream()
                 .map(story->storyAssembler.toAllStoryResponse(story))

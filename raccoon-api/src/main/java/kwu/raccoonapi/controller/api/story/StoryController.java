@@ -3,7 +3,7 @@ package kwu.raccoonapi.controller.api.story;
 import kwu.raccoonapi.dto.ApiResponse;
 import kwu.raccoonapi.dto.story.request.StoryCreateRequest;
 import kwu.raccoonapi.dto.story.request.StoryUpdateRequest;
-import kwu.raccoonapi.dto.story.response.StoryAllResponse;
+import kwu.raccoonapi.dto.story.response.StoryResponse;
 import kwu.raccoonapi.dto.story.response.StoryCreateResponse;
 import kwu.raccoonapi.dto.story.response.StoryUpdateResponse;
 import kwu.raccoonapi.facade.story.StoryFacadeService;
@@ -31,7 +31,7 @@ public class StoryController {
     }
 
     @GetMapping("/story/all")
-    public ApiResponse<List<StoryAllResponse>> getAllStories(){
+    public ApiResponse<List<StoryResponse>> getAllStories(){
         return ApiResponse.ok(storyFacadeService.getAllStory());
     }
 

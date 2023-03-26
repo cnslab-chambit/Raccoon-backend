@@ -7,6 +7,106 @@ servers:
 - url: http://localhost:8080
 tags: []
 paths:
+  /story:
+    post:
+      tags:
+      - Story
+      summary: 스토리 생성 API
+      description: 스토리 생성 API
+      operationId: story-controller-test/스토리_생성
+      parameters:
+      - name: Authorization
+        in: header
+        description: ACCESS TOKEN
+        required: true
+        schema:
+          type: string
+        example: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOltdLCJpYXQiOjE2Nzk0NzIzMTAsImV4cCI6MTY4MzA3MjMxMH0.z_oE-pzcvdIaUqLxULlfBZf6dadfq2btSLsSrhqvcvI
+      requestBody:
+        content:
+          multipart/form-data;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/story1012374214'
+            examples:
+              story-controller-test/스토리_생성:
+                value: "{\"contents\":\"스토리의 내용입니다.\",\"storyImage\":\"org.springframework.mock.web.MockMultipartFile@6ed7b9c5\"\
+                  }"
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/story221479330'
+              examples:
+                story-controller-test/스토리_생성:
+                  value: "{\"message\":\"성공\",\"code\":200,\"data\":{\"storyId\":1}}"
+      security:
+      - bearerAuthJWT: []
+    patch:
+      tags:
+      - Story
+      summary: 스토리 변경 API
+      description: 스토리 변경 API
+      operationId: story-controller-test/스토리_업데이트
+      parameters:
+      - name: Authorization
+        in: header
+        description: ACCESS TOKEN
+        required: true
+        schema:
+          type: string
+        example: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOltdLCJpYXQiOjE2Nzk0NzIzMTAsImV4cCI6MTY4MzA3MjMxMH0.z_oE-pzcvdIaUqLxULlfBZf6dadfq2btSLsSrhqvcvI
+      requestBody:
+        content:
+          multipart/form-data;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/story-278565220'
+            examples:
+              story-controller-test/스토리_업데이트:
+                value: "{\"storyId\":1,\"contents\":\"스토리의 내용이에요\",\"storyImage\"\
+                  :\"org.springframework.mock.web.MockMultipartFile@2e4d2232\"}"
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/story221479330'
+              examples:
+                story-controller-test/스토리_업데이트:
+                  value: "{\"message\":\"성공\",\"code\":200,\"data\":{\"storyId\":1}}"
+      security:
+      - bearerAuthJWT: []
+  /story/all:
+    get:
+      tags:
+      - Story
+      summary: 스토리 전체 조회 API
+      description: 스토리 전체 조회 API
+      operationId: story-controller-test/스토리_전체조회
+      parameters:
+      - name: Authorization
+        in: header
+        description: 요청자의 JWT
+        required: true
+        schema:
+          type: string
+        example: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOltdLCJpYXQiOjE2Nzk0NzIzMTAsImV4cCI6MTY4MzA3MjMxMH0.z_oE-pzcvdIaUqLxULlfBZf6dadfq2btSLsSrhqvcvI
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/story-all876884235'
+              examples:
+                story-controller-test/스토리_전체조회:
+                  value: "{\"message\":\"성공\",\"code\":200,\"data\":[{\"id\":1,\"\
+                    storyImageUrl\":\"http://1\"},{\"id\":2,\"storyImageUrl\":\"http://2\"\
+                    }]}"
+      security:
+      - bearerAuthJWT: []
   /user/profile:
     patch:
       tags:
@@ -26,12 +126,12 @@ paths:
         content:
           multipart/form-data;charset=UTF-8:
             schema:
-              $ref: '#/components/schemas/user-profile1052611802'
+              $ref: '#/components/schemas/user-profile-1030560250'
             examples:
               user-profile-controller-test/프로필_업데이트:
                 value: "{\"gender\":\"MAN\",\"wantedAnimal\":\"CAT\",\"nickname\"\
                   :\"유저닉네임\",\"mbti\":\"INTP\",\"animal\":\"CAT\",\"location\":\"\
-                  GANDONG\",\"profileImage\":\"org.springframework.mock.web.MockMultipartFile@a03529c\"\
+                  GANDONG\",\"profileImage\":\"org.springframework.mock.web.MockMultipartFile@1aeff8ca\"\
                   ,\"smokingStatus\":false,\"job\":\"대학생이에요\",\"age\":25,\"height\"\
                   :175,\"selfDescription\":\"안녕하세요 자기소개입니다.\"}"
       responses:
@@ -118,6 +218,30 @@ paths:
       - bearerAuthJWT: []
 components:
   schemas:
+    story221479330:
+      type: object
+      properties:
+        code:
+          type: number
+          description: 응답 코드
+        data:
+          type: object
+          properties:
+            storyId:
+              type: number
+              description: 스토리 id
+        message:
+          type: string
+          description: 메시지
+    story1012374214:
+      type: object
+      properties:
+        contents:
+          type: string
+          description: 스토리 내용
+        storyImage:
+          type: string
+          description: 스토리 이미지
     user-profile-all-1103448983:
       type: object
       properties:
@@ -156,22 +280,7 @@ components:
         message:
           type: string
           description: 메시지
-    user-profile-748640380:
-      type: object
-      properties:
-        code:
-          type: number
-          description: 응답 코드
-        data:
-          type: object
-          properties:
-            userId:
-              type: number
-              description: 유저의 프로필 id
-        message:
-          type: string
-          description: 메시지
-    user-profile1052611802:
+    user-profile-1030560250:
       type: object
       properties:
         gender:
@@ -194,7 +303,7 @@ components:
           description: 사는 곳
         profileImage:
           type: string
-          description: 이미지파일
+          description: 프로필 이미지파일
         job:
           type: string
           description: 직업
@@ -210,6 +319,33 @@ components:
         height:
           type: number
           description: 키
+    user-profile-748640380:
+      type: object
+      properties:
+        code:
+          type: number
+          description: 응답 코드
+        data:
+          type: object
+          properties:
+            userId:
+              type: number
+              description: 유저의 프로필 id
+        message:
+          type: string
+          description: 메시지
+    story-278565220:
+      type: object
+      properties:
+        storyId:
+          type: number
+          description: 스토리 ID
+        contents:
+          type: string
+          description: 내용
+        storyImage:
+          type: string
+          description: 스토리 이미지
     user-userId-461205012:
       type: object
       properties:
@@ -258,6 +394,26 @@ components:
         message:
           type: string
           description: 결과 메시지
+    story-all876884235:
+      type: object
+      properties:
+        code:
+          type: number
+          description: 응답코드
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              storyImageUrl:
+                type: string
+                description: 스토리 이미지 URL
+              id:
+                type: number
+                description: 스토리 ID
+        message:
+          type: string
+          description: 메시지
   securitySchemes:
     bearerAuthJWT:
       type: http

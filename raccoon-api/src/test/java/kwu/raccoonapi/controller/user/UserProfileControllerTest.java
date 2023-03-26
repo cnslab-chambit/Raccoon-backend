@@ -34,8 +34,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.HttpMethod.PATCH;
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.multipart;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestPartBody;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -121,9 +120,9 @@ public class UserProfileControllerTest extends ApiDocumentationTest {
         Animal wantedAnimal = Animal.CAT;
         String job = "대학생이에요";
         Location location = Location.GANDONG;
-        JSONObject request = new JSONObject();
-
         MockMultipartFile profileImage = new MockMultipartFile("profileImage","image.jpg".getBytes());
+
+        JSONObject request = new JSONObject();
 
         request.put("nickname",nickname)
                 .put("gender",gender)
@@ -143,12 +142,7 @@ public class UserProfileControllerTest extends ApiDocumentationTest {
         when(userProfileFacadeService.updateProfile(any()))
                 .thenReturn(response);
 
-        MockMultipartHttpServletRequestBuilder builder = multipart("/user/profile");
-        builder.with(req -> {
-            req.setMethod(PATCH.name());
-            return req;
-        });
-        ResultActions resultActions = mockMvc.perform(builder
+        ResultActions resultActions = mockMvc.perform(patch("/user/profile")
                 .header(AUTHORIZATION,BEARER+" "+JWT)
                         .content(request.toString())
                 .contentType(MULTIPART_FORM_DATA))
@@ -195,7 +189,6 @@ public class UserProfileControllerTest extends ApiDocumentationTest {
         ResultActions resultActions = mockMvc.perform(
                 get("/user/profile/all")
                         .header(AUTHORIZATION,BEARER+" "+JWT)
-                        .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk());
 
         resultActions.andDo(restDocs.document(resource(

@@ -1,7 +1,7 @@
 package kwu.raccoonapi.facade.story.assembler;
 
 import kwu.raccoonapi.dto.story.request.StoryCreateRequest;
-import kwu.raccoonapi.dto.story.response.StoryAllResponse;
+import kwu.raccoonapi.dto.story.response.StoryResponse;
 import kwu.raccoonapi.dto.story.response.StoryCreateResponse;
 import kwu.raccoonapi.dto.story.response.StoryUpdateResponse;
 import kwu.raccoonapi.utils.SecurityUtils;
@@ -26,8 +26,8 @@ public class StoryAssembler {
         return StoryCreateResponse.of(story.getId());
     }
 
-    public StoryAllResponse toAllStoryResponse(Story story){
-        return StoryAllResponse.of(
+    public StoryResponse toAllStoryResponse(Story story){
+        return StoryResponse.of(
                 story.getId(),
                 story.getStoryImageUrl()
         );
