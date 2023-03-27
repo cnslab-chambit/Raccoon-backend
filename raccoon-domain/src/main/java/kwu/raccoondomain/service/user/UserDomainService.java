@@ -5,6 +5,7 @@ import kwu.raccooncommon.dto.OauthResponse;
 import kwu.raccooncommon.exception.RaccoonException;
 import kwu.raccoondomain.dto.user.UserSignUpDto;
 import kwu.raccoondomain.persistence.domain.user.User;
+import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import kwu.raccoondomain.persistence.domain.user.enums.VendorType;
 import kwu.raccoondomain.persistence.query.user.UserRepository;
 import kwu.raccooninfra.dto.KakaoProfileResponse;
@@ -68,5 +69,4 @@ public class UserDomainService {
             throw new RaccoonException(RetConsts.ERR600);
         }
     }
-
 }

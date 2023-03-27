@@ -8,6 +8,7 @@ import kwu.raccoonapi.dto.story.response.StoryUpdateResponse;
 import kwu.raccoonapi.utils.SecurityUtils;
 import kwu.raccoondomain.dto.story.StoryCreateDto;
 import kwu.raccoondomain.persistence.domain.story.Story;
+import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -34,7 +35,7 @@ public class StoryAssembler {
         );
     }
 
-    public StoryDetailResponse toStoryDetailResponse(Story story){
-        return StoryDetailResponse.of(story);
+    public StoryDetailResponse toStoryDetailResponse(Story story, double distance){
+        return StoryDetailResponse.of(story,distance);
     }
 }

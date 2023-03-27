@@ -60,7 +60,9 @@ public class StoryFacadeService {
     @Transactional(readOnly = true)
     public StoryDetailResponse getStoryDetail(Long storyId){
         Story story= storyDomainService.getStoryById(storyId);
-        return storyAssembler.toStoryDetailResponse(story);
+        UserProfile userProfile = userProfileDomainService.getProfile(SecurityUtils.getUser().getId());
+        Double distance = userProfileDomainService.getDistance(story.getUserProfile().getId(), userProfile);
+        return storyAssembler.toStoryDetailResponse(story,distance);
     }
 
 }
