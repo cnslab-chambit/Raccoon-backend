@@ -45,7 +45,7 @@ public class User implements Serializable {
         user.vendorType = userSignUpDto.getVendorType();
         user.email = userSignUpDto.getEmail();
 
-        UserProfile profile = new UserProfile(user);
+        UserProfile profile = new UserProfile();
         user.userProfile = profile;
 
         return user;

@@ -24,10 +24,6 @@ public class UserProfile {
     @Column(name = "user_profile_id")
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY,mappedBy = "userProfile")
-    @JoinColumn(name = "user_id")
-    private User user;
-
     @Column(name = "user_nickname")
     private String nickname;
 
@@ -70,10 +66,6 @@ public class UserProfile {
     @Enumerated(value = EnumType.STRING)
     private Animal wantedAnimal;
 
-
-    public UserProfile(User user){
-        this.user = user;
-    }
 
     public void updateProfile(UserProfileUpdateDto userProfileUpdateDto,String profileImageUrl){
         if(userProfileUpdateDto.getNickname() != null) this.nickname = userProfileUpdateDto.getNickname();
