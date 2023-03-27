@@ -3,6 +3,7 @@ plugins {
 	id 'org.springframework.boot' version '2.7.1'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'com.epages.restdocs-api-spec' version '0.16.2'
+	id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 }
 
 repositories {
@@ -103,7 +104,7 @@ project(':raccoon-api'){
 }
 project(':raccoon-domain'){
 
-	apply plugin: 'com.epages.restdocs-api-spec'
+	apply plugin: 'com.ewerk.gradle.plugins.querydsl'
 
 	bootJar {
 		enabled = false
@@ -112,12 +113,48 @@ project(':raccoon-domain'){
 	jar {
 		enabled = true
 	}
+
+	configurations {
+		querydsl {
+			extendsFrom compileClasspath
+		}
+	}
+
+	ext {
+		queryDslVersion = "5.0.0"
+	}
+
 	dependencies {
 		implementation project(path:':raccoon-common')
 		implementation project(path:':raccoon-infra')
 		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 		implementation 'mysql:mysql-connector-java'
+		implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+		implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 	}
+
+	def querydslSrcDir = "$buildDir/generated/querydsl"
+
+	querydsl {
+		jpa = true
+		querydslSourcesDir = querydslSrcDir
+	}
+
+	sourceSets {
+		main.java.srcDir querydslSrcDir
+	}
+
+	compileQuerydsl {
+		options.annotationProcessorPath = configurations.querydsl
+	}
+
+	configurations {
+		compileOnly {
+			extendsFrom annotationProcessor
+		}
+		querydsl.extendsFrom compileClasspath
+	}
+
 }
 
 project(':raccoon-infra'){
