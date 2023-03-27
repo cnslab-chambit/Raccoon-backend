@@ -50,4 +50,9 @@ public class StoryFacadeService {
                 .collect(Collectors.toList());
     }
 
+    public void delete(Long StoryId) {
+        UserProfile userProfile = userProfileDomainService.getProfile(SecurityUtils.getUser().getId());
+        storyDomainService.deleteStoryByIdOrElseThrow(userProfile, StoryId);
+    }
+
 }
