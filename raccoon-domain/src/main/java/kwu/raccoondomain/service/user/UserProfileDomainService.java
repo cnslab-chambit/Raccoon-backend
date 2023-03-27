@@ -24,8 +24,7 @@ public class UserProfileDomainService {
 
         User user = userRepository.findById(userId).orElseThrow(() -> new RaccoonException(RetConsts.ERR600));
 
-        UserProfile userProfile = userProfileRepository
-                .findUserProfileByUser(user).orElseThrow(() -> new RaccoonException(RetConsts.ERR600));
+        UserProfile userProfile = user.getUserProfile();
 
         userProfile.updateProfile(userProfileUpdateDto,profileImgUrl);
         return user.getId();
@@ -33,8 +32,7 @@ public class UserProfileDomainService {
 
     public UserProfile getProfile(Long userId){
         User user = userRepository.findById(userId).orElseThrow(() -> new RaccoonException(RetConsts.ERR600));
-        UserProfile userProfile = userProfileRepository
-                .findUserProfileByUser(user).orElseThrow(() -> new RaccoonException(RetConsts.ERR600));
+        UserProfile userProfile = user.getUserProfile();
         return userProfile;
     }
     public List<UserProfile> findAllProfile(){
