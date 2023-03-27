@@ -22,7 +22,7 @@ public class StoryDomainService {
     private final S3Service s3Service;
 
     public Long updateStory(UserProfile userProfile, StoryUpdateDto storyUpdateDto){
-        Story story=storyRepository.findById(storyUpdateDto.getStoryId()).orElseThrow(()->new RaccoonException(RetConsts.ERR600));
+        Story story=storyRepository.findById(storyUpdateDto.getStoryId()).orElseThrow(()->new RaccoonException(RetConsts.ERR602));
         if (story.getUserProfile()!=userProfile){
             throw new RaccoonException(RetConsts.ERR601);
         }
@@ -46,6 +46,18 @@ public class StoryDomainService {
     public List<Story> findAllStory(){
         List<Story> all = storyRepository.findAll();
         return all;
+    }
+
+    public void deleteStoryByIdOrElseThrow(UserProfile userProfile,Long storyId){
+        Story story=storyRepository.findById(storyId).orElseThrow(()->new RaccoonException(RetConsts.ERR602));
+        if(story.getUserProfile()!=userProfile){
+            throw new RaccoonException(RetConsts.ERR601);
+        }
+        try{
+            storyRepository.deleteById(storyId);
+        }catch (Exception e) {
+            throw new RaccoonException(RetConsts.ERR602);
+        }
     }
 
 }

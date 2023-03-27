@@ -35,4 +35,9 @@ public class StoryController {
         return ApiResponse.ok(storyFacadeService.getAllStory());
     }
 
+    @DeleteMapping("/story/{storyId}")
+    public void deleteStory(@PathVariable Long storyId){
+        storyFacadeService.delete(storyId);
+    }
+
 }
