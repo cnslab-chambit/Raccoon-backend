@@ -26,7 +26,7 @@ public class StoryController {
     }
 
     @PostMapping("/story")
-    public ApiResponse<StoryCreateResponse> create(@ModelAttribute StoryCreateRequest request){
+    public ApiResponse<StoryCreateResponse> createStory(@ModelAttribute StoryCreateRequest request){
         return ApiResponse.ok(storyFacadeService.create(request));
     }
 
