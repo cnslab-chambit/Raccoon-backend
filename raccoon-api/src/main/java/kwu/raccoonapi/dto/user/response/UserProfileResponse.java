@@ -17,6 +17,6 @@ public class UserProfileResponse {
     private String profileImageUrl;
     private Location location;
     private Animal animal;
-    private double x;
-    private double y;
+    private Double x;
+    private Double y;
 }

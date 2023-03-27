@@ -5,6 +5,7 @@ import kwu.raccooncommon.exception.RaccoonException;
 import kwu.raccoondomain.dto.story.StoryCreateDto;
 import kwu.raccoondomain.dto.story.StoryUpdateDto;
 import kwu.raccoondomain.persistence.domain.story.Story;
+import kwu.raccoondomain.persistence.domain.user.User;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import kwu.raccoondomain.persistence.query.story.StoryRepository;
 import kwu.raccooninfra.service.s3.S3Service;
@@ -58,6 +59,11 @@ public class StoryDomainService {
         }catch (Exception e) {
             throw new RaccoonException(RetConsts.ERR602);
         }
+    }
+
+    public Story getStoryById(Long storyId){
+        Story story = storyRepository.findById(storyId).orElseThrow(() -> new RaccoonException(RetConsts.ERR602));
+        return story;
     }
 
 }

@@ -25,8 +25,8 @@ public class UserProfileDetailsResponse {
     private Mbti mbti;
     private Animal animal;
     private Animal wantedAnimal;
-    private double x;
-    private double y;
+    private Double x;
+    private Double y;
 
     //user를 parameter로 받아서 response로 바꿔서 반환
     public static UserProfileDetailsResponse of(UserProfile userProfile) {

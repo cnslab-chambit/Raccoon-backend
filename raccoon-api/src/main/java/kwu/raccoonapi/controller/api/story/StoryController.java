@@ -3,6 +3,7 @@ package kwu.raccoonapi.controller.api.story;
 import kwu.raccoonapi.dto.ApiResponse;
 import kwu.raccoonapi.dto.story.request.StoryCreateRequest;
 import kwu.raccoonapi.dto.story.request.StoryUpdateRequest;
+import kwu.raccoonapi.dto.story.response.StoryDetailResponse;
 import kwu.raccoonapi.dto.story.response.StoryResponse;
 import kwu.raccoonapi.dto.story.response.StoryCreateResponse;
 import kwu.raccoonapi.dto.story.response.StoryUpdateResponse;
@@ -38,6 +39,11 @@ public class StoryController {
     @DeleteMapping("/story/{storyId}")
     public void deleteStory(@PathVariable Long storyId){
         storyFacadeService.delete(storyId);
+    }
+
+    @GetMapping("/story/{storyId}")
+    public ApiResponse<StoryDetailResponse> getStoryDetail(@PathVariable Long storyId){
+        return ApiResponse.ok(storyFacadeService.getStoryDetail(storyId));
     }
 
 
