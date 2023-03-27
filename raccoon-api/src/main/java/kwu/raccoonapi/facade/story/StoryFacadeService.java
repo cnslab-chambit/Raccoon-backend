@@ -61,7 +61,7 @@ public class StoryFacadeService {
     public StoryDetailResponse getStoryDetail(Long storyId){
         Story story= storyDomainService.getStoryById(storyId);
         UserProfile userProfile = userProfileDomainService.getProfile(SecurityUtils.getUser().getId());
-        Double distance = userProfileDomainService.getDistance(story.getUserProfile().getId(), userProfile);
+        Double distance = userProfileDomainService.getDistance(story.getUserProfile(), userProfile);
         return storyAssembler.toStoryDetailResponse(story,distance);
     }
 

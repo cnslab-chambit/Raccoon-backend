@@ -43,27 +43,23 @@ public class UserProfileDomainService {
         return all;
     }
 
-    public Double getDistance(Long otherUserId, UserProfile userProfile){
-        User other = userRepository.findById(otherUserId).orElseThrow(() -> new RaccoonException(RetConsts.ERR600));
-        UserProfile otherUserProfile = other.getUserProfile();
-        Double d= null;
-
+    public Double getDistance(UserProfile otherUserProfile, UserProfile userProfile){
+        Double distance= null;
         try{
-            Double lat1 =userProfile.getY();//위도(y)
-            Double lon1= userProfile.getX();//경도(x)
-            Double lat2= otherUserProfile.getY();
-            Double lon2=otherUserProfile.getX();
-            Double dLat = Math.toRadians(lat2 - lat1);
-            Double dLon = Math.toRadians(lon2 - lon1);
+            Double latitude1 =userProfile.getY(); //위도(y)
+            Double longitude1= userProfile.getX(); //경도(x)
+            Double latitude2= otherUserProfile.getY();
+            Double longitude2=otherUserProfile.getX();
+            Double dLatitude = Math.toRadians(latitude2 - latitude1);
+            Double dLongitude = Math.toRadians(longitude2 - longitude1);
 
-            Double a = Math.sin(dLat/2)* Math.sin(dLat/2)+ Math.cos(Math.toRadians(lat1))* Math.cos(Math.toRadians(lat2))* Math.sin(dLon/2)* Math.sin(dLon/2);
+            Double a = Math.sin(dLatitude/2)* Math.sin(dLatitude/2)+ Math.cos(Math.toRadians(latitude1))* Math.cos(Math.toRadians(latitude2))* Math.sin(dLongitude/2)* Math.sin(dLongitude/2);
             Double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-            d =EARTH_RADIUS* c * 1000;    // Distance in m
+            distance =EARTH_RADIUS* c * 1000;
 
         }catch (Exception e) {
             throw new RaccoonException(RetConsts.ERR603);
         }
-
-        return d;
+        return distance;
     }
 }
