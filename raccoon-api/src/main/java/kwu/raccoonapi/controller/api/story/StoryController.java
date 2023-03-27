@@ -40,4 +40,5 @@ public class StoryController {
         storyFacadeService.delete(storyId);
     }
 
+
 }

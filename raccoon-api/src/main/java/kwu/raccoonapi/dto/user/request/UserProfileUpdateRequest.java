@@ -23,6 +23,8 @@ public class UserProfileUpdateRequest {
     private Animal wantedAnimal;
     private String job;
     private Location location;
+    private double x;
+    private double y;
 
     public UserProfileUpdateDto toUserProfileUpdateDto(){
         return UserProfileUpdateDto.of(
@@ -37,7 +39,9 @@ public class UserProfileUpdateRequest {
                 animal,
                 wantedAnimal,
                 job,
-                location
+                location,
+                x,
+                y
         );
     }
 }

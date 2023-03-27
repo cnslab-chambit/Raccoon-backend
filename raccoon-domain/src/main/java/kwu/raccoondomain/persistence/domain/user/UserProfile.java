@@ -66,6 +66,12 @@ public class UserProfile {
     @Enumerated(value = EnumType.STRING)
     private Animal wantedAnimal;
 
+    @Column(name="coordinate_x")
+    private double x;
+
+    @Column(name="coordinate_y")
+    private double y;
+
 
     public void updateProfile(UserProfileUpdateDto userProfileUpdateDto,String profileImageUrl){
         if(userProfileUpdateDto.getNickname() != null) this.nickname = userProfileUpdateDto.getNickname();
@@ -80,5 +86,7 @@ public class UserProfile {
         if(userProfileUpdateDto.getWantedAnimal() != null) this.wantedAnimal = userProfileUpdateDto.getWantedAnimal();
         if(userProfileUpdateDto.getJob() != null ) this.job = userProfileUpdateDto.getJob();
         if(userProfileUpdateDto.getLocation() != null) this.location = userProfileUpdateDto.getLocation();
+        if(userProfileUpdateDto.getX() != 0) this.x=userProfileUpdateDto.getX();
+        if(userProfileUpdateDto.getY()!=0)this.y=userProfileUpdateDto.getY();
     }
 }
