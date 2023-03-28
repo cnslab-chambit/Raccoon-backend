@@ -1,13 +1,13 @@
 package kwu.raccoondomain.persistence.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import kwu.raccoondomain.dto.user.UserCoordinateUpdateDto;
 import kwu.raccoondomain.dto.user.UserProfileUpdateDto;
 import kwu.raccoondomain.persistence.domain.user.enums.Animal;
 import kwu.raccoondomain.persistence.domain.user.enums.Gender;
 import kwu.raccoondomain.persistence.domain.user.enums.Location;
 import kwu.raccoondomain.persistence.domain.user.enums.Mbti;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -37,7 +37,6 @@ public class UserProfile {
     @Column(name = "user_height")
     private Long height;
 
-    //프로필 사진 -> 동물상 추출하는데 사용
     @Column(name = "profile_image_url")
     private String profileImageUrl;
 
@@ -66,11 +65,11 @@ public class UserProfile {
     @Enumerated(value = EnumType.STRING)
     private Animal wantedAnimal;
 
-    @Column(name="coordinate_x")
-    private Double x;
+    @Column(name="user_longitude")
+    private Double longitude;
 
-    @Column(name="coordinate_y")
-    private Double y;
+    @Column(name="user_latitude")
+    private Double latitude;
 
 
     public void updateProfile(UserProfileUpdateDto userProfileUpdateDto,String profileImageUrl){
@@ -86,7 +85,12 @@ public class UserProfile {
         if(userProfileUpdateDto.getWantedAnimal() != null) this.wantedAnimal = userProfileUpdateDto.getWantedAnimal();
         if(userProfileUpdateDto.getJob() != null ) this.job = userProfileUpdateDto.getJob();
         if(userProfileUpdateDto.getLocation() != null) this.location = userProfileUpdateDto.getLocation();
-        if(userProfileUpdateDto.getX() != null) this.x=userProfileUpdateDto.getX();
-        if(userProfileUpdateDto.getY()!=null)this.y=userProfileUpdateDto.getY();
+        if(userProfileUpdateDto.getLongitude() != null) this.longitude =userProfileUpdateDto.getLongitude();
+        if(userProfileUpdateDto.getLatitude()!=null)this.latitude =userProfileUpdateDto.getLatitude();
+    }
+
+    public void updateCoordinate(UserCoordinateUpdateDto userCoordinateUpdateDto) {
+        if(userCoordinateUpdateDto.getLongitude() != null) this.longitude =userCoordinateUpdateDto.getLongitude();
+        if(userCoordinateUpdateDto.getLatitude()!=null)this.latitude =userCoordinateUpdateDto.getLatitude();
     }
 }

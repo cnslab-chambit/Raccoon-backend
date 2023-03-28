@@ -1,6 +1,7 @@
 package kwu.raccoonapi.controller.api.user;
 
 import kwu.raccoonapi.dto.ApiResponse;
+import kwu.raccoonapi.dto.user.request.UserCoordinateUpdateRequest;
 import kwu.raccoonapi.dto.user.request.UserProfileUpdateRequest;
 import kwu.raccoonapi.dto.user.response.UserProfileResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileDetailsResponse;
@@ -21,6 +22,11 @@ public class UserProfileController {
     @PatchMapping("/user/profile")
     public ApiResponse<UserProfileUpdateResponse> updateProfile(@ModelAttribute UserProfileUpdateRequest request){
         return ApiResponse.ok(userProfileFacadeService.updateProfile(request));
+    }
+
+    @PatchMapping("user/profile/coordinate")
+    public ApiResponse<UserProfileUpdateResponse> updateProfileCoordinate(@ModelAttribute UserCoordinateUpdateRequest request){
+        return ApiResponse.ok(userProfileFacadeService.updateProfileCoordinate(request));
     }
     
     @GetMapping(path="/user/{userId}")

@@ -1,5 +1,6 @@
 package kwu.raccoonapi.facade.user;
 
+import kwu.raccoonapi.dto.user.request.UserCoordinateUpdateRequest;
 import kwu.raccoonapi.dto.user.request.UserProfileUpdateRequest;
 import kwu.raccoonapi.dto.user.response.UserProfileResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileDetailsResponse;
@@ -27,6 +28,14 @@ public class UserProfileFacadeService {
                 .updateProfile(SecurityUtils.getUser().getId(), request.toUserProfileUpdateDto());
         return userProfileAssembler.toUserProfileUpdateResponse(userId);
     }
+
+    @Transactional
+    public UserProfileUpdateResponse updateProfileCoordinate(UserCoordinateUpdateRequest request) {
+        Long userId = userProfileDomainService
+                .updateProfileCoordinate(SecurityUtils.getUser().getId(), request.toUserCoordinateUpdateDto());
+        return userProfileAssembler.toUserProfileUpdateResponse(userId);
+    }
+
     @Transactional(readOnly = true)
     public UserProfileDetailsResponse getProfile(Long userId){
         UserProfile userProfile= userProfileDomainService.getProfile(userId);
@@ -39,6 +48,5 @@ public class UserProfileFacadeService {
                 .map(profile -> userProfileAssembler.toAllUserProfileResponse(profile))
                 .collect(Collectors.toList());
     }
-
 
 }

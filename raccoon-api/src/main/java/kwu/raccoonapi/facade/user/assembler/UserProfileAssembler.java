@@ -25,8 +25,8 @@ public class UserProfileAssembler {
                 userProfile.getProfileImageUrl(),
                 userProfile.getLocation(),
                 userProfile.getAnimal(),
-                userProfile.getX(),
-                userProfile.getY()
+                userProfile.getLongitude(),
+                userProfile.getLatitude()
         );
     }
 
