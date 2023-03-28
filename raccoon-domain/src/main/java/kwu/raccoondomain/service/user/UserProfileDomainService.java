@@ -11,6 +11,7 @@ import kwu.raccooninfra.service.s3.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.nio.DoubleBuffer;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -19,6 +20,8 @@ public class UserProfileDomainService {
     private final UserRepository userRepository;
     private final UserProfileRepository userProfileRepository;
     private final S3Service s3Service;
+    private static final double EARTH_RADIUS=6371;
+
     public Long updateProfile(Long userId, UserProfileUpdateDto userProfileUpdateDto){
         String profileImgUrl = s3Service.upload(userProfileUpdateDto.getProfileImage());
 
@@ -40,4 +43,23 @@ public class UserProfileDomainService {
         return all;
     }
 
+    public Double getDistance(UserProfile otherUserProfile, UserProfile userProfile){
+        Double distance= null;
+        try{
+            Double latitude1 =userProfile.getY(); //위도(y)
+            Double longitude1= userProfile.getX(); //경도(x)
+            Double latitude2= otherUserProfile.getY();
+            Double longitude2=otherUserProfile.getX();
+            Double dLatitude = Math.toRadians(latitude2 - latitude1);
+            Double dLongitude = Math.toRadians(longitude2 - longitude1);
+
+            Double a = Math.sin(dLatitude/2)* Math.sin(dLatitude/2)+ Math.cos(Math.toRadians(latitude1))* Math.cos(Math.toRadians(latitude2))* Math.sin(dLongitude/2)* Math.sin(dLongitude/2);
+            Double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            distance =EARTH_RADIUS* c * 1000;
+
+        }catch (Exception e) {
+            throw new RaccoonException(RetConsts.ERR603);
+        }
+        return distance;
+    }
 }

@@ -13,7 +13,8 @@ public enum RetConsts {
     ERR501(RetStatus.INFRA,501,"파일 url 이상함"),
     ERR600(RetStatus.BUSINESS,600,"해당 유저가 없어요"),
     ERR601(RetStatus.BUSINESS,601,"회원 정보가 일치하지 않습니다."),
-    ERR602(RetStatus.BUSINESS,602,"해당 스토리가 존재하지 않습니다.");
+    ERR602(RetStatus.BUSINESS,602,"해당 스토리가 존재하지 않습니다."),
+    ERR603(RetStatus.BUSINESS,603,"위치 정보를 동의하지 않았습니다.");
     private RetStatus retStatus;
     private int code;
     private String description;

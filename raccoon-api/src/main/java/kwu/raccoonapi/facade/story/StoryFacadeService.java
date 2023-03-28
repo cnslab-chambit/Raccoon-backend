@@ -2,6 +2,7 @@ package kwu.raccoonapi.facade.story;
 
 import kwu.raccoonapi.dto.story.request.StoryCreateRequest;
 import kwu.raccoonapi.dto.story.request.StoryUpdateRequest;
+import kwu.raccoonapi.dto.story.response.StoryDetailResponse;
 import kwu.raccoonapi.dto.story.response.StoryResponse;
 import kwu.raccoonapi.dto.story.response.StoryCreateResponse;
 import kwu.raccoonapi.dto.story.response.StoryUpdateResponse;
@@ -50,9 +51,18 @@ public class StoryFacadeService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public void delete(Long StoryId) {
         UserProfile userProfile = userProfileDomainService.getProfile(SecurityUtils.getUser().getId());
         storyDomainService.deleteStoryByIdOrElseThrow(userProfile, StoryId);
+    }
+
+    @Transactional(readOnly = true)
+    public StoryDetailResponse getStoryDetail(Long storyId){
+        Story story= storyDomainService.getStoryById(storyId);
+        UserProfile userProfile = userProfileDomainService.getProfile(SecurityUtils.getUser().getId());
+        Double distance = userProfileDomainService.getDistance(story.getUserProfile(), userProfile);
+        return storyAssembler.toStoryDetailResponse(story,distance);
     }
 
 }

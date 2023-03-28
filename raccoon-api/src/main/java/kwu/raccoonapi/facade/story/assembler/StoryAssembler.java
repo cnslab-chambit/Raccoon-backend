@@ -1,12 +1,14 @@
 package kwu.raccoonapi.facade.story.assembler;
 
 import kwu.raccoonapi.dto.story.request.StoryCreateRequest;
+import kwu.raccoonapi.dto.story.response.StoryDetailResponse;
 import kwu.raccoonapi.dto.story.response.StoryResponse;
 import kwu.raccoonapi.dto.story.response.StoryCreateResponse;
 import kwu.raccoonapi.dto.story.response.StoryUpdateResponse;
 import kwu.raccoonapi.utils.SecurityUtils;
 import kwu.raccoondomain.dto.story.StoryCreateDto;
 import kwu.raccoondomain.persistence.domain.story.Story;
+import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -31,5 +33,9 @@ public class StoryAssembler {
                 story.getId(),
                 story.getStoryImageUrl()
         );
+    }
+
+    public StoryDetailResponse toStoryDetailResponse(Story story, double distance){
+        return StoryDetailResponse.of(story,distance);
     }
 }

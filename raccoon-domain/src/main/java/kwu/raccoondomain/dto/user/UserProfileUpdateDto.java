@@ -23,4 +23,6 @@ public class UserProfileUpdateDto {
     private Animal wantedAnimal;
     private String job;
     private Location location;
+    private Double x;
+    private Double y;
 }
