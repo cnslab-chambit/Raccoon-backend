@@ -25,8 +25,8 @@ public class UserProfileDetailsResponse {
     private Mbti mbti;
     private Animal animal;
     private Animal wantedAnimal;
-    private Double x;
-    private Double y;
+    private Double longitude;
+    private Double latitude;
 
     //user를 parameter로 받아서 response로 바꿔서 반환
     public static UserProfileDetailsResponse of(UserProfile userProfile) {
@@ -44,8 +44,8 @@ public class UserProfileDetailsResponse {
         userProfileDetailsResponse.mbti=userProfile.getMbti();
         userProfileDetailsResponse.animal=userProfile.getAnimal();
         userProfileDetailsResponse.wantedAnimal=userProfile.getWantedAnimal();
-        userProfileDetailsResponse.x=userProfile.getX();
-        userProfileDetailsResponse.y=userProfile.getY();
+        userProfileDetailsResponse.longitude =userProfile.getLongitude();
+        userProfileDetailsResponse.latitude =userProfile.getLatitude();
 
         return userProfileDetailsResponse;
     }
