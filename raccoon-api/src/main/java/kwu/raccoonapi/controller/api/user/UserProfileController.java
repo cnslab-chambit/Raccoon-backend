@@ -7,6 +7,7 @@ import kwu.raccoonapi.dto.user.response.UserProfileResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileDetailsResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileUpdateResponse;
 import kwu.raccoonapi.facade.user.UserProfileFacadeService;
+import kwu.raccoondomain.persistence.domain.user.enums.Animal;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,12 @@ public class UserProfileController {
     public ApiResponse<UserProfileUpdateResponse> updateProfileCoordinate(@ModelAttribute UserCoordinateUpdateRequest request){
         return ApiResponse.ok(userProfileFacadeService.updateProfileCoordinate(request));
     }
-    
+
+    @PatchMapping("user/profile/animal/{animal}")
+    public ApiResponse<UserProfileUpdateResponse> updateProfileAnimal(@PathVariable Animal animal){
+        return ApiResponse.ok(userProfileFacadeService.updateProfileAnimal(animal));
+    }
+
     @GetMapping(path="/user/{userId}")
     public ApiResponse<UserProfileDetailsResponse> getProfile(@PathVariable Long userId){
         return ApiResponse.ok(userProfileFacadeService.getProfile(userId));

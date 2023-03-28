@@ -8,6 +8,7 @@ import kwu.raccoonapi.dto.user.response.UserProfileUpdateResponse;
 import kwu.raccoonapi.facade.user.assembler.UserProfileAssembler;
 import kwu.raccoonapi.utils.SecurityUtils;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
+import kwu.raccoondomain.persistence.domain.user.enums.Animal;
 import kwu.raccoondomain.service.user.UserProfileDomainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,13 @@ public class UserProfileFacadeService {
         return userProfileAssembler.toUserProfileUpdateResponse(userId);
     }
 
+    @Transactional
+    public UserProfileUpdateResponse updateProfileAnimal(Animal animal) {
+        Long userId = userProfileDomainService
+                .updateProfileAnimal(SecurityUtils.getUser().getId(), animal);
+        return userProfileAssembler.toUserProfileUpdateResponse(userId);
+    }
+
     @Transactional(readOnly = true)
     public UserProfileDetailsResponse getProfile(Long userId){
         UserProfile userProfile= userProfileDomainService.getProfile(userId);
@@ -48,5 +56,4 @@ public class UserProfileFacadeService {
                 .map(profile -> userProfileAssembler.toAllUserProfileResponse(profile))
                 .collect(Collectors.toList());
     }
-
 }

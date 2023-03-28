@@ -93,4 +93,8 @@ public class UserProfile {
         if(userCoordinateUpdateDto.getLongitude() != null) this.longitude =userCoordinateUpdateDto.getLongitude();
         if(userCoordinateUpdateDto.getLatitude()!=null)this.latitude =userCoordinateUpdateDto.getLatitude();
     }
+
+    public void updateAnimal(Animal animal) {
+        this.animal=animal;
+    }
 }

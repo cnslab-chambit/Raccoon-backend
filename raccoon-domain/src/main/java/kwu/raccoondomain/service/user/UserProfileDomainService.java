@@ -6,6 +6,7 @@ import kwu.raccoondomain.dto.user.UserCoordinateUpdateDto;
 import kwu.raccoondomain.dto.user.UserProfileUpdateDto;
 import kwu.raccoondomain.persistence.domain.user.User;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
+import kwu.raccoondomain.persistence.domain.user.enums.Animal;
 import kwu.raccoondomain.persistence.query.user.UserProfileRepository;
 import kwu.raccoondomain.persistence.query.user.UserRepository;
 import kwu.raccooninfra.service.s3.S3Service;
@@ -34,6 +35,12 @@ public class UserProfileDomainService {
         User user = userRepository.findById(userId).orElseThrow(() -> new RaccoonException(RetConsts.ERR600));
         UserProfile userProfile = user.getUserProfile();
         userProfile.updateCoordinate(userCoordinateUpdateDto);
+        return user.getId();
+    }
+    public Long updateProfileAnimal(Long userId, Animal animal) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RaccoonException(RetConsts.ERR600));
+        UserProfile userProfile = user.getUserProfile();
+        userProfile.updateAnimal(animal);
         return user.getId();
     }
 
