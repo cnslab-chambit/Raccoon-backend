@@ -1,5 +1,6 @@
 package kwu.raccoonapi.facade.user;
 
+import kwu.raccoonapi.dto.user.request.UserAnimalUpdateRequest;
 import kwu.raccoonapi.dto.user.request.UserCoordinateUpdateRequest;
 import kwu.raccoonapi.dto.user.request.UserProfileUpdateRequest;
 import kwu.raccoonapi.dto.user.response.UserProfileResponse;
@@ -38,9 +39,9 @@ public class UserProfileFacadeService {
     }
 
     @Transactional
-    public UserProfileUpdateResponse updateProfileAnimal(Animal animal) {
+    public UserProfileUpdateResponse updateProfileAnimal(UserAnimalUpdateRequest request) {
         Long userId = userProfileDomainService
-                .updateProfileAnimal(SecurityUtils.getUser().getId(), animal);
+                .updateProfileAnimal(SecurityUtils.getUser().getId(), request.getAnimal());
         return userProfileAssembler.toUserProfileUpdateResponse(userId);
     }
 

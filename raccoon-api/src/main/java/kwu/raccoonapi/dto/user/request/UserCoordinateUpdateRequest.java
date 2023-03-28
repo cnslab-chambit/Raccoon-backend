@@ -2,8 +2,9 @@ package kwu.raccoonapi.dto.user.request;
 
 import kwu.raccoondomain.dto.user.UserCoordinateUpdateDto;
 import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class UserCoordinateUpdateRequest {
     private Double latitude;
     private Double longitude;
