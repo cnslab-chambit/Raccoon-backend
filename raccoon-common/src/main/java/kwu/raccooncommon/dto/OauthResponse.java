@@ -4,5 +4,6 @@ public interface OauthResponse {
     String getId();
     String getEmail();
     String getGender();
+    String getBirthDay();
 }
 
