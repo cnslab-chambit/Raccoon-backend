@@ -46,6 +46,9 @@ public class User implements Serializable {
         user.email = userSignUpDto.getEmail();
 
         UserProfile profile = new UserProfile();
+
+        profile.setGender(userSignUpDto.getGender());
+
         user.userProfile = profile;
 
         return user;

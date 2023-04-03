@@ -24,7 +24,7 @@ public class UserProfileAssembler {
                 userProfile.getHeight(),
                 userProfile.getImages().get(0).getUrl(),
                 userProfile.getLocation(),
-                userProfile.getAnimal(),
+                userProfile.getAnimalType(),
                 userProfile.getLongitude(),
                 userProfile.getLatitude()
         );

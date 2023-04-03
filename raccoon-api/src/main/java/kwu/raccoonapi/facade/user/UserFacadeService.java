@@ -6,6 +6,7 @@ import kwu.raccoonapi.facade.user.assembler.UserAssembler;
 import kwu.raccoonapi.utils.SecurityUtils;
 import kwu.raccooncommon.dto.OauthResponse;
 import kwu.raccoondomain.persistence.domain.user.User;
+import kwu.raccoondomain.persistence.domain.user.enums.Gender;
 import kwu.raccoondomain.persistence.domain.user.enums.VendorType;
 import kwu.raccoondomain.service.user.UserDomainService;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +38,8 @@ public class UserFacadeService {
         User user  = signupWithOauth(
                 account.getId(),
                 vendorType,
-                account.getEmail()
+                account.getEmail(),
+                account.getGender()
         );
         return userAssembler.toUserSignUpResponse(user,getAccessToken(user.getId()),true);
     }
@@ -46,8 +48,8 @@ public class UserFacadeService {
         return jwtProvider.createToken(userId, List.of());
     }
 
-    private User signupWithOauth(String vendorId, VendorType vendorType, String email){
-        return userDomainService.save(userAssembler.toUserSignUpDto(vendorId,vendorType,email));
+    private User signupWithOauth(String vendorId, VendorType vendorType, String email, String gender){
+        return userDomainService.save(userAssembler.toUserSignUpDto(vendorId,vendorType,email,gender));
     }
 
     public void deleteUser() {

@@ -11,4 +11,5 @@ import lombok.extern.slf4j.Slf4j;
 public class KakaoProfileResponse implements OauthResponse {
     private String id;
     private String email;
+    private String gender;
 }

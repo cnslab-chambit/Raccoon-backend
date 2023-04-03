@@ -64,11 +64,15 @@ public class UserProfile {
 
     @Column(name = "user_animal")
     @Enumerated(value = EnumType.STRING)
-    private Animal animal;
+    private AnimalType animalType;
 
     @Column(name = "wanted_animal")
     @Enumerated(value = EnumType.STRING)
-    private Animal wantedAnimal;
+    private AnimalType wantedAnimal;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Animal> wantedAnimals = new ArrayList<>();
+
 
     @Column(name="user_longitude")
     private Double longitude;
@@ -85,11 +89,20 @@ public class UserProfile {
         if(userProfileUpdateDto.getSelfDescription() != null) this.selfDescription = userProfileUpdateDto.getSelfDescription();
         if(userProfileUpdateDto.getSmokingStatus() != null) this.smokingStatus = userProfileUpdateDto.getSmokingStatus();
         if(userProfileUpdateDto.getMbti() != null) this.mbti = userProfileUpdateDto.getMbti();
-        if(userProfileUpdateDto.getAnimal() != null) this.animal = userProfileUpdateDto.getAnimal();
-        if(userProfileUpdateDto.getWantedAnimal() != null) this.wantedAnimal = userProfileUpdateDto.getWantedAnimal();
+        if(userProfileUpdateDto.getAnimalType() != null) this.animalType = userProfileUpdateDto.getAnimalType();
+        if(userProfileUpdateDto.getWantedAnimalType() != null) this.wantedAnimal = userProfileUpdateDto.getWantedAnimalType();
         if(userProfileUpdateDto.getJob() != null ) this.job = userProfileUpdateDto.getJob();
         if(userProfileUpdateDto.getLocation() != null) this.location = userProfileUpdateDto.getLocation();
         updateImages(imageUrls);
+    }
+
+    private  void updateWantedAnimal(List<AnimalType> animalTypes){
+        this.wantedAnimals.clear();
+        for (AnimalType types : animalTypes) {
+            Animal animal = new Animal();
+            animal.setAnimalType(animalType);
+            this.wantedAnimals.add(animal);
+        }
     }
 
     private void updateImages(List<String> imageUrls){
@@ -104,10 +117,18 @@ public class UserProfile {
 
     public void updateCoordinate(UserCoordinateUpdateDto userCoordinateUpdateDto) {
         if(userCoordinateUpdateDto.getLongitude() != null) this.longitude =userCoordinateUpdateDto.getLongitude();
-        if(userCoordinateUpdateDto.getLatitude()!=null)this.latitude =userCoordinateUpdateDto.getLatitude();
+        if(userCoordinateUpdateDto.getLatitude()!=null) this.latitude =userCoordinateUpdateDto.getLatitude();
     }
 
-    public void updateAnimal(Animal animal) {
-        this.animal=animal;
+    public void updateAnimal(AnimalType animalType) {
+        this.animalType=animalType;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public void setAge(Long age) {
+        this.age = age;
     }
 }

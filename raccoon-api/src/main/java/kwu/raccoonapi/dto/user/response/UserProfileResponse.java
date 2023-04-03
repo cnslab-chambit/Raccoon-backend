@@ -1,6 +1,6 @@
 package kwu.raccoonapi.dto.user.response;
 
-import kwu.raccoondomain.persistence.domain.user.enums.Animal;
+import kwu.raccoondomain.persistence.domain.user.enums.AnimalType;
 import kwu.raccoondomain.persistence.domain.user.enums.Gender;
 import kwu.raccoondomain.persistence.domain.user.enums.Location;
 import lombok.AllArgsConstructor;
@@ -16,7 +16,7 @@ public class UserProfileResponse {
     private Long height;
     private String profileImageUrl;
     private Location location;
-    private Animal animal;
+    private AnimalType animalType;
     private Double longitude;
     private Double latitude;
 }

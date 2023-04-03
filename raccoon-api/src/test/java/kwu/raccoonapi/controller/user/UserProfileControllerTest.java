@@ -8,7 +8,7 @@ import kwu.raccoonapi.dto.user.response.UserProfileDetailsResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileUpdateResponse;
 import kwu.raccoonapi.facade.user.UserProfileFacadeService;
-import kwu.raccoondomain.persistence.domain.user.enums.Animal;
+import kwu.raccoondomain.persistence.domain.user.enums.AnimalType;
 import kwu.raccoondomain.persistence.domain.user.enums.Gender;
 import kwu.raccoondomain.persistence.domain.user.enums.Location;
 import kwu.raccoondomain.persistence.domain.user.enums.Mbti;
@@ -22,7 +22,6 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockMultipartHttpServletRequestBuilder;
 
 import java.util.List;
 
@@ -32,7 +31,6 @@ import static org.apache.http.HttpHeaders.AUTHORIZATION;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
-import static org.springframework.http.HttpMethod.PATCH;
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
@@ -67,8 +65,8 @@ public class UserProfileControllerTest extends ApiDocumentationTest {
                         "안녕하세요",
                         false,
                         Mbti.INTP,
-                        Animal.CAT,
-                        Animal.DEER
+                        AnimalType.CAT,
+                        AnimalType.DEER
                 )
         );
 
@@ -116,8 +114,8 @@ public class UserProfileControllerTest extends ApiDocumentationTest {
         String selfDescription = "안녕하세요 자기소개입니다.";
         Boolean smokingStatus = false;
         Mbti mbti = Mbti.INTP;
-        Animal animal = Animal.CAT;
-        Animal wantedAnimal = Animal.CAT;
+        AnimalType animalType = AnimalType.CAT;
+        AnimalType wantedAnimalType = AnimalType.CAT;
         String job = "대학생이에요";
         Location location = Location.GANDONG;
         MockMultipartFile profileImage = new MockMultipartFile("profileImage","image.jpg".getBytes());
@@ -131,8 +129,8 @@ public class UserProfileControllerTest extends ApiDocumentationTest {
                 .put("selfDescription",selfDescription)
                 .put("smokingStatus",smokingStatus)
                 .put("mbti",mbti)
-                .put("animal",animal)
-                .put("wantedAnimal",wantedAnimal)
+                .put("animal", animalType)
+                .put("wantedAnimal", wantedAnimalType)
                 .put("job",job)
                 .put("location",location)
                 .put("profileImage",profileImage);
@@ -181,8 +179,8 @@ public class UserProfileControllerTest extends ApiDocumentationTest {
     @Test
     @DisplayName("프로필_전체조회")
     void 프로필_전체조회() throws Exception{
-        UserProfileResponse res1 = UserProfileResponse.of(1L,"김성지1",Gender.MAN,25L,175L,"http://",Location.GANDONG,Animal.CAT);
-        UserProfileResponse res2 = UserProfileResponse.of(2L,"김성지2",Gender.MAN,25L,175L,"http://",Location.GANGBUK,Animal.DOG);
+        UserProfileResponse res1 = UserProfileResponse.of(1L,"김성지1",Gender.MAN,25L,175L,"http://",Location.GANDONG, AnimalType.CAT);
+        UserProfileResponse res2 = UserProfileResponse.of(2L,"김성지2",Gender.MAN,25L,175L,"http://",Location.GANGBUK, AnimalType.DOG);
 
         when(userProfileFacadeService.getAllProfile()).thenReturn(List.of(res1,res2));
 

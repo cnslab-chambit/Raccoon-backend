@@ -9,7 +9,6 @@ import kwu.raccoonapi.dto.user.response.UserProfileUpdateResponse;
 import kwu.raccoonapi.facade.user.assembler.UserProfileAssembler;
 import kwu.raccoonapi.utils.SecurityUtils;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
-import kwu.raccoondomain.persistence.domain.user.enums.Animal;
 import kwu.raccoondomain.service.user.UserProfileDomainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -41,7 +40,7 @@ public class UserProfileFacadeService {
     @Transactional
     public UserProfileUpdateResponse updateProfileAnimal(UserAnimalUpdateRequest request) {
         Long userId = userProfileDomainService
-                .updateProfileAnimal(SecurityUtils.getUser().getId(), request.getAnimal());
+                .updateProfileAnimal(SecurityUtils.getUser().getId(), request.getAnimalType());
         return userProfileAssembler.toUserProfileUpdateResponse(userId);
     }
 
