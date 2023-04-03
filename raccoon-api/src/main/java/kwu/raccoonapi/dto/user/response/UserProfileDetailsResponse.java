@@ -27,7 +27,6 @@ public class UserProfileDetailsResponse {
     private Boolean smokingStatus;
     private Mbti mbti;
     private AnimalType animalType;
-    private AnimalType wantedAnimalType;
     private Double longitude;
     private Double latitude;
 
@@ -47,7 +46,6 @@ public class UserProfileDetailsResponse {
         userProfileDetailsResponse.smokingStatus=userProfile.getSmokingStatus();
         userProfileDetailsResponse.mbti=userProfile.getMbti();
         userProfileDetailsResponse.animalType =userProfile.getAnimalType();
-        userProfileDetailsResponse.wantedAnimalType =userProfile.getWantedAnimal();
         userProfileDetailsResponse.longitude =userProfile.getLongitude();
         userProfileDetailsResponse.latitude =userProfile.getLatitude();
 

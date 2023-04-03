@@ -14,6 +14,6 @@ public class UserAssembler {
     }
 
     public UserSignUpDto toUserSignUpDto(String vendorId, VendorType vendorType, String email,String gender){
-        return UserSignUpDto.of(vendorId,vendorType,email, Gender.parsing(gender));
+        return UserSignUpDto.of(vendorId,vendorType,email, Gender.from(gender));
     }
 }

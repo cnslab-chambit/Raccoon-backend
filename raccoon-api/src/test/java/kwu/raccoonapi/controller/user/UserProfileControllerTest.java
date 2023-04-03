@@ -180,7 +180,7 @@ public class UserProfileControllerTest extends ApiDocumentationTest {
     @DisplayName("프로필_전체조회")
     void 프로필_전체조회() throws Exception{
         UserProfileResponse res1 = UserProfileResponse.of(1L,"김성지1",Gender.MAN,25L,175L,"http://",Location.GANDONG, AnimalType.CAT);
-        UserProfileResponse res2 = UserProfileResponse.of(2L,"김성지2",Gender.MAN,25L,175L,"http://",Location.GANGBUK, AnimalType.DOG);
+        UserProfileResponse res2 = UserProfileResponse.of(2L,"김성지2",Gender.WOMAN,25L,175L,"http://",Location.GANGBUK, AnimalType.DOG);
 
         when(userProfileFacadeService.getAllProfile()).thenReturn(List.of(res1,res2));
 

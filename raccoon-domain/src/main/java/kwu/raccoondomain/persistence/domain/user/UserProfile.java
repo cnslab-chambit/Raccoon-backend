@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user_profile")
@@ -62,17 +63,17 @@ public class UserProfile {
     @Enumerated(value = EnumType.STRING)
     private Mbti mbti;
 
+    @Column(name = "user_edu")
+    private String edu;
     @Column(name = "user_animal")
     @Enumerated(value = EnumType.STRING)
     private AnimalType animalType;
 
-    @Column(name = "wanted_animal")
-    @Enumerated(value = EnumType.STRING)
-    private AnimalType wantedAnimal;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Animal> wantedAnimals = new ArrayList<>();
-
+    @Column(name = "user_drink")
+    private String drink;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    private Set<AnimalType> wantedAnimals;
 
     @Column(name="user_longitude")
     private Double longitude;
@@ -83,25 +84,26 @@ public class UserProfile {
 
     public void updateProfile(UserProfileUpdateDto userProfileUpdateDto,List<String> imageUrls){
         if(userProfileUpdateDto.getNickname() != null) this.nickname = userProfileUpdateDto.getNickname();
-        if(userProfileUpdateDto.getGender() != null) this.gender = userProfileUpdateDto.getGender();
         if(userProfileUpdateDto.getAge() != null) this.age = userProfileUpdateDto.getAge();
         if(userProfileUpdateDto.getHeight() != null) this.height = userProfileUpdateDto.getHeight();
         if(userProfileUpdateDto.getSelfDescription() != null) this.selfDescription = userProfileUpdateDto.getSelfDescription();
         if(userProfileUpdateDto.getSmokingStatus() != null) this.smokingStatus = userProfileUpdateDto.getSmokingStatus();
         if(userProfileUpdateDto.getMbti() != null) this.mbti = userProfileUpdateDto.getMbti();
-        if(userProfileUpdateDto.getAnimalType() != null) this.animalType = userProfileUpdateDto.getAnimalType();
-        if(userProfileUpdateDto.getWantedAnimalType() != null) this.wantedAnimal = userProfileUpdateDto.getWantedAnimalType();
         if(userProfileUpdateDto.getJob() != null ) this.job = userProfileUpdateDto.getJob();
+        if(userProfileUpdateDto.getEdu() != null) this.edu = userProfileUpdateDto.getEdu();
         if(userProfileUpdateDto.getLocation() != null) this.location = userProfileUpdateDto.getLocation();
+        if(userProfileUpdateDto.getDrink() != null) this.drink = userProfileUpdateDto.getDrink();
+        if(userProfileUpdateDto.getReligion() != null) this.religion = userProfileUpdateDto.getReligion();
+        if(userProfileUpdateDto.getWantedAnimalTypes() != null) updateWantedAnimal(userProfileUpdateDto.getWantedAnimalTypes());
+
         updateImages(imageUrls);
+
     }
 
-    private  void updateWantedAnimal(List<AnimalType> animalTypes){
+    private void updateWantedAnimal(List<AnimalType> animalTypes){
         this.wantedAnimals.clear();
-        for (AnimalType types : animalTypes) {
-            Animal animal = new Animal();
-            animal.setAnimalType(animalType);
-            this.wantedAnimals.add(animal);
+        for (AnimalType type : animalTypes) {
+            this.wantedAnimals.add(type);
         }
     }
 
