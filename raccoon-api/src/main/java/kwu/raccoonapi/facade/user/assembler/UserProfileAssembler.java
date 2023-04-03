@@ -22,7 +22,7 @@ public class UserProfileAssembler {
                 userProfile.getGender(),
                 userProfile.getAge(),
                 userProfile.getHeight(),
-                userProfile.getProfileImageUrl(),
+                userProfile.getImages().get(0).getUrl(),
                 userProfile.getLocation(),
                 userProfile.getAnimal(),
                 userProfile.getLongitude(),

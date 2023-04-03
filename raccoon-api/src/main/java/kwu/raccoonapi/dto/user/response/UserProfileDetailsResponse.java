@@ -9,12 +9,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Data
 @AllArgsConstructor(staticName = "of")
 @NoArgsConstructor()
 public class UserProfileDetailsResponse {
     private String nickname;
-    private String profileImageUrl;
+    private List<String> profileImageUrls;
     private Gender gender;
     private Long age;
     private Long height;
@@ -32,7 +35,8 @@ public class UserProfileDetailsResponse {
     public static UserProfileDetailsResponse of(UserProfile userProfile) {
         UserProfileDetailsResponse userProfileDetailsResponse = new UserProfileDetailsResponse();
 
-        userProfileDetailsResponse.profileImageUrl=userProfile.getProfileImageUrl();
+        userProfileDetailsResponse.profileImageUrls=userProfile.getImages().
+                stream().map(imageFile -> imageFile.getUrl()).collect(Collectors.toList());
         userProfileDetailsResponse.nickname=userProfile.getNickname();
         userProfileDetailsResponse.gender=userProfile.getGender();
         userProfileDetailsResponse.age=userProfile.getAge();

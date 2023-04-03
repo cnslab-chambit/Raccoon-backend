@@ -8,10 +8,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor(staticName = "of")
 public class UserProfileUpdateDto {
-    private MultipartFile profileImage;
+    private List<MultipartFile> profileImages;
     private String nickname;
     private Gender gender;
     private Long age;

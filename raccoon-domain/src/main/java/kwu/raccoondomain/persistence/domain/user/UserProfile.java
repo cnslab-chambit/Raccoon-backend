@@ -3,15 +3,15 @@ package kwu.raccoondomain.persistence.domain.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import kwu.raccoondomain.dto.user.UserCoordinateUpdateDto;
 import kwu.raccoondomain.dto.user.UserProfileUpdateDto;
-import kwu.raccoondomain.persistence.domain.user.enums.Animal;
-import kwu.raccoondomain.persistence.domain.user.enums.Gender;
-import kwu.raccoondomain.persistence.domain.user.enums.Location;
-import kwu.raccoondomain.persistence.domain.user.enums.Mbti;
+import kwu.raccoondomain.persistence.domain.files.ImageFile;
+import kwu.raccoondomain.persistence.domain.user.enums.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "user_profile")
@@ -31,14 +31,19 @@ public class UserProfile {
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
 
+    @Column(name = "user_religion")
+    @Enumerated(value = EnumType.STRING)
+    private Religion religion;
+
     @Column(name = "user_age")
     private Long age;
 
     @Column(name = "user_height")
     private Long height;
 
-    @Column(name = "profile_image_url")
-    private String profileImageUrl;
+    @Column(name = "profile_images")
+    @OneToMany(mappedBy = "userProfile",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ImageFile> images = new ArrayList<>();
 
     @Column(name="user_job")
     private String job;
@@ -72,12 +77,11 @@ public class UserProfile {
     private Double latitude;
 
 
-    public void updateProfile(UserProfileUpdateDto userProfileUpdateDto,String profileImageUrl){
+    public void updateProfile(UserProfileUpdateDto userProfileUpdateDto,List<String> imageUrls){
         if(userProfileUpdateDto.getNickname() != null) this.nickname = userProfileUpdateDto.getNickname();
         if(userProfileUpdateDto.getGender() != null) this.gender = userProfileUpdateDto.getGender();
         if(userProfileUpdateDto.getAge() != null) this.age = userProfileUpdateDto.getAge();
         if(userProfileUpdateDto.getHeight() != null) this.height = userProfileUpdateDto.getHeight();
-        if(userProfileUpdateDto.getProfileImage() != null) this.profileImageUrl = profileImageUrl;
         if(userProfileUpdateDto.getSelfDescription() != null) this.selfDescription = userProfileUpdateDto.getSelfDescription();
         if(userProfileUpdateDto.getSmokingStatus() != null) this.smokingStatus = userProfileUpdateDto.getSmokingStatus();
         if(userProfileUpdateDto.getMbti() != null) this.mbti = userProfileUpdateDto.getMbti();
@@ -85,8 +89,17 @@ public class UserProfile {
         if(userProfileUpdateDto.getWantedAnimal() != null) this.wantedAnimal = userProfileUpdateDto.getWantedAnimal();
         if(userProfileUpdateDto.getJob() != null ) this.job = userProfileUpdateDto.getJob();
         if(userProfileUpdateDto.getLocation() != null) this.location = userProfileUpdateDto.getLocation();
-        if(userProfileUpdateDto.getLongitude() != null) this.longitude =userProfileUpdateDto.getLongitude();
-        if(userProfileUpdateDto.getLatitude()!=null)this.latitude =userProfileUpdateDto.getLatitude();
+        updateImages(imageUrls);
+    }
+
+    private void updateImages(List<String> imageUrls){
+        this.images.clear();
+        for (String imageUrl : imageUrls) {
+            ImageFile imageFile = new ImageFile();
+            imageFile.setUserProfile(this);
+            imageFile.setUrl(imageUrl);
+            this.images.add(imageFile);
+        }
     }
 
     public void updateCoordinate(UserCoordinateUpdateDto userCoordinateUpdateDto) {

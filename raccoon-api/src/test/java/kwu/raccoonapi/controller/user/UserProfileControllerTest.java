@@ -63,7 +63,7 @@ public class UserProfileControllerTest extends ApiDocumentationTest {
                         18L,
                         167L,
                         "모름",
-                        Location.GANDONG,
+                        Location.,
                         "안녕하세요",
                         false,
                         Mbti.INTP,
@@ -181,7 +181,7 @@ public class UserProfileControllerTest extends ApiDocumentationTest {
     @Test
     @DisplayName("프로필_전체조회")
     void 프로필_전체조회() throws Exception{
-        UserProfileResponse res1 = UserProfileResponse.of(1L,"김성지1",Gender.MAN,25L,175L,"http://",Location.GANGSEO,Animal.CAT);
+        UserProfileResponse res1 = UserProfileResponse.of(1L,"김성지1",Gender.MAN,25L,175L,"http://",Location.GANDONG,Animal.CAT);
         UserProfileResponse res2 = UserProfileResponse.of(2L,"김성지2",Gender.MAN,25L,175L,"http://",Location.GANGBUK,Animal.DOG);
 
         when(userProfileFacadeService.getAllProfile()).thenReturn(List.of(res1,res2));

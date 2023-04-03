@@ -12,7 +12,9 @@ import kwu.raccoondomain.persistence.query.user.UserRepository;
 import kwu.raccooninfra.service.s3.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -24,10 +26,14 @@ public class UserProfileDomainService {
     private static final double EARTH_RADIUS=6371;
 
     public Long updateProfile(Long userId, UserProfileUpdateDto userProfileUpdateDto){
-        String profileImgUrl = s3Service.upload(userProfileUpdateDto.getProfileImage());
+        List<MultipartFile> profileImage = userProfileUpdateDto.getProfileImages();
+        List<String> imageUrls = new ArrayList<>();
+        for (MultipartFile multipartFile : profileImage) {
+            imageUrls.add(s3Service.upload(multipartFile));
+        }
         User user = userRepository.findById(userId).orElseThrow(() -> new RaccoonException(RetConsts.ERR600));
         UserProfile userProfile = user.getUserProfile();
-        userProfile.updateProfile(userProfileUpdateDto,profileImgUrl);
+        userProfile.updateProfile(userProfileUpdateDto,imageUrls);
         return user.getId();
     }
 
