@@ -40,4 +40,12 @@ public enum Location {
         return state;
     }
 
+    @JsonCreator
+    public static Location of(String state){
+        return Arrays.stream(Location.values())
+                .filter(t -> t.state.equals(state))
+                .findAny()
+                .orElseThrow(()-> new IllegalArgumentException("asd"));
+    }
+
 }

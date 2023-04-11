@@ -56,17 +56,18 @@ public class UserProfileControllerTest extends ApiDocumentationTest {
         when(userProfileFacadeService.getProfile(anyLong())).thenReturn(
                 UserProfileDetailsResponse.of(
                        "오어어엉",
-                       "https://www.google.com/imgres?imgurl=https%3A%2F%2Ftalkimg.imbc.com%2FTVianUpload%2Ftvian%2FTViews%2Fimage%2F2023%2F01%2F03%2F7eec0933-d37b-4939-afb4-f1488ebc0d68.jpg&tbnid=A4jvGsqs01f0aM&vet=12ahUKEwiFrPSB9vT9AhWCdt4KHSIgABUQMygHegUIARDZAQ..i&imgrefurl=https%3A%2F%2Fimnews.imbc.com%2Fnews%2F2023%2Fenter%2Farticle%2F6442122_36161.html&docid=xWL2UuU60SIGKM&w=800&h=1119&q=%ED%95%B4%EB%A6%B0&ved=2ahUKEwiFrPSB9vT9AhWCdt4KHSIgABUQMygHegUIARDZAQ",
+                       List.of("https:/sdg","https:/asgd"),
                         Gender.WOMAN,
                         18L,
                         167L,
                         "모름",
-                        Location.,
+                        Location.NOWON,
                         "안녕하세요",
                         false,
                         Mbti.INTP,
-                        AnimalType.CAT,
-                        AnimalType.DEER
+                        AnimalType.DEER,
+                        112.125,
+                        135323.235
                 )
         );
 
@@ -88,7 +89,7 @@ public class UserProfileControllerTest extends ApiDocumentationTest {
                                 fieldWithPath("message").description("결과 메시지"),
                                 fieldWithPath("code").description("응답 코드"),
                                 fieldWithPath("data.nickname").description("프로필 닉네임"),
-                                fieldWithPath("data.profileImageUrl").description("프로필 닉네임"),
+                                fieldWithPath("data.profileImageUrls").description("프로필 닉네임"),
                                 fieldWithPath("data.gender").description("프로필 닉네임"),
                                 fieldWithPath("data.age").description("프로필 닉네임"),
                                 fieldWithPath("data.height").description("프로필 닉네임"),
@@ -97,8 +98,9 @@ public class UserProfileControllerTest extends ApiDocumentationTest {
                                 fieldWithPath("data.selfDescription").description("프로필 닉네임"),
                                 fieldWithPath("data.smokingStatus").description("프로필 닉네임"),
                                 fieldWithPath("data.mbti").description("프로필 닉네임"),
-                                fieldWithPath("data.animal").description("프로필 닉네임"),
-                                fieldWithPath("data.wantedAnimal").description("프로필 닉네임"))
+                                fieldWithPath("data.animalType").description("프로필 닉네임"),
+                                fieldWithPath("data.longitude").description("위도"),
+                                fieldWithPath("data.latitude").description("경도"))
                         .tag("UserProfile")
                         .build()
         )));
@@ -179,8 +181,8 @@ public class UserProfileControllerTest extends ApiDocumentationTest {
     @Test
     @DisplayName("프로필_전체조회")
     void 프로필_전체조회() throws Exception{
-        UserProfileResponse res1 = UserProfileResponse.of(1L,"김성지1",Gender.MAN,25L,175L,"http://",Location.GANDONG, AnimalType.CAT);
-        UserProfileResponse res2 = UserProfileResponse.of(2L,"김성지2",Gender.WOMAN,25L,175L,"http://",Location.GANGBUK, AnimalType.DOG);
+        UserProfileResponse res1 = UserProfileResponse.of(1L,"김성지1",Gender.MAN,25L,175L,"http://",Location.GANDONG, AnimalType.CAT,2153.23,23.42);
+        UserProfileResponse res2 = UserProfileResponse.of(2L,"김성지2",Gender.WOMAN,25L,175L,"http://",Location.GANGBUK, AnimalType.DOG,23463.34,1544.32);
 
         when(userProfileFacadeService.getAllProfile()).thenReturn(List.of(res1,res2));
 
@@ -206,7 +208,9 @@ public class UserProfileControllerTest extends ApiDocumentationTest {
                                 fieldWithPath("data[].height").description("유저의 키"),
                                 fieldWithPath("data[].profileImageUrl").description("유저의 프로필이미지 URL"),
                                 fieldWithPath("data[].location").description("유저의 지역"),
-                                fieldWithPath("data[].animal").description("유저의 동물상")
+                                fieldWithPath("data[].animalType").description("유저의 동물상"),
+                                fieldWithPath("data[].longitude").description("유저의 경도"),
+                                fieldWithPath("data[].latitude").description("유저의 위도")
                         )
                         .tag("UserProfile")
                         .build()
