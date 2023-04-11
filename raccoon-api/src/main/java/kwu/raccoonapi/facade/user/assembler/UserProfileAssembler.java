@@ -11,8 +11,8 @@ public class UserProfileAssembler {
     public UserProfileUpdateResponse toUserProfileUpdateResponse(Long userId){
         return UserProfileUpdateResponse.of(userId);
     }
-    public UserProfileDetailsResponse toUserProfileResponse(UserProfile profile){
-        return UserProfileDetailsResponse.of(profile);
+    public UserProfileDetailsResponse toUserProfileDetailsResponse(UserProfile profile,Double dist){
+        return UserProfileDetailsResponse.of(profile,Integer.valueOf(dist.intValue()));
     }
 
     public UserProfileResponse toAllUserProfileResponse(UserProfile userProfile){

@@ -66,12 +66,11 @@ public class UserProfileControllerTest extends ApiDocumentationTest {
                         false,
                         Mbti.INTP,
                         AnimalType.DEER,
-                        112.125,
-                        135323.235
+                        11
                 )
         );
 
-        ResultActions resultActions = mockMvc.perform(get("/user/{userId}",1L)
+        ResultActions resultActions = mockMvc.perform(get("/user/profile/{userId}",1L)
                 .header(AUTHORIZATION,BEARER+" "+JWT)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -99,8 +98,7 @@ public class UserProfileControllerTest extends ApiDocumentationTest {
                                 fieldWithPath("data.smokingStatus").description("프로필 닉네임"),
                                 fieldWithPath("data.mbti").description("프로필 닉네임"),
                                 fieldWithPath("data.animalType").description("프로필 닉네임"),
-                                fieldWithPath("data.longitude").description("위도"),
-                                fieldWithPath("data.latitude").description("경도"))
+                                fieldWithPath("data.dist").description("요청자의 유저와의 거리"))
                         .tag("UserProfile")
                         .build()
         )));
