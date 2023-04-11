@@ -46,5 +46,4 @@ public class StoryController {
         return ApiResponse.ok(storyFacadeService.getStoryDetail(storyId));
     }
 
-
 }

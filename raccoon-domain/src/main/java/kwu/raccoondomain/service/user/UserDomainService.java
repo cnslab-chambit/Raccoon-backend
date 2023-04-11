@@ -33,7 +33,6 @@ public class UserDomainService {
                 return (T) getKakaoProfile(code);
             case NAVER:
                 
-                
             //TODO exception 정의
             default:
                 throw  new RuntimeException();

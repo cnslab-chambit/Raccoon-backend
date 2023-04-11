@@ -5,6 +5,7 @@ import kwu.raccoondomain.dto.story.StoryCreateDto;
 import kwu.raccoondomain.dto.story.StoryUpdateDto;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

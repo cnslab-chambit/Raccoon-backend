@@ -16,6 +16,7 @@ public class StoryDetailResponse {
     private String nickname;
     private Long age;
     private Double distance;
+    private Long likeCount;
 
     public static StoryDetailResponse of(Story story, double distance){
         StoryDetailResponse storyDetailResponse = new StoryDetailResponse();
@@ -26,6 +27,7 @@ public class StoryDetailResponse {
         storyDetailResponse.nickname=story.getUserProfile().getNickname();
         storyDetailResponse.age=story.getUserProfile().getAge();
         storyDetailResponse.distance= distance;
+        storyDetailResponse.likeCount=story.getLikeCount();
 
         return storyDetailResponse;
     }
