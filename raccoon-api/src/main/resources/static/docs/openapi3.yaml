@@ -29,7 +29,7 @@ paths:
               $ref: '#/components/schemas/story1012374214'
             examples:
               story-controller-test/스토리_생성:
-                value: "{\"contents\":\"스토리의 내용입니다.\",\"storyImage\":\"org.springframework.mock.web.MockMultipartFile@5444f1c3\"\
+                value: "{\"contents\":\"스토리의 내용입니다.\",\"storyImage\":\"org.springframework.mock.web.MockMultipartFile@2f58f492\"\
                   }"
       responses:
         "200":
@@ -65,7 +65,7 @@ paths:
             examples:
               story-controller-test/스토리_업데이트:
                 value: "{\"storyId\":1,\"contents\":\"스토리의 내용이에요\",\"storyImage\"\
-                  :\"org.springframework.mock.web.MockMultipartFile@cd93621\"}"
+                  :\"org.springframework.mock.web.MockMultipartFile@5ced0537\"}"
       responses:
         "200":
           description: "200"
@@ -131,7 +131,7 @@ paths:
               user-profile-controller-test/프로필_업데이트:
                 value: "{\"gender\":\"MAN\",\"wantedAnimal\":\"고양이상\",\"nickname\"\
                   :\"유저닉네임\",\"mbti\":\"INTP\",\"animal\":\"고양이상\",\"location\":\"\
-                  강동구\",\"profileImage\":\"org.springframework.mock.web.MockMultipartFile@6a1d1467\"\
+                  강동구\",\"profileImage\":\"org.springframework.mock.web.MockMultipartFile@58fbcb71\"\
                   ,\"smokingStatus\":false,\"job\":\"대학생이에요\",\"age\":25,\"height\"\
                   :175,\"selfDescription\":\"안녕하세요 자기소개입니다.\"}"
       responses:
@@ -144,44 +144,6 @@ paths:
               examples:
                 user-profile-controller-test/프로필_업데이트:
                   value: "{\"message\":\"성공\",\"code\":200,\"data\":{\"userId\":1}}"
-      security:
-      - bearerAuthJWT: []
-  /user/{userId}:
-    get:
-      tags:
-      - UserProfile
-      summary: 유저프로필 조회 API
-      description: 유저프로필 조회 API
-      operationId: user-profile-controller-test/프로필_조회
-      parameters:
-      - name: userId
-        in: path
-        description: 대상 유저의Id
-        required: true
-        schema:
-          type: string
-      - name: Authorization
-        in: header
-        description: 요청보낸 사람 ACCESS TOKEN
-        required: true
-        schema:
-          type: string
-        example: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOltdLCJpYXQiOjE2Nzk0NzIzMTAsImV4cCI6MTY4MzA3MjMxMH0.z_oE-pzcvdIaUqLxULlfBZf6dadfq2btSLsSrhqvcvI
-      responses:
-        "200":
-          description: "200"
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                $ref: '#/components/schemas/user-userId23762074'
-              examples:
-                user-profile-controller-test/프로필_조회:
-                  value: "{\"message\":\"성공\",\"code\":200,\"data\":{\"nickname\"\
-                    :\"오어어엉\",\"profileImageUrls\":[\"https:/sdg\",\"https:/asgd\"\
-                    ],\"gender\":\"WOMAN\",\"age\":18,\"height\":167,\"job\":\"모름\"\
-                    ,\"location\":\"NOWON\",\"selfDescription\":\"안녕하세요\",\"smokingStatus\"\
-                    :false,\"mbti\":\"INTP\",\"animalType\":\"DEER\",\"longitude\"\
-                    :112.125,\"latitude\":135323.235}}"
       security:
       - bearerAuthJWT: []
   /user/profile/all:
@@ -218,74 +180,45 @@ paths:
                     latitude\":1544.32}]}"
       security:
       - bearerAuthJWT: []
+  /user/profile/{userId}:
+    get:
+      tags:
+      - UserProfile
+      summary: 유저프로필 조회 API
+      description: 유저프로필 조회 API
+      operationId: user-profile-controller-test/프로필_조회
+      parameters:
+      - name: userId
+        in: path
+        description: 대상 유저의Id
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 요청보낸 사람 ACCESS TOKEN
+        required: true
+        schema:
+          type: string
+        example: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOltdLCJpYXQiOjE2Nzk0NzIzMTAsImV4cCI6MTY4MzA3MjMxMH0.z_oE-pzcvdIaUqLxULlfBZf6dadfq2btSLsSrhqvcvI
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/user-profile-userId-46357064'
+              examples:
+                user-profile-controller-test/프로필_조회:
+                  value: "{\"message\":\"성공\",\"code\":200,\"data\":{\"nickname\"\
+                    :\"오어어엉\",\"profileImageUrls\":[\"https:/sdg\",\"https:/asgd\"\
+                    ],\"gender\":\"WOMAN\",\"age\":18,\"height\":167,\"job\":\"모름\"\
+                    ,\"location\":\"NOWON\",\"selfDescription\":\"안녕하세요\",\"smokingStatus\"\
+                    :false,\"mbti\":\"INTP\",\"animalType\":\"DEER\",\"dist\":11}}"
+      security:
+      - bearerAuthJWT: []
 components:
   schemas:
-    user-userId23762074:
-      type: object
-      properties:
-        code:
-          type: number
-          description: 응답 코드
-        data:
-          type: object
-          properties:
-            gender:
-              type: string
-              description: 프로필 닉네임
-            profileImageUrls:
-              type: array
-              description: 프로필 닉네임
-              items:
-                oneOf:
-                - type: object
-                - type: boolean
-                - type: string
-                - type: number
-            latitude:
-              type: number
-              description: 경도
-            animalType:
-              type: string
-              description: 프로필 닉네임
-            selfDescription:
-              type: string
-              description: 프로필 닉네임
-            nickname:
-              type: string
-              description: 프로필 닉네임
-            mbti:
-              type: string
-              description: 프로필 닉네임
-            location:
-              type: string
-              description: 프로필 닉네임
-            smokingStatus:
-              type: boolean
-              description: 프로필 닉네임
-            job:
-              type: string
-              description: 프로필 닉네임
-            age:
-              type: number
-              description: 프로필 닉네임
-            longitude:
-              type: number
-              description: 위도
-            height:
-              type: number
-              description: 프로필 닉네임
-        message:
-          type: string
-          description: 결과 메시지
-    story1012374214:
-      type: object
-      properties:
-        contents:
-          type: string
-          description: 스토리 내용
-        storyImage:
-          type: string
-          description: 스토리 이미지
     story221479330:
       type: object
       properties:
@@ -301,6 +234,15 @@ components:
         message:
           type: string
           description: 메시지
+    story1012374214:
+      type: object
+      properties:
+        contents:
+          type: string
+          description: 스토리 내용
+        storyImage:
+          type: string
+          description: 스토리 이미지
     user-profile-all-193200887:
       type: object
       properties:
@@ -345,6 +287,60 @@ components:
         message:
           type: string
           description: 메시지
+    user-profile-userId-46357064:
+      type: object
+      properties:
+        code:
+          type: number
+          description: 응답 코드
+        data:
+          type: object
+          properties:
+            gender:
+              type: string
+              description: 프로필 닉네임
+            profileImageUrls:
+              type: array
+              description: 프로필 닉네임
+              items:
+                oneOf:
+                - type: object
+                - type: boolean
+                - type: string
+                - type: number
+            animalType:
+              type: string
+              description: 프로필 닉네임
+            nickname:
+              type: string
+              description: 프로필 닉네임
+            dist:
+              type: number
+              description: 요청자의 유저와의 거리
+            mbti:
+              type: string
+              description: 프로필 닉네임
+            location:
+              type: string
+              description: 프로필 닉네임
+            smokingStatus:
+              type: boolean
+              description: 프로필 닉네임
+            job:
+              type: string
+              description: 프로필 닉네임
+            age:
+              type: number
+              description: 프로필 닉네임
+            selfDescription:
+              type: string
+              description: 프로필 닉네임
+            height:
+              type: number
+              description: 프로필 닉네임
+        message:
+          type: string
+          description: 결과 메시지
     user-profile-1030560250:
       type: object
       properties:

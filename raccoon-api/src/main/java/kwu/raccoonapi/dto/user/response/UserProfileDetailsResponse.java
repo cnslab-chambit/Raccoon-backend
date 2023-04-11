@@ -27,11 +27,10 @@ public class UserProfileDetailsResponse {
     private Boolean smokingStatus;
     private Mbti mbti;
     private AnimalType animalType;
-    private Double longitude;
-    private Double latitude;
+    private Integer dist;
 
     //user를 parameter로 받아서 response로 바꿔서 반환
-    public static UserProfileDetailsResponse of(UserProfile userProfile) {
+    public static UserProfileDetailsResponse of(UserProfile userProfile,Integer dist) {
         UserProfileDetailsResponse userProfileDetailsResponse = new UserProfileDetailsResponse();
 
         userProfileDetailsResponse.profileImageUrls=userProfile.getImages().
@@ -46,8 +45,7 @@ public class UserProfileDetailsResponse {
         userProfileDetailsResponse.smokingStatus=userProfile.getSmokingStatus();
         userProfileDetailsResponse.mbti=userProfile.getMbti();
         userProfileDetailsResponse.animalType =userProfile.getAnimalType();
-        userProfileDetailsResponse.longitude =userProfile.getLongitude();
-        userProfileDetailsResponse.latitude =userProfile.getLatitude();
+        userProfileDetailsResponse.dist = dist;
 
         return userProfileDetailsResponse;
     }

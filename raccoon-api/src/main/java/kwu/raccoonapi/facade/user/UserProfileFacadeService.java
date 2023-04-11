@@ -47,7 +47,9 @@ public class UserProfileFacadeService {
     @Transactional(readOnly = true)
     public UserProfileDetailsResponse getProfile(Long userId){
         UserProfile userProfile= userProfileDomainService.getProfile(userId);
-        return userProfileAssembler.toUserProfileResponse(userProfile);
+        UserProfile otherUserProfile = userProfileDomainService.getProfile(SecurityUtils.getUser().getId());
+        Double distance = userProfileDomainService.getDistance(otherUserProfile,userProfile);
+        return userProfileAssembler.toUserProfileDetailsResponse(userProfile,distance);
     }
     @Transactional(readOnly = true)
     public List<UserProfileResponse> getAllProfile(){
