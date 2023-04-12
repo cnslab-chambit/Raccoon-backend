@@ -1,10 +1,11 @@
 package kwu.raccoonapi.dto.user.response;
 
-import kwu.raccoondomain.persistence.domain.user.enums.AnimalType;
-import kwu.raccoondomain.persistence.domain.user.enums.Gender;
-import kwu.raccoondomain.persistence.domain.user.enums.Location;
+import kwu.raccoondomain.persistence.domain.user.enums.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import javax.swing.plaf.synth.Region;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor(staticName = "of")
@@ -19,4 +20,9 @@ public class UserProfileResponse {
     private AnimalType animalType;
     private Double longitude;
     private Double latitude;
+    private Set<AnimalType> idealAnimalTypes;
+    private String drink;
+    private String edu;
+    private Religion religion;
+
 }

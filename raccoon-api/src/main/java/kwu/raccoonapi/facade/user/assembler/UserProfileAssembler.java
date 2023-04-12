@@ -26,7 +26,11 @@ public class UserProfileAssembler {
                 userProfile.getLocation(),
                 userProfile.getAnimalType(),
                 userProfile.getLongitude(),
-                userProfile.getLatitude()
+                userProfile.getLatitude(),
+                userProfile.getWantedAnimals(),
+                userProfile.getDrink(),
+                userProfile.getEdu(),
+                userProfile.getReligion()
         );
     }
 

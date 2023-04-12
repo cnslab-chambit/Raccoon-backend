@@ -1,15 +1,13 @@
 package kwu.raccoonapi.dto.user.response;
 
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
-import kwu.raccoondomain.persistence.domain.user.enums.AnimalType;
-import kwu.raccoondomain.persistence.domain.user.enums.Gender;
-import kwu.raccoondomain.persistence.domain.user.enums.Location;
-import kwu.raccoondomain.persistence.domain.user.enums.Mbti;
+import kwu.raccoondomain.persistence.domain.user.enums.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Data
@@ -28,6 +26,10 @@ public class UserProfileDetailsResponse {
     private Mbti mbti;
     private AnimalType animalType;
     private Integer dist;
+    private Set<AnimalType> wantedAnimals;
+    private String drink;
+    private String edu;
+    private Religion religion;
 
     //user를 parameter로 받아서 response로 바꿔서 반환
     public static UserProfileDetailsResponse of(UserProfile userProfile,Integer dist) {
@@ -46,6 +48,11 @@ public class UserProfileDetailsResponse {
         userProfileDetailsResponse.mbti=userProfile.getMbti();
         userProfileDetailsResponse.animalType =userProfile.getAnimalType();
         userProfileDetailsResponse.dist = dist;
+        userProfileDetailsResponse.wantedAnimals =userProfile.getWantedAnimals();
+        userProfileDetailsResponse.drink=userProfile.getDrink();
+        userProfileDetailsResponse.edu =userProfile.getEdu();
+        userProfileDetailsResponse.religion=userProfile.getReligion();
+
 
         return userProfileDetailsResponse;
     }
