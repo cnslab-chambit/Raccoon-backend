@@ -1,6 +1,5 @@
 package kwu.raccoonapi.facade.story.like;
 
-import kwu.raccoonapi.dto.story.like.request.StoryLikeToggleRequest;
 import kwu.raccoonapi.dto.story.like.response.StoryLikeToggleResponse;
 import kwu.raccoonapi.facade.story.like.assembler.StoryLikeAssembler;
 import kwu.raccoonapi.utils.SecurityUtils;
@@ -24,10 +23,10 @@ public class StoryLikeFacadeService {
     private final StoryDomainService storyDomainService;
 
     @Transactional
-    public StoryLikeToggleResponse toggleStoryLike(StoryLikeToggleRequest request){
+    public StoryLikeToggleResponse toggleStoryLike(Long storyId){
 
         UserProfile userProfile = userProfileDomainService.getProfile(SecurityUtils.getUser().getId());
-        Story story= storyDomainService.getStoryById(request.getStoryId());
+        Story story= storyDomainService.getStoryById(storyId);
 
         Boolean likeStatus=storyLikeDomainService.toggleStoryLike(userProfile,story);
         Integer likeCnt=storyLikeDomainService.countStoryLikeNum(story.getId());
