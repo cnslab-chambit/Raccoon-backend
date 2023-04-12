@@ -14,10 +14,6 @@ import java.util.Optional;
 @Transactional
 @Slf4j
 public class StoryLikeDomainService {
-
-    public static final Integer INCRESE = 1;
-    public static final Integer DECRESE = -1;
-
     private final StoryLikeRepository storyLikeRepository;
 
     public StoryLikeDomainService(StoryLikeRepository storyLikeRepository) {
@@ -31,12 +27,12 @@ public class StoryLikeDomainService {
         if (optionalStoryLike.isPresent()) {
             StoryLike storyLike = optionalStoryLike.get();
             storyLikeRepository.delete(storyLike);
-            story.updateLikeCount(story.getLikeCount() +DECRESE);
+            story.decreaseLikeCount();
             return false;
         } else {
             StoryLike storyLike = StoryLike.builder().story(story).userProfile(userProfile).build();
             storyLikeRepository.save(storyLike);
-            story.updateLikeCount(story.getLikeCount() +INCRESE);
+            story.increaseLikeCount();
             return true;
         }
     }

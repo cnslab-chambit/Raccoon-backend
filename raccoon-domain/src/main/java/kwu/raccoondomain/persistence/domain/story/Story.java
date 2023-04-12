@@ -50,7 +50,10 @@ public class Story {
         if(storyUpdateDto.getStoryImage() != null )this.storyImageUrl=storyImageUrl;
     }
 
-    public void updateLikeCount(Long likeCount){
-        this.likeCount=likeCount;
+    public void increaseLikeCount(){
+        this.likeCount++;
+    }
+    public void decreaseLikeCount(){
+        this.likeCount--;
     }
 }
