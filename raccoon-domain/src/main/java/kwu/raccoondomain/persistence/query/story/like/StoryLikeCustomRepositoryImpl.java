@@ -1,8 +1,8 @@
 package kwu.raccoondomain.persistence.query.story.like;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import kwu.raccoondomain.persistence.domain.story.like.QStoryLike;
-import kwu.raccoondomain.persistence.domain.story.like.StoryLike;
+import kwu.raccoondomain.persistence.domain.story.QStoryLike;
+import kwu.raccoondomain.persistence.domain.story.StoryLike;
 
 import javax.persistence.EntityManager;
 import java.util.Optional;

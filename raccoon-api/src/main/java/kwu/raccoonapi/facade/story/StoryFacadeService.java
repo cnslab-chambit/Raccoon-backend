@@ -11,6 +11,7 @@ import kwu.raccoonapi.utils.SecurityUtils;
 import kwu.raccoondomain.persistence.domain.story.Story;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import kwu.raccoondomain.service.story.StoryDomainService;
+import kwu.raccoondomain.service.story.StoryLikeDomainService;
 import kwu.raccoondomain.service.user.UserProfileDomainService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +28,7 @@ public class StoryFacadeService {
 
     private final StoryDomainService storyDomainService;
     private final StoryAssembler storyAssembler;
-
+    private final StoryLikeDomainService storyLikeDomainService;
     private final UserProfileDomainService userProfileDomainService;
 
     @Transactional
@@ -62,7 +63,8 @@ public class StoryFacadeService {
         Story story= storyDomainService.getStoryById(storyId);
         UserProfile userProfile = userProfileDomainService.getProfile(SecurityUtils.getUser().getId());
         Double distance = userProfileDomainService.getDistance(story.getUserProfile(), userProfile);
-        return storyAssembler.toStoryDetailResponse(story,distance);
+        Boolean likeStatus=storyLikeDomainService.getLikeStatus(userProfile,story);
+        return storyAssembler.toStoryDetailResponse(story,distance,likeStatus);
     }
 
 }

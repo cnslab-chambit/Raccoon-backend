@@ -1,4 +1,4 @@
-package kwu.raccoonapi.facade.story.like.assembler;
+package kwu.raccoonapi.facade.story.assembler;
 
 import kwu.raccoonapi.dto.story.like.response.StoryLikeCountResponse;
 import kwu.raccoonapi.dto.story.like.response.StoryLikeToggleResponse;

@@ -1,4 +1,4 @@
-package kwu.raccoondomain.persistence.domain.story.like;
+package kwu.raccoondomain.persistence.domain.story;
 
 import kwu.raccoondomain.dto.story.StoryUpdateDto;
 import kwu.raccoondomain.persistence.domain.story.Story;

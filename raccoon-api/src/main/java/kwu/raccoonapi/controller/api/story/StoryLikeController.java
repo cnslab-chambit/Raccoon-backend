@@ -1,9 +1,9 @@
-package kwu.raccoonapi.controller.api.story.like;
+package kwu.raccoonapi.controller.api.story;
 
 import kwu.raccoonapi.dto.ApiResponse;
 import kwu.raccoonapi.dto.story.like.response.StoryLikeCountResponse;
 import kwu.raccoonapi.dto.story.like.response.StoryLikeToggleResponse;
-import kwu.raccoonapi.facade.story.like.StoryLikeFacadeService;
+import kwu.raccoonapi.facade.story.StoryLikeFacadeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

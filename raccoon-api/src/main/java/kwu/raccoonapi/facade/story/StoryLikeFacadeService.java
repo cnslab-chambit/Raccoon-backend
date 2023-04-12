@@ -1,13 +1,13 @@
-package kwu.raccoonapi.facade.story.like;
+package kwu.raccoonapi.facade.story;
 
 import kwu.raccoonapi.dto.story.like.response.StoryLikeCountResponse;
 import kwu.raccoonapi.dto.story.like.response.StoryLikeToggleResponse;
-import kwu.raccoonapi.facade.story.like.assembler.StoryLikeAssembler;
+import kwu.raccoonapi.facade.story.assembler.StoryLikeAssembler;
 import kwu.raccoonapi.utils.SecurityUtils;
 import kwu.raccoondomain.persistence.domain.story.Story;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import kwu.raccoondomain.service.story.StoryDomainService;
-import kwu.raccoondomain.service.story.like.StoryLikeDomainService;
+import kwu.raccoondomain.service.story.StoryLikeDomainService;
 import kwu.raccoondomain.service.user.UserProfileDomainService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

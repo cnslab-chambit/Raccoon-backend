@@ -1,8 +1,7 @@
-package kwu.raccoondomain.service.story.like;
+package kwu.raccoondomain.service.story;
 
-import kwu.raccooncommon.exception.RaccoonException;
 import kwu.raccoondomain.persistence.domain.story.Story;
-import kwu.raccoondomain.persistence.domain.story.like.StoryLike;
+import kwu.raccoondomain.persistence.domain.story.StoryLike;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import kwu.raccoondomain.persistence.query.story.like.StoryLikeRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -26,9 +25,9 @@ public class StoryLikeDomainService {
     }
 
     public Boolean toggleStoryLike(UserProfile userProfile, Story story) {
-        Long userId = userProfile.getId();
+        Long userProfileId = userProfile.getId();
         Long storyId = story.getId();
-        Optional<StoryLike> optionalStoryLike = storyLikeRepository.storyLikeExist(userId, storyId);
+        Optional<StoryLike> optionalStoryLike = storyLikeRepository.storyLikeExist(userProfileId, storyId);
         if (optionalStoryLike.isPresent()) {
             StoryLike storyLike = optionalStoryLike.get();
             storyLikeRepository.delete(storyLike);
@@ -39,6 +38,17 @@ public class StoryLikeDomainService {
             storyLikeRepository.save(storyLike);
             story.updateLikeCount(story.getLikeCount() +INCRESE);
             return true;
+        }
+    }
+
+    public Boolean getLikeStatus(UserProfile userProfile, Story story) {
+        Long userProfileId = userProfile.getId();
+        Long storyId = story.getId();
+        Optional<StoryLike> optionalStoryLike = storyLikeRepository.storyLikeExist(userProfileId, storyId);
+        if (optionalStoryLike.isPresent()) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

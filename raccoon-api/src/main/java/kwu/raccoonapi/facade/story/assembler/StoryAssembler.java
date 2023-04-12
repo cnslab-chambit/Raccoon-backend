@@ -35,7 +35,7 @@ public class StoryAssembler {
         );
     }
 
-    public StoryDetailResponse toStoryDetailResponse(Story story, double distance){
-        return StoryDetailResponse.of(story,distance);
+    public StoryDetailResponse toStoryDetailResponse(Story story, Double distance,Boolean likeStatus){
+        return StoryDetailResponse.of(story,distance,likeStatus);
     }
 }
