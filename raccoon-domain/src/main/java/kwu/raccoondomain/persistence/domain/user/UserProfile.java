@@ -97,7 +97,6 @@ public class UserProfile {
         if(userProfileUpdateDto.getWantedAnimalTypes() != null) updateWantedAnimal(userProfileUpdateDto.getWantedAnimalTypes());
 
         updateImages(imageUrls);
-
     }
 
     private void updateWantedAnimal(List<AnimalType> animalTypes){
