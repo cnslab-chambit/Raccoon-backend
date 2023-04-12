@@ -32,12 +32,9 @@ public class StoryLike {
     @JoinColumn(name="story_id")
     private Story story;
 
-    private LocalDateTime likeTime;
-
     @Builder
-    public StoryLike(UserProfile userProfile, Story story, LocalDateTime likeTime){
+    public StoryLike(UserProfile userProfile, Story story){
         this.userProfile=userProfile;
         this.story=story;
-        this.likeTime=likeTime;
     }
 }

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class StoryLikeAssembler {
-    public StoryLikeToggleResponse toStoryLikeToggleResponse(Integer likeCnt, Boolean likeStatus){
+    public StoryLikeToggleResponse toStoryLikeToggleResponse(Long likeCnt, Boolean likeStatus){
         return StoryLikeToggleResponse.of(likeCnt,likeStatus);
     }
 }

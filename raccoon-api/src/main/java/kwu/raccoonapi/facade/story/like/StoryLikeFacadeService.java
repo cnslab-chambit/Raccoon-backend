@@ -23,13 +23,13 @@ public class StoryLikeFacadeService {
     private final StoryDomainService storyDomainService;
 
     @Transactional
-    public StoryLikeToggleResponse toggleStoryLike(Long storyId){
+    public StoryLikeToggleResponse toggleStoryLike(Long storyId) {
 
         UserProfile userProfile = userProfileDomainService.getProfile(SecurityUtils.getUser().getId());
-        Story story= storyDomainService.getStoryById(storyId);
+        Story story = storyDomainService.getStoryById(storyId);
 
-        Boolean likeStatus=storyLikeDomainService.toggleStoryLike(userProfile,story);
-        Integer likeCnt=storyLikeDomainService.countStoryLikeNum(story.getId());
+        Boolean likeStatus = storyLikeDomainService.toggleStoryLike(userProfile, story);
+        Long likeCnt = story.getLikeCount();
 
         return storyLikeAssembler.toStoryLikeToggleResponse(likeCnt, likeStatus);
     }
