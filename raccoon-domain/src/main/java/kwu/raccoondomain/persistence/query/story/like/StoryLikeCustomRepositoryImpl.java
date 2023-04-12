@@ -9,7 +9,7 @@ import java.util.Optional;
 
 
 public class StoryLikeCustomRepositoryImpl implements StoryLikeCustomRepository {
-    JPAQueryFactory jpaQueryFactory;
+    private JPAQueryFactory jpaQueryFactory;
 
     public StoryLikeCustomRepositoryImpl(EntityManager em) {
         this.jpaQueryFactory = new JPAQueryFactory(em);
