@@ -35,7 +35,7 @@ public class UserProfileController {
         return ApiResponse.ok(userProfileFacadeService.updateProfileAnimal(request));
     }
 
-    @GetMapping(path="/user/{userId}")
+    @GetMapping("/user/profile/{userId}")
     public ApiResponse<UserProfileDetailsResponse> getProfile(@PathVariable Long userId){
         return ApiResponse.ok(userProfileFacadeService.getProfile(userId));
     }
