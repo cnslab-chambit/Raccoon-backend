@@ -1,6 +1,7 @@
 package kwu.raccoonapi.controller.api.story.like;
 
 import kwu.raccoonapi.dto.ApiResponse;
+import kwu.raccoonapi.dto.story.like.response.StoryLikeCountResponse;
 import kwu.raccoonapi.dto.story.like.response.StoryLikeToggleResponse;
 import kwu.raccoonapi.facade.story.like.StoryLikeFacadeService;
 import lombok.RequiredArgsConstructor;
@@ -17,5 +18,9 @@ public class StoryLikeController {
     @PatchMapping("/story/like/{storyId}")
     public ApiResponse<StoryLikeToggleResponse> toggleStoryLike(@PathVariable Long storyId){
         return ApiResponse.ok(storyLikeFacadeService.toggleStoryLike(storyId));
+    }
+    @GetMapping("/story/like/{storyId}")
+    public ApiResponse<StoryLikeCountResponse> getStoryLikeCount(@PathVariable Long storyId){
+        return ApiResponse.ok(storyLikeFacadeService.getStoryLikeCount(storyId));
     }
 }

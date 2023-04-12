@@ -25,12 +25,4 @@ public class StoryLikeCustomRepositoryImpl implements StoryLikeCustomRepository 
                 .fetchFirst();
         return Optional.ofNullable(sLike);
     }
-
-    public Long countStoryLikeNum(Long storyId) {
-        QStoryLike storyLike = QStoryLike.storyLike;
-        return jpaQueryFactory
-                .selectFrom(storyLike)
-                .where(storyLike.story.id.eq(storyId))
-                .fetchCount();
-    }
 }

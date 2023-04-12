@@ -6,5 +6,4 @@ import java.util.Optional;
 
 public interface StoryLikeCustomRepository {
     Optional<StoryLike> storyLikeExist(Long userId, Long storyId);
-    Number countStoryLikeNum(Long storyId);
 }

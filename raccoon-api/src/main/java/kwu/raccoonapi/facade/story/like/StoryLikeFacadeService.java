@@ -1,5 +1,6 @@
 package kwu.raccoonapi.facade.story.like;
 
+import kwu.raccoonapi.dto.story.like.response.StoryLikeCountResponse;
 import kwu.raccoonapi.dto.story.like.response.StoryLikeToggleResponse;
 import kwu.raccoonapi.facade.story.like.assembler.StoryLikeAssembler;
 import kwu.raccoonapi.utils.SecurityUtils;
@@ -32,5 +33,12 @@ public class StoryLikeFacadeService {
         Long likeCnt = story.getLikeCount();
 
         return storyLikeAssembler.toStoryLikeToggleResponse(likeCnt, likeStatus);
+    }
+
+    @Transactional
+    public StoryLikeCountResponse getStoryLikeCount(Long storyId){
+        Story story = storyDomainService.getStoryById(storyId);
+        Long likeCnt = story.getLikeCount();
+        return storyLikeAssembler.toStoryLikeCountResponse(likeCnt);
     }
 }
