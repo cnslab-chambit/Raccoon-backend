@@ -3,11 +3,13 @@ package kwu.raccoondomain.service.story;
 import kwu.raccoondomain.persistence.domain.story.Story;
 import kwu.raccoondomain.persistence.domain.story.StoryLike;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
-import kwu.raccoondomain.persistence.query.story.like.StoryLikeRepository;
+import kwu.raccoondomain.persistence.repository.story.like.StoryLikeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -47,5 +49,10 @@ public class StoryLikeDomainService {
             return false;
         }
     }
+
+    public Map<Long,Long> getLikeCountPerStory(List<Story> stories){
+        return storyLikeRepository.countPerStory(stories);
+    }
+
 }
 

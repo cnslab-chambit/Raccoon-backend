@@ -5,7 +5,8 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor(staticName = "of")
-public class StoryResponse {
+public class StoryThumbnailResponse {
     private Long id;
     private String storyImageUrl;
+    private Long likeCount;
 }

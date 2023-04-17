@@ -2,13 +2,12 @@ package kwu.raccoonapi.facade.story.assembler;
 
 import kwu.raccoonapi.dto.story.request.StoryCreateRequest;
 import kwu.raccoonapi.dto.story.response.StoryDetailResponse;
-import kwu.raccoonapi.dto.story.response.StoryResponse;
+import kwu.raccoonapi.dto.story.response.StoryThumbnailResponse;
 import kwu.raccoonapi.dto.story.response.StoryCreateResponse;
 import kwu.raccoonapi.dto.story.response.StoryUpdateResponse;
 import kwu.raccoonapi.utils.SecurityUtils;
 import kwu.raccoondomain.dto.story.StoryCreateDto;
 import kwu.raccoondomain.persistence.domain.story.Story;
-import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,10 +27,11 @@ public class StoryAssembler {
         return StoryCreateResponse.of(story.getId());
     }
 
-    public StoryResponse toAllStoryResponse(Story story){
-        return StoryResponse.of(
+    public StoryThumbnailResponse toAllStoryResponse(Story story,Long likeCount){
+        return StoryThumbnailResponse.of(
                 story.getId(),
-                story.getStoryImageUrl()
+                story.getStoryImageUrl(),
+                likeCount
         );
     }
 

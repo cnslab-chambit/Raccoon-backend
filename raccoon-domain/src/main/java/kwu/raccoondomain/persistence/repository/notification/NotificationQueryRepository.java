@@ -1,4 +1,4 @@
-package kwu.raccoondomain.persistence.query.notification;
+package kwu.raccoondomain.persistence.repository.notification;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
