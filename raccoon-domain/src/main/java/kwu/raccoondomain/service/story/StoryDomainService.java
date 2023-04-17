@@ -1,15 +1,21 @@
 package kwu.raccoondomain.service.story;
 
+import io.lettuce.core.GeoArgs;
 import kwu.raccooncommon.consts.ret.RetConsts;
 import kwu.raccooncommon.exception.RaccoonException;
 import kwu.raccoondomain.dto.story.StoryCreateDto;
 import kwu.raccoondomain.dto.story.StoryUpdateDto;
 import kwu.raccoondomain.persistence.domain.story.Story;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
+import kwu.raccoondomain.persistence.repository.story.StoryQueryRepository;
 import kwu.raccoondomain.persistence.repository.story.StoryRepository;
+import kwu.raccoondomain.persistence.repository.utils.CursorPageable;
 import kwu.raccooninfra.service.s3.S3Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +26,7 @@ import java.util.List;
 public class StoryDomainService {
     private final StoryRepository storyRepository;
     private final S3Service s3Service;
-
+    private final StoryQueryRepository storyQueryRepository;
     public Long updateStory(UserProfile userProfile, StoryUpdateDto storyUpdateDto){
         Story story=storyRepository.findById(storyUpdateDto.getStoryId()).orElseThrow(()->new RaccoonException(RetConsts.ERR602));
         if (story.getUserProfile()!=userProfile){
@@ -43,11 +49,6 @@ public class StoryDomainService {
         return story;
     }
 
-    public List<Story> findAllStory(){
-        List<Story> all = storyRepository.findAll();
-        return all;
-    }
-
     public void deleteStoryByIdOrElseThrow(UserProfile userProfile,Long storyId){
         Story story=storyRepository.findById(storyId).orElseThrow(()->new RaccoonException(RetConsts.ERR602));
         if(story.getUserProfile()!=userProfile){
@@ -65,4 +66,12 @@ public class StoryDomainService {
         return story;
     }
 
+    public List<Story> paginate(CursorPageable<Long> cursorPageable){
+        Sort sort = Sort.by(getOrder(cursorPageable.getOrder()), cursorPageable.getSortBy());
+        Pageable pageable = PageRequest.of(cursorPageable.getCursor().intValue(),cursorPageable.getLimit().intValue(),sort);
+        return storyQueryRepository.paginate(pageable);
+    }
+    private Sort.Direction getOrder(String order){
+        return order == "ASC" ? Sort.Direction.ASC : Sort.Direction.DESC;
+    }
 }

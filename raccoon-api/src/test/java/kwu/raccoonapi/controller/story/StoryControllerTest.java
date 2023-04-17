@@ -5,7 +5,7 @@ import com.epages.restdocs.apispec.ResourceSnippetParameters;
 import kwu.raccoonapi.controller.api.story.StoryController;
 import kwu.raccoonapi.document.utils.ApiDocumentationTest;
 import kwu.raccoonapi.dto.story.response.StoryCreateResponse;
-import kwu.raccoonapi.dto.story.response.StoryResponse;
+import kwu.raccoonapi.dto.story.response.StoryThumbnailResponse;
 import kwu.raccoonapi.dto.story.response.StoryUpdateResponse;
 import kwu.raccoonapi.facade.story.StoryFacadeService;
 import org.json.JSONObject;
@@ -134,8 +134,8 @@ public class StoryControllerTest extends ApiDocumentationTest {
     @Test
     @DisplayName("스토리 전체 조회")
     void 스토리_전체조회() throws Exception{
-        StoryResponse res1 = StoryResponse.of(1L,"http://1");
-        StoryResponse res2 = StoryResponse.of(2L,"http://2");
+        StoryThumbnailResponse res1 = StoryThumbnailResponse.of(1L,"http://1");
+        StoryThumbnailResponse res2 = StoryThumbnailResponse.of(2L,"http://2");
 
         when(storyFacadeService.getAllStory()).thenReturn(List.of(res1,res2));
 
