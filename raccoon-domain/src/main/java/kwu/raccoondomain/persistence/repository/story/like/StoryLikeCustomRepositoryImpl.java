@@ -1,4 +1,4 @@
-package kwu.raccoondomain.persistence.query.story.like;
+package kwu.raccoondomain.persistence.repository.story.like;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import kwu.raccoondomain.persistence.domain.story.QStoryLike;

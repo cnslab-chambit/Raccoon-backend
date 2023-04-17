@@ -3,7 +3,7 @@ package kwu.raccoondomain.service.story;
 import kwu.raccoondomain.persistence.domain.story.Story;
 import kwu.raccoondomain.persistence.domain.story.StoryLike;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
-import kwu.raccoondomain.persistence.query.story.like.StoryLikeRepository;
+import kwu.raccoondomain.persistence.repository.story.like.StoryLikeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

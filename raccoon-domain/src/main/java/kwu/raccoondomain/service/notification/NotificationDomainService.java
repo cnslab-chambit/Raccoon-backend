@@ -2,8 +2,8 @@ package kwu.raccoondomain.service.notification;
 
 import kwu.raccoondomain.persistence.domain.notification.NotificationReadHistory;
 import kwu.raccoondomain.persistence.domain.user.User;
-import kwu.raccoondomain.persistence.query.notification.NotificationQueryRepository;
-import kwu.raccoondomain.persistence.query.notification.NotificationReadHistoryRepository;
+import kwu.raccoondomain.persistence.repository.notification.NotificationQueryRepository;
+import kwu.raccoondomain.persistence.repository.notification.NotificationReadHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

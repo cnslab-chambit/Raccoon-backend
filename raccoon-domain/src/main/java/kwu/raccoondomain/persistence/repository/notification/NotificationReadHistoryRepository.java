@@ -1,4 +1,4 @@
-package kwu.raccoondomain.persistence.query.notification;
+package kwu.raccoondomain.persistence.repository.notification;
 
 import kwu.raccoondomain.persistence.domain.notification.NotificationReadHistory;
 import kwu.raccoondomain.persistence.domain.user.User;
