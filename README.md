@@ -1,6 +1,7 @@
 [//]: # (<p align="center">)
 
-[//]: # (<img src="https://user-images.githubusercontent.com/85841791/221329070-b28a58e9-2aab-4e9c-b2e7-568839fa424e.png" width="70%">)
+[//]: # (<img src="[https://user-images.githubusercontent.com/85841791/221329070-b28a58e9-2aab-4e9c-b2e7-568839fa424e.png](https://user-images.githubusercontent.com/85841791/234476841-3c890f7c-f4b1-435e-bca9-98cd339b1c2c.jpg)" width="70%">)
+
 
 [//]: # (</p>)
  
