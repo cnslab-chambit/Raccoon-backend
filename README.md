@@ -1,7 +1,6 @@
 [//]: # (<p align="center">)
 
-[//]: # (<img src="[https://user-images.githubusercontent.com/85841791/221329070-b28a58e9-2aab-4e9c-b2e7-568839fa424e.png](https://user-images.githubusercontent.com/85841791/234476841-3c890f7c-f4b1-435e-bca9-98cd339b1c2c.jpg)" width="70%">)
-
+[//]: # (<img src="https://user-images.githubusercontent.com/85841791/221329070-b28a58e9-2aab-4e9c-b2e7-568839fa424e.png" width="70%">)
 
 [//]: # (</p>)
  
@@ -36,8 +35,10 @@ AI 기반 이상형 추천 소개팅 어플리케이션
 > ## 애플리케이션 내부 설계도
 (눌러서봐주세요)
 
-[![애플리케이션 설계도](https://user-images.githubusercontent.com/85841791/221388949-2063f05b-81bb-4d9d-96ec-1967dddecf6d.png)
-](https://user-images.githubusercontent.com/85841791/221388824-3de3e2ec-e214-44be-a501-d11d98c2a12d.jpg)
+[![애플리케이션 설계도](https://user-images.githubusercontent.com/85841791/234478844-72b8464f-2962-4560-b010-1a239591dc5e.png)
+](https://user-images.githubusercontent.com/85841791/234478749-231f70cc-c376-4b0b-a4b9-923ac154ac7a.jpg)
+
+
 
 <!-- ![img.png](img.png) -->
 
