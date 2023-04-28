@@ -4,6 +4,7 @@ import kwu.raccoonapi.dto.user.response.UserProfileResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileDetailsResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileUpdateResponse;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
+import kwu.raccoondomain.persistence.domain.user.enums.Gender;
 import org.springframework.stereotype.Component;
 
 @Component

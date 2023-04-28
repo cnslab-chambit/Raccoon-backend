@@ -3,12 +3,14 @@ package kwu.raccoonapi.facade.user;
 import kwu.raccoonapi.dto.user.request.UserAnimalUpdateRequest;
 import kwu.raccoonapi.dto.user.request.UserCoordinateUpdateRequest;
 import kwu.raccoonapi.dto.user.request.UserProfileUpdateRequest;
+import kwu.raccoonapi.dto.user.response.UserGenderResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileDetailsResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileUpdateResponse;
 import kwu.raccoonapi.facade.user.assembler.UserProfileAssembler;
 import kwu.raccoonapi.utils.SecurityUtils;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
+import kwu.raccoondomain.persistence.domain.user.enums.Gender;
 import kwu.raccoondomain.service.user.UserProfileDomainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -57,5 +59,11 @@ public class UserProfileFacadeService {
         return allProfile.stream()
                 .map(profile -> userProfileAssembler.toAllUserProfileResponse(profile))
                 .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public UserGenderResponse getUserGender(){
+        Gender gender=userProfileDomainService.getProfile(SecurityUtils.getUser().getId()).getGender();
+        return UserGenderResponse.of(gender);
     }
 }
