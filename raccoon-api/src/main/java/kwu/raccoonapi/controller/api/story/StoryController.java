@@ -43,7 +43,7 @@ public class StoryController {
     }
     
     // 최신 순 조회
-    @GetMapping("/story")
+    @GetMapping("/story/newest")
     public ApiResponse<List<StoryThumbnailResponse>> paginateStories(
         @RequestParam(required = false,defaultValue = CommonConsts.PAGE_DEFAULT) Long cursor,
         @RequestParam Long limit,
