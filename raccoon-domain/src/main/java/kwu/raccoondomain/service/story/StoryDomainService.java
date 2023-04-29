@@ -71,7 +71,15 @@ public class StoryDomainService {
         Pageable pageable = PageRequest.of(cursorPageable.getCursor().intValue(),cursorPageable.getLimit().intValue(),sort);
         return storyQueryRepository.paginate(pageable);
     }
+
+    public List<Story> paginateMyStory(CursorPageable<Long> cursorPageable, Long userId) {
+        Sort sort = Sort.by(getOrder(cursorPageable.getOrder()), cursorPageable.getSortBy());
+        Pageable pageable = PageRequest.of(cursorPageable.getCursor().intValue(),cursorPageable.getLimit().intValue(),sort);
+        return storyQueryRepository.paginateMyStory(pageable,userId);
+    }
+
     private Sort.Direction getOrder(String order){
         return order == "ASC" ? Sort.Direction.ASC : Sort.Direction.DESC;
     }
+
 }

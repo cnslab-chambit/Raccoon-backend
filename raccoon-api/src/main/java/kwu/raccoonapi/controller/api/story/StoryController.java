@@ -45,12 +45,21 @@ public class StoryController {
     // 최신 순 조회
     @GetMapping("/story")
     public ApiResponse<List<StoryThumbnailResponse>> paginateStories(
-        @RequestParam(required = false,defaultValue = CommonConsts.PAGE_DEFAULT) Long cursor,
-        @RequestParam Long limit,
+        @RequestParam Long cursor,
+        @RequestParam(required = false,defaultValue = CommonConsts.PAGE_DEFAULT) Long limit,
         @RequestParam(required = false,defaultValue = "id") String sortBy,
         @RequestParam(required = false,defaultValue = "ASC") String order
         ){
         return ApiResponse.ok(storyFacadeService.paginate(CursorPageable.of(cursor,limit,sortBy,order)));
     }
 
+    // 내 게시글 최신 순으로 조회
+    @GetMapping("/story/my")
+    public ApiResponse<List<StoryThumbnailResponse>> paginateMyStories(
+            @RequestParam Long cursor,
+            @RequestParam(required = false,defaultValue = CommonConsts.PAGE_DEFAULT) Long limit,
+            @RequestParam(required = false,defaultValue = "id") String sortBy,
+            @RequestParam(required = false,defaultValue = "ASC") String order){
+        return ApiResponse.ok(storyFacadeService.paginateMyStory(CursorPageable.of(cursor,limit,sortBy,order)));
+    }
 }
