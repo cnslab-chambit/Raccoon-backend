@@ -30,6 +30,16 @@ public class StoryQueryRepository {
                 .fetch();
     }
 
+    public List<Story> paginateMyStory(Pageable pageable, Long userId) {
+        return queryFactory.select(story)
+                .from(story)
+                .where(story.userProfile.id.eq(userId))
+                .orderBy(getOrderSpecifier(pageable.getSort()).stream().toArray(OrderSpecifier[]::new))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+    }
+
     private List<OrderSpecifier> getOrderSpecifier(Sort sort){
         List<OrderSpecifier> orders = new ArrayList<>();
         sort.stream().forEach(order -> {
@@ -40,5 +50,4 @@ public class StoryQueryRepository {
         });
         return orders;
     }
-
 }
