@@ -43,7 +43,7 @@ public class StoryController {
     }
     
     // 최신 순 조회
-    @GetMapping("/story/newest")
+    @GetMapping("/story")
     public ApiResponse<List<StoryThumbnailResponse>> paginateStories(
         @RequestParam Long cursor,
         @RequestParam(required = false,defaultValue = CommonConsts.PAGE_DEFAULT) Long limit,
@@ -54,7 +54,7 @@ public class StoryController {
     }
 
     // 내 게시글 최신 순으로 조회
-    @GetMapping("/story")
+    @GetMapping("/story/my")
     public ApiResponse<List<StoryThumbnailResponse>> paginateMyStories(
             @RequestParam Long cursor,
             @RequestParam(required = false,defaultValue = CommonConsts.PAGE_DEFAULT) Long limit,
