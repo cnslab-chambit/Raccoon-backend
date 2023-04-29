@@ -9,17 +9,17 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public enum AnimalType {
     //공통
-    DOG("강아지상"),
-    RABBIT("토끼상"),
-    CAT("고양이상"),
+    DOG("강아지"),
+    RABBIT("토끼"),
+    CAT("고양이"),
 
     //여자
-    DEER("사슴상"),
-    FOX("여우상"),
+    DEER("사슴"),
+    FOX("여우"),
 
     //남자
-    DINOSAUR("공룡상"),
-    BEAR("곰상");
+    DINOSAUR("공룡"),
+    BEAR("곰");
     private final String kor;
     @Override
     public String toString() {
