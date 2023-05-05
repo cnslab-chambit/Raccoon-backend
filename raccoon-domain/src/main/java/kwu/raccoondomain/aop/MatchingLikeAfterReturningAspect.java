@@ -20,7 +20,7 @@ public class MatchingLikeAfterReturningAspect {
     public void pubAfterReturning(JoinPoint joinPoint, Object result) {
         Object[] args = joinPoint.getArgs();
         if (args.length != 2 || !(args[0] instanceof UserProfile) || !(args[1] instanceof UserProfile)) {
-            log.error("Invalid arguments for matchingLike method, expected two UserProfile arguments");
+            log.error("두개의 userProfile 이 필요합니다.");
             return;
         }
         UserProfile sender = (UserProfile) args[0];

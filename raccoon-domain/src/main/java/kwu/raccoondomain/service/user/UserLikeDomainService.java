@@ -5,7 +5,6 @@ import kwu.raccoondomain.persistence.domain.user.UserLike;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import kwu.raccoondomain.persistence.repository.user.UserLikeQueryRepository;
 import kwu.raccoondomain.persistence.repository.user.UserLikeRepository;
-import kwu.raccooninfra.service.rabbitmq.UserLikePublisher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,6 @@ public class UserLikeDomainService {
 
     private final UserLikeQueryRepository userLikeQueryRepository;
     private final UserLikeRepository userLikeRepository;
-    private final UserLikePublisher userLikePublisher;
 
     public UserLike sendLike(UserProfile sender,UserProfile receiver){
         return userLikeQueryRepository.findBySenderIdAndReceiverId(sender,receiver);

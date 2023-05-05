@@ -18,7 +18,6 @@ public class UserLikeFacadeService {
     private final UserLikeDomainService userLikeDomainService;
     private final UserProfileDomainService userProfileDomainService;
 
-    // TODO PUB RETRY HANDLING
     @Transactional
     public void sendUserLike(UserLikeRequest userLikeRequest){
         UserProfile sender = userProfileDomainService.getProfile(SecurityUtils.getUser().getId());
