@@ -15,7 +15,6 @@ import static kwu.raccoondomain.persistence.domain.user.QUserLike.userLike;
 public class UserLikeQueryRepository {
     private final JPAQueryFactory queryFactory;
 
-
     public UserLike findBySenderIdAndReceiverId(UserProfile sender, UserProfile receiver){
         BooleanBuilder where = new BooleanBuilder();
 
@@ -29,4 +28,31 @@ public class UserLikeQueryRepository {
                 .fetchOne();
     }
 
+    // 이미 sender 가 receiver 에게 좋아요를 보낸 적이 있는지 확인
+    public boolean checkDuplicateLike(UserProfile sender, UserProfile receiver){
+        BooleanBuilder where = new BooleanBuilder();
+
+        where.and(userLike.isMatched.eq(false));
+        where.and(userLike.sender.eq(sender));
+        where.and(userLike.receiver.eq(receiver));
+
+        return queryFactory.selectFrom(userLike)
+                .where(where)
+                .limit(1)
+                .fetchOne()!=null;
+    }
+
+    // 이미 sender 와 receiver 가 매칭된 상태인지 확인
+    public boolean checkMatched(UserProfile sender, UserProfile receiver) {
+        BooleanBuilder where = new BooleanBuilder();
+
+        where.and(userLike.isMatched.eq(true));
+        where.and(userLike.sender.eq(sender));
+        where.and(userLike.receiver.eq(receiver));
+
+        return queryFactory.selectFrom(userLike)
+                .where(where)
+                .limit(1)
+                .fetchOne()!=null;
+    }
 }

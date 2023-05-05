@@ -131,6 +131,8 @@ project(':raccoon-domain'){
 		implementation 'mysql:mysql-connector-java'
 		implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 		implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
+		implementation("org.springframework.retry:spring-retry")
+		implementation("org.springframework:spring-aspects")
 	}
 
 	def querydslSrcDir = "$buildDir/generated/querydsl"
