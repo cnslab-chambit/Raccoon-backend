@@ -23,6 +23,14 @@ public class UserLikeDomainService {
         return userLikeQueryRepository.findBySenderIdAndReceiverId(sender,receiver);
     }
 
+    public boolean duplicateLike(UserProfile sender, UserProfile receiver) {
+        return userLikeQueryRepository.checkDuplicateLike(sender,receiver);
+    }
+
+    public boolean isMatched(UserProfile sender, UserProfile receiver) {
+        return userLikeQueryRepository.checkMatched(sender,receiver);
+    }
+
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void saveUserLike(UserProfile sender, UserProfile receiver){
         userLikeRepository.save(UserLike.of(sender,receiver));
@@ -30,11 +38,10 @@ public class UserLikeDomainService {
 
     @MatchingLikeAfterReturning
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void matchingLike(UserProfile sender, UserProfile receiver){
+    public void matchingLike(UserProfile sender, UserProfile receiver) {
         UserLike s = userLikeQueryRepository.findBySenderIdAndReceiverId(sender, receiver);
         UserLike r = userLikeQueryRepository.findBySenderIdAndReceiverId(receiver, sender);
         s.match();
         r.match();
     }
-
 }

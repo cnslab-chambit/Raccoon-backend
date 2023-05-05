@@ -24,12 +24,23 @@ public class UserLikeFacadeService {
         UserProfile receiver = userProfileDomainService.getProfile(userLikeRequest.getReceiverId());
         UserLike userLike = userLikeDomainService.sendLike(sender, receiver);
 
-        // 처음 보내는 거면
+        // 내가 상대에게 중복된 좋아요를 누르면
+        if (userLikeDomainService.duplicateLike(sender,receiver)){
+            return;
+        }
+
+        // 이미 매칭된 상태에서 다시 좋아요를 누르면
+        if (userLikeDomainService.isMatched(sender,receiver)){
+            return;
+        }
+
+        // 쌍방으로 좋아요를 표시한 적이 없으면 (내가 상대에게 첫 좋아요)
         if(userLike == null){
             userLikeDomainService.saveUserLike(sender,receiver);
             return;
         }
-        // 상대가 이미 보냈다면
+
+        // 상대는 나에게 좋아요를 보낸 상태라면
         userLikeDomainService.saveUserLike(sender,receiver);
         userLikeDomainService.matchingLike(sender,receiver);
     }
