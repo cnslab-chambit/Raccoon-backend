@@ -5,7 +5,7 @@ ENTRYPOINT ["java","-Dcom.amazonaws.sdk.disableEc2Metadata=true","-jar","app.jar
  
  
  
-  
+   
  
  
  
