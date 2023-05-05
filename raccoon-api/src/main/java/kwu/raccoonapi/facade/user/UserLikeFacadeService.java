@@ -18,13 +18,13 @@ public class UserLikeFacadeService {
     private final UserLikeDomainService userLikeDomainService;
     private final UserProfileDomainService userProfileDomainService;
 
-    // TODO Spring AOP 로 (userLikeDomainService.matchingLike) 종료시 PUB 되게 끔..!
     // TODO PUB RETRY HANDLING
     @Transactional
     public void sendUserLike(UserLikeRequest userLikeRequest){
         UserProfile sender = userProfileDomainService.getProfile(SecurityUtils.getUser().getId());
         UserProfile receiver = userProfileDomainService.getProfile(userLikeRequest.getReceiverId());
         UserLike userLike = userLikeDomainService.sendLike(sender, receiver);
+
         // 처음 보내는 거면
         if(userLike == null){
             userLikeDomainService.saveUserLike(sender,receiver);
@@ -32,9 +32,6 @@ public class UserLikeFacadeService {
         }
         // 상대가 이미 보냈다면
         userLikeDomainService.saveUserLike(sender,receiver);
-        //
-        userLikeDomainService.pub(sender,receiver);
-
         userLikeDomainService.matchingLike(sender,receiver);
     }
 

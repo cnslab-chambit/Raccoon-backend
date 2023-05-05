@@ -1,5 +1,6 @@
 package kwu.raccoondomain.service.user;
 
+import kwu.raccoondomain.aop.MatchingLikeAfterReturning;
 import kwu.raccoondomain.persistence.domain.user.UserLike;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import kwu.raccoondomain.persistence.repository.user.UserLikeQueryRepository;
@@ -19,6 +20,7 @@ public class UserLikeDomainService {
     private final UserLikeQueryRepository userLikeQueryRepository;
     private final UserLikeRepository userLikeRepository;
     private final UserLikePublisher userLikePublisher;
+
     public UserLike sendLike(UserProfile sender,UserProfile receiver){
         return userLikeQueryRepository.findBySenderIdAndReceiverId(sender,receiver);
     }
@@ -28,10 +30,7 @@ public class UserLikeDomainService {
         userLikeRepository.save(UserLike.of(sender,receiver));
     }
 
-    public void pub(UserProfile sender, UserProfile receiver){
-        userLikePublisher.pubUserLikeMessage(sender.getId(),receiver.getId());
-    }
-    // #TODO AOP 넣기
+    @MatchingLikeAfterReturning
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void matchingLike(UserProfile sender, UserProfile receiver){
         UserLike s = userLikeQueryRepository.findBySenderIdAndReceiverId(sender, receiver);
