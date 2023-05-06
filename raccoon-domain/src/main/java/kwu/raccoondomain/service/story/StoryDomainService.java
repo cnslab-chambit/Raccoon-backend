@@ -43,7 +43,7 @@ public class StoryDomainService {
     public Story create(StoryCreateDto dto){
         String imageUrl = s3Service.upload(dto.getStoryImage());
 
-        Story story = Story.of(dto.getUserProfile(),imageUrl,dto);
+        Story story = Story.of(dto.getUserProfile(),imageUrl,dto.getContents());
 
         storyRepository.save(story);
         return story;

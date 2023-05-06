@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import kwu.raccoondomain.dto.story.StoryCreateDto;
 import kwu.raccoondomain.dto.story.StoryUpdateDto;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -15,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "story")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Story {
 
     @JsonIgnore
@@ -37,11 +35,11 @@ public class Story {
     private String storyImageUrl;
 
 
-    public static Story of(UserProfile userProfile, String storyImageUrl, StoryCreateDto dto){
+    public static Story of(UserProfile userProfile, String storyImageUrl, String contents){
         Story story = new Story();
         story.userProfile = userProfile;
         story.storyImageUrl = storyImageUrl;
-        story.contents = dto.getContents();
+        story.contents = contents;
         story.likeCount = 0L;
         return story;
     }
