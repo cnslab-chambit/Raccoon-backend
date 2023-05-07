@@ -2,6 +2,7 @@ package kwu.raccoondomain.unit.fixture.story;
 
 import kwu.raccoondomain.persistence.domain.story.Story;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
+import kwu.raccoondomain.unit.fixture.user.userprofile.UserProfileFactory;
 
 import java.util.Arrays;
 import java.util.List;

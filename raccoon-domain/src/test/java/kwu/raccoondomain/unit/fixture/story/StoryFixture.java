@@ -37,13 +37,7 @@ public class StoryFixture {
             return this;
         }
         public Story build(){
-            return new Story(
-                    id,
-                    userProfile,
-                    contents,
-                    likeCount,
-                    imageUrl
-            );
+            return Story.of(userProfile,imageUrl,contents);
         }
     }
 

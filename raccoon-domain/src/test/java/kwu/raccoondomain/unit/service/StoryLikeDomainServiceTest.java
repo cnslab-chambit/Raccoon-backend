@@ -35,23 +35,4 @@ public class StoryLikeDomainServiceTest {
         story1 = StoryFactory.mockStory();
     }
 
-    @DisplayName("Story 좋아요는")
-    @Nested
-    class Story_Like{
-        @DisplayName("이미 좋아요 한 상태라면")
-        @Nested
-        class Context_Like{
-            @DisplayName("좋아요가 취소된다.")
-            @Test
-            void unLike(){
-                // given
-                story1.
-            }
-        }
-    }
-
-    private Story createStoryOfId(Long id){
-        return StoryFactory.mockStoryBy(UserProfileFactory.userProfile());
-    }
-
 }

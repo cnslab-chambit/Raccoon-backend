@@ -16,7 +16,6 @@ import java.util.List;
 @Table(name = "story")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 public class Story {
 
     @JsonIgnore
@@ -45,6 +44,7 @@ public class Story {
         story.userProfile = userProfile;
         story.storyImageUrl = storyImageUrl;
         story.contents = contents;
+        story.likes = new Likes();
         return story;
     }
     public void updateStory(StoryUpdateDto storyUpdateDto, String storyImageUrl){
