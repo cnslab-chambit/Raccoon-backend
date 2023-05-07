@@ -1,7 +1,7 @@
 package kwu.raccoondomain.persistence.repository.story.like;
 
-import kwu.raccoondomain.persistence.domain.story.StoryLike;
+import kwu.raccoondomain.persistence.domain.story.like.Like;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface StoryLikeRepository extends JpaRepository<StoryLike,Long>, StoryLikeCustomRepository {
+public interface StoryLikeRepository extends JpaRepository<Like,Long>, StoryLikeCustomRepository {
 }

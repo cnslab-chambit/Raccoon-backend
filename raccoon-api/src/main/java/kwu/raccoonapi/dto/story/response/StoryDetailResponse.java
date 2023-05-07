@@ -28,7 +28,7 @@ public class StoryDetailResponse {
         storyDetailResponse.nickname=story.getUserProfile().getNickname();
         storyDetailResponse.age=story.getUserProfile().getAge();
         storyDetailResponse.distance= distance;
-        storyDetailResponse.likeCount=Integer.toUnsignedLong(story.getLikes().size());
+        storyDetailResponse.likeCount=Integer.toUnsignedLong(story.getLikes().getCounts());
         storyDetailResponse.likeStatus=likeStatus;
 
         return storyDetailResponse;

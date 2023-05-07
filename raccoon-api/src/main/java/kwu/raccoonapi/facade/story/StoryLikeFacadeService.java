@@ -30,7 +30,7 @@ public class StoryLikeFacadeService {
         Story story = storyDomainService.getStoryById(storyId);
 
         Boolean likeStatus = storyLikeDomainService.toggleStoryLike(userProfile, story);
-        Long likeCnt = Integer.toUnsignedLong(story.getLikes().size());
+        Long likeCnt = Integer.toUnsignedLong(story.getLikes().getCounts());
 
         return storyLikeAssembler.toStoryLikeToggleResponse(likeCnt, likeStatus);
     }
@@ -38,7 +38,7 @@ public class StoryLikeFacadeService {
     @Transactional
     public StoryLikeCountResponse getStoryLikeCount(Long storyId){
         Story story = storyDomainService.getStoryById(storyId);
-        Long likeCnt = Integer.toUnsignedLong(story.getLikes().size());
+        Long likeCnt = Integer.toUnsignedLong(story.getLikes().getCounts());
         return storyLikeAssembler.toStoryLikeCountResponse(likeCnt);
     }
 }

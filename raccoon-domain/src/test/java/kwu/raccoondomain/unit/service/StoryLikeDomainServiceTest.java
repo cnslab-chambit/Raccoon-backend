@@ -32,7 +32,7 @@ public class StoryLikeDomainServiceTest {
 
     @BeforeEach
     void setUp(){
-
+        story1 = StoryFactory.mockStory();
     }
 
     @DisplayName("Story 좋아요는")
@@ -44,7 +44,8 @@ public class StoryLikeDomainServiceTest {
             @DisplayName("좋아요가 취소된다.")
             @Test
             void unLike(){
-
+                // given
+                story1.
             }
         }
     }

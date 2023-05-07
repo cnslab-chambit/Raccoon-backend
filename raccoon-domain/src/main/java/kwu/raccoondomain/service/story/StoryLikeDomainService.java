@@ -1,7 +1,7 @@
 package kwu.raccoondomain.service.story;
 
 import kwu.raccoondomain.persistence.domain.story.Story;
-import kwu.raccoondomain.persistence.domain.story.StoryLike;
+import kwu.raccoondomain.persistence.domain.story.like.Like;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import kwu.raccoondomain.persistence.repository.story.like.StoryLikeRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -24,29 +24,21 @@ public class StoryLikeDomainService {
     }
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Boolean toggleStoryLike(UserProfile userProfile, Story story) {
-        Long userProfileId = userProfile.getId();
-        Long storyId = story.getId();
-        Optional<StoryLike> optionalStoryLike = storyLikeRepository.storyLikeExist(userProfileId, storyId);
+        Optional<Like> optionalStoryLike = storyLikeRepository.storyLikeExist(userProfile, story);
         if (optionalStoryLike.isPresent()) {
-            StoryLike storyLike = optionalStoryLike.get();
-            storyLikeRepository.delete(storyLike);
+            story.unlike(userProfile);
             return false;
-        } else {
-            StoryLike storyLike = StoryLike.of(story,userProfile);
-            storyLikeRepository.save(storyLike);
-            return true;
         }
+        story.like(userProfile);
+        return true;
     }
 
     public Boolean getLikeStatus(UserProfile userProfile, Story story) {
-        Long userProfileId = userProfile.getId();
-        Long storyId = story.getId();
-        Optional<StoryLike> optionalStoryLike = storyLikeRepository.storyLikeExist(userProfileId, storyId);
+        Optional<Like> optionalStoryLike = storyLikeRepository.storyLikeExist(userProfile,story);
         if (optionalStoryLike.isPresent()) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public Map<Long,Long> getLikeCountPerStory(List<Story> stories){
