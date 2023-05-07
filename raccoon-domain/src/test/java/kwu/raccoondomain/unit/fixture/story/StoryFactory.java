@@ -20,6 +20,10 @@ public class StoryFactory {
         return Story.of(userProfile,"mock-url","mock story content");
     }
 
+    public static Story mockStory(){
+        return Story.of(null,"mock-url","mock story content");
+    }
+
     public static List<Story> mockStoriesBy(List<UserProfile> userProfiles){
         AtomicInteger index = new AtomicInteger();
         return userProfiles.stream()

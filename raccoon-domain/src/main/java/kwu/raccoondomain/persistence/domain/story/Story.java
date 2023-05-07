@@ -3,6 +3,8 @@ package kwu.raccoondomain.persistence.domain.story;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import kwu.raccoondomain.dto.story.StoryCreateDto;
 import kwu.raccoondomain.dto.story.StoryUpdateDto;
+import kwu.raccoondomain.persistence.domain.story.like.Like;
+import kwu.raccoondomain.persistence.domain.story.like.Likes;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import lombok.*;
 
@@ -30,9 +32,8 @@ public class Story {
     @Column(name = "contents",nullable = false,length = 500)
     private String contents;
 
-
-    @OneToMany(mappedBy = "story")
-    private List<StoryLike> likes = new ArrayList<>();
+    @Embedded
+    private Likes likes;
 
 
     @Column(name = "story_image")
@@ -50,4 +51,15 @@ public class Story {
         if(storyUpdateDto.getContents() != null )this.contents=storyUpdateDto.getContents();
         if(storyUpdateDto.getStoryImage() != null )this.storyImageUrl=storyImageUrl;
     }
+
+    public void like(UserProfile userProfile){
+        Like like = new Like(this,userProfile);
+        likes.add(like);
+    }
+
+    public void unlike(UserProfile userProfile){
+        Like like = new Like(this,userProfile);
+        likes.remove(like);
+    }
+
 }

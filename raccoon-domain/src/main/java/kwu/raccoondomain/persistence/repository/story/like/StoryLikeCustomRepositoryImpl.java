@@ -2,19 +2,18 @@ package kwu.raccoondomain.persistence.repository.story.like;
 
 import com.querydsl.core.group.GroupBy;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import kwu.raccoondomain.persistence.domain.story.QStory;
-import kwu.raccoondomain.persistence.domain.story.QStoryLike;
 import kwu.raccoondomain.persistence.domain.story.Story;
-import kwu.raccoondomain.persistence.domain.story.StoryLike;
+import kwu.raccoondomain.persistence.domain.story.like.Like;
+
+import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import static kwu.raccoondomain.persistence.domain.story.QStory.story;
-import static kwu.raccoondomain.persistence.domain.story.QStoryLike.storyLike;
+import static kwu.raccoondomain.persistence.domain.story.like.QLike.like;
 
 
 @RequiredArgsConstructor
@@ -22,12 +21,11 @@ public class StoryLikeCustomRepositoryImpl implements StoryLikeCustomRepository 
     private final JPAQueryFactory jpaQueryFactory;
 
     //좋아요 상태를 반환하는 메서드
-    public Optional<StoryLike> storyLikeExist(Long userProfileId, Long storyId) {
-        QStoryLike storyLike = QStoryLike.storyLike;
-        StoryLike sLike= jpaQueryFactory
-                .selectFrom(storyLike)
-                .where(storyLike.userProfile.id.eq(userProfileId),
-                        storyLike.story.id.eq(storyId))
+    public Optional<Like> storyLikeExist(UserProfile userProfile, Story story) {
+        Like sLike= jpaQueryFactory
+                .selectFrom(like)
+                .where(like.userProfile.eq(userProfile),
+                        like.story.eq(story))
                 .fetchFirst();
         return Optional.ofNullable(sLike);
     }
@@ -35,10 +33,10 @@ public class StoryLikeCustomRepositoryImpl implements StoryLikeCustomRepository 
     @Override
     public Map<Long, Long> countPerStory(List<Story> stories) {
         return jpaQueryFactory
-                .from(storyLike)
-                .innerJoin(storyLike.story,story)
+                .from(like)
+                .innerJoin(like.story,story)
                 .where(story.in(stories))
                 .groupBy(story.id)
-                .transform(GroupBy.groupBy(story.id).as(storyLike.count()));
+                .transform(GroupBy.groupBy(story.id).as(like.count()));
     }
 }
