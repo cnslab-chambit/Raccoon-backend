@@ -7,6 +7,8 @@ import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "story")
@@ -28,8 +30,10 @@ public class Story {
     @Column(name = "contents",nullable = false,length = 500)
     private String contents;
 
-    @Column(name = "like_count")
-    private Long likeCount;
+
+    @OneToMany(mappedBy = "story")
+    private List<StoryLike> likes = new ArrayList<>();
+
 
     @Column(name = "story_image")
     private String storyImageUrl;
@@ -40,18 +44,10 @@ public class Story {
         story.userProfile = userProfile;
         story.storyImageUrl = storyImageUrl;
         story.contents = contents;
-        story.likeCount = 0L;
         return story;
     }
     public void updateStory(StoryUpdateDto storyUpdateDto, String storyImageUrl){
         if(storyUpdateDto.getContents() != null )this.contents=storyUpdateDto.getContents();
         if(storyUpdateDto.getStoryImage() != null )this.storyImageUrl=storyImageUrl;
-    }
-
-    public void increaseLikeCount(){
-        this.likeCount++;
-    }
-    public void decreaseLikeCount(){
-        this.likeCount--;
     }
 }
