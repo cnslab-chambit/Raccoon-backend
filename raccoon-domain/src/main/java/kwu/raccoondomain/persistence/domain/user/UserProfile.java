@@ -6,6 +6,7 @@ import kwu.raccoondomain.dto.user.UserProfileUpdateDto;
 import kwu.raccoondomain.persistence.domain.files.ImageFile;
 import kwu.raccoondomain.persistence.domain.user.enums.*;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +19,7 @@ import java.util.Set;
 @Table(name = "user_profile")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class UserProfile {
     @JsonIgnore
     @Id

@@ -32,9 +32,10 @@ public class StoryLike {
     @JoinColumn(name="story_id")
     private Story story;
 
-    @Builder
-    public StoryLike(UserProfile userProfile, Story story){
-        this.userProfile=userProfile;
-        this.story=story;
+    public static StoryLike of(Story story,UserProfile userProfile){
+        StoryLike storyLike = new StoryLike();
+        storyLike.story = story;
+        storyLike.userProfile = userProfile;
+        return storyLike;
     }
 }

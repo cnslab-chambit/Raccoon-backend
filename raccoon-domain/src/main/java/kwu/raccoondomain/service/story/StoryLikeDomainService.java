@@ -6,6 +6,7 @@ import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import kwu.raccoondomain.persistence.repository.story.like.StoryLikeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class StoryLikeDomainService {
     public StoryLikeDomainService(StoryLikeRepository storyLikeRepository) {
         this.storyLikeRepository = storyLikeRepository;
     }
-
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Boolean toggleStoryLike(UserProfile userProfile, Story story) {
         Long userProfileId = userProfile.getId();
         Long storyId = story.getId();
@@ -29,12 +30,10 @@ public class StoryLikeDomainService {
         if (optionalStoryLike.isPresent()) {
             StoryLike storyLike = optionalStoryLike.get();
             storyLikeRepository.delete(storyLike);
-            story.decreaseLikeCount();
             return false;
         } else {
-            StoryLike storyLike = StoryLike.builder().story(story).userProfile(userProfile).build();
+            StoryLike storyLike = StoryLike.of(story,userProfile);
             storyLikeRepository.save(storyLike);
-            story.increaseLikeCount();
             return true;
         }
     }
