@@ -61,7 +61,7 @@ public class StoryDomainServiceTest {
 
         verify(storyRepository,times(1))
                 .save(any(Story.class));
-        
+
     }
 
 
