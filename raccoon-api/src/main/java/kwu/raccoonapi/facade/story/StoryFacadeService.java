@@ -58,7 +58,7 @@ public class StoryFacadeService {
         UserProfile userProfile = userProfileDomainService.getProfile(SecurityUtils.getUser().getId());
         Double distance = userProfileDomainService.getDistance(story.getUserProfile(), userProfile);
         Boolean likeStatus = storyLikeDomainService.getLikeStatus(userProfile,story);
-        return storyAssembler.toStoryDetailResponse(story,distance,likeStatus,userProfile);
+        return storyAssembler.toStoryDetailResponse(story,distance,likeStatus,story.getUserProfile());
     }
 
     @Transactional(readOnly = true)
