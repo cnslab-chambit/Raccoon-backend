@@ -14,12 +14,13 @@ public class StoryDetailResponse {
     private String contents;
     private Long userId;
     private String nickname;
+    private String profileImage;
     private Long age;
     private Double distance;
     private Long likeCount;
     private Boolean likeStatus;
 
-    public static StoryDetailResponse of(Story story, Double distance, Boolean likeStatus){
+    public static StoryDetailResponse of(Story story, Double distance, Boolean likeStatus,UserProfile userProfile){
         StoryDetailResponse storyDetailResponse = new StoryDetailResponse();
 
         storyDetailResponse.storyImageUrl=story.getStoryImageUrl();
@@ -30,6 +31,7 @@ public class StoryDetailResponse {
         storyDetailResponse.distance= distance;
         storyDetailResponse.likeCount=Integer.toUnsignedLong(story.getLikes().getCounts());
         storyDetailResponse.likeStatus=likeStatus;
+        storyDetailResponse.profileImage = userProfile.getImages().get(0).getUrl();
 
         return storyDetailResponse;
     }

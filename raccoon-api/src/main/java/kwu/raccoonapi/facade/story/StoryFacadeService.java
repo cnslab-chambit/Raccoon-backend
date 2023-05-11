@@ -54,11 +54,11 @@ public class StoryFacadeService {
 
     @Transactional(readOnly = true)
     public StoryDetailResponse getStoryDetail(Long storyId){
-        Story story= storyDomainService.getStoryById(storyId);
+        Story story = storyDomainService.getStoryById(storyId);
         UserProfile userProfile = userProfileDomainService.getProfile(SecurityUtils.getUser().getId());
         Double distance = userProfileDomainService.getDistance(story.getUserProfile(), userProfile);
-        Boolean likeStatus=storyLikeDomainService.getLikeStatus(userProfile,story);
-        return storyAssembler.toStoryDetailResponse(story,distance,likeStatus);
+        Boolean likeStatus = storyLikeDomainService.getLikeStatus(userProfile,story);
+        return storyAssembler.toStoryDetailResponse(story,distance,likeStatus,userProfile);
     }
 
     @Transactional(readOnly = true)
