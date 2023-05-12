@@ -34,6 +34,7 @@ public class Story {
     @Embedded
     private Likes likes;
 
+    private Long likeCount;
 
     @Column(name = "story_image")
     private String storyImageUrl;
@@ -45,6 +46,7 @@ public class Story {
         story.storyImageUrl = storyImageUrl;
         story.contents = contents;
         story.likes = new Likes();
+        story.likeCount = 0L;
         return story;
     }
     public void updateStory(StoryUpdateDto storyUpdateDto, String storyImageUrl){
@@ -55,11 +57,13 @@ public class Story {
     public void like(UserProfile userProfile){
         Like like = new Like(this,userProfile);
         likes.add(like);
+        likeCount -= 1;
     }
 
     public void unlike(UserProfile userProfile){
         Like like = new Like(this,userProfile);
         likes.remove(like);
+        likeCount += 1;
     }
 
 }

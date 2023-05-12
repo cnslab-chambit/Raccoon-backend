@@ -29,7 +29,7 @@ public class StoryDetailResponse {
         storyDetailResponse.nickname=story.getUserProfile().getNickname();
         storyDetailResponse.age=story.getUserProfile().getAge();
         storyDetailResponse.distance= distance;
-        storyDetailResponse.likeCount=Integer.toUnsignedLong(story.getLikes().getCounts());
+        storyDetailResponse.likeCount=story.getLikeCount();
         storyDetailResponse.likeStatus=likeStatus;
         storyDetailResponse.profileImage = userProfile.getImages().get(0).getUrl();
 
