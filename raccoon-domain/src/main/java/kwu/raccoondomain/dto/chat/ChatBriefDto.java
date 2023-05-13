@@ -8,4 +8,5 @@ import lombok.Data;
 public class ChatBriefDto {
     private Long roomId;
     private Long oppositeUserId;
+    private Long senderId;
 }

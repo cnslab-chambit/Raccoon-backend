@@ -17,6 +17,6 @@ public class ChatDomainService {
 
     public List<ChatBriefDto> findUserChatRooms(Long userId){
         return chattingInfraService.getRooms(userId).stream().map(chatRoomDto -> ChatBriefDto.of(
-                chatRoomDto.getRoomId(), chatRoomDto.getOppositeUserId())).collect(Collectors.toList());
+                chatRoomDto.getRoomId(), chatRoomDto.getOppositeUserId(),userId)).collect(Collectors.toList());
     }
 }
