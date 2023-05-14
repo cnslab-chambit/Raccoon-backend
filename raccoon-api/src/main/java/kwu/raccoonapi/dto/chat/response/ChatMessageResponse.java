@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChatMessageResponse {
-    private Long senderId;
+    private Long sender;
     private String message;
     private Long seqId;
     public static ChatMessageResponse of(Long senderId,String message,Long seqId){
         ChatMessageResponse res = new ChatMessageResponse();
-        res.senderId = senderId;
+        res.sender = senderId;
         res.message = message;
         res.seqId = seqId;
         return res;
