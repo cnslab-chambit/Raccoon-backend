@@ -1,6 +1,7 @@
 package kwu.raccooninfra.service.chatting;
 
 import kwu.raccooninfra.apis.chatting.ChattingApi;
+import kwu.raccooninfra.dto.ChatDto;
 import kwu.raccooninfra.dto.ChatRoomDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,10 @@ public class ChattingInfraService {
 
     public List<ChatRoomDto> getRooms(Long userId){
         return chattingApi.getUserChatRooms(userId);
+    }
+
+    public List<ChatDto> getChats(Long roomId, Long userId){
+        return chattingApi.getUserChatMessages(roomId,userId);
     }
 
 }

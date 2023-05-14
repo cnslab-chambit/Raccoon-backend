@@ -1,5 +1,6 @@
 package kwu.raccoonapi.facade.chat;
 
+import kwu.raccoonapi.dto.chat.response.ChatMessageResponse;
 import kwu.raccoonapi.dto.chat.response.ChatRoomBriefResponse;
 import kwu.raccoonapi.facade.chat.assembler.ChatAssembler;
 import kwu.raccoonapi.utils.SecurityUtils;
@@ -30,4 +31,9 @@ public class ChatFacadeService {
                 userProfileDomainService.getProfile(a.getOppositeUserId()))).collect(Collectors.toList());
     }
 
+    public List<ChatMessageResponse> getChatMessages(Long roomId){
+        return chatDomainService.findChatMessages(roomId,SecurityUtils.getUser().getId()).stream().map(chatMessageDto -> ChatMessageResponse.of(
+                chatMessageDto.getUserId(),chatMessageDto.getText(),chatMessageDto.getSeqId()
+        )).collect(Collectors.toList());
+    }
 }

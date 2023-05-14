@@ -1,5 +1,6 @@
 package kwu.raccooninfra.apis.chatting;
 
+import kwu.raccooninfra.dto.ChatDto;
 import kwu.raccooninfra.dto.ChatRoomDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,4 +13,8 @@ import java.util.List;
 public interface ChattingApi {
     @GetMapping("/users/{userId}/rooms")
     List<ChatRoomDto> getUserChatRooms(@PathVariable Long userId);
+
+    @GetMapping("/users/{userId}/rooms/{roomId}/chats")
+    public List<ChatDto> getUserChatMessages(@PathVariable Long roomId,
+                                             @PathVariable Long userId);
 }
