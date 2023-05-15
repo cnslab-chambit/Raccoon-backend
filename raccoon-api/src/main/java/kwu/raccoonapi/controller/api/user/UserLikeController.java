@@ -16,7 +16,6 @@ public class UserLikeController {
     private final UserLikeFacadeService userLikeFacadeService;
     @PostMapping("/user/like")
     public ApiResponse<?> sendUserLike(@RequestBody UserLikeRequest userLikeRequest){
-        userLikeFacadeService.sendUserLike(userLikeRequest);
-        return ApiResponse.ok();
+        return ApiResponse.ok(userLikeFacadeService.sendUserLike(userLikeRequest));
     }
 }
