@@ -18,7 +18,8 @@ public class ChatDomainService {
 
     public List<ChatBriefDto> findUserChatRooms(Long userId){
         return chattingInfraService.getRooms(userId).stream().map(chatRoomDto -> ChatBriefDto.of(
-                chatRoomDto.getRoomId(), chatRoomDto.getOppositeUserId(),userId)).collect(Collectors.toList());
+                chatRoomDto.getRoomId(), chatRoomDto.getOppositeUserId(),userId,
+                chatRoomDto.getLastMessage(),chatRoomDto.getLastTime())).collect(Collectors.toList());
     }
     public List<ChatMessageDto> findChatMessages(Long roomId,Long userId){
         return chattingInfraService.getChats(roomId,userId).stream().map(chatDto -> ChatMessageDto.of(

@@ -21,8 +21,7 @@ public class ChatFacadeService {
     private final ChatDomainService chatDomainService;
     private final UserProfileDomainService userProfileDomainService;
     private final ChatAssembler chatAssembler;
-
-    // ##TODO DB 커넥션 줄이기 위해 userProfileDomain에서 userProfile list로 받고 stream
+    // #TODO 스트림으로 DB커넥션 ㅜㅈㄹ이기..
     public List<ChatRoomBriefResponse> getChatRooms(){
 
         List<ChatBriefDto> rooms = chatDomainService.findUserChatRooms(SecurityUtils.getUser().getId());

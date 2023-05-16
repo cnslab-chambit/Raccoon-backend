@@ -172,6 +172,7 @@ project(':raccoon-infra'){
 	dependencies {
 		implementation project(path:':raccoon-common')
 		implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
 		implementation 'org.springframework.boot:spring-boot-starter-amqp'
 		implementation 'com.amazonaws:aws-java-sdk-s3:1.12.362'
 		implementation group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
@@ -179,6 +180,8 @@ project(':raccoon-infra'){
 		implementation 'com.fasterxml.jackson.core:jackson-databind'
 
 		testImplementation 'org.springframework.amqp:spring-rabbit-test'
+		testImplementation 'com.github.tomakehurst:wiremock:2.27.2'
+		testImplementation "org.springframework.cloud:spring-cloud-starter-contract-stub-runner"
 	}
 }
 
