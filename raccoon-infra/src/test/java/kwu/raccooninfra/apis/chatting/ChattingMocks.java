@@ -7,11 +7,11 @@ import org.springframework.http.MediaType;
 
 public class ChattingMocks {
     public static void setupMockChattingResponse(WireMockServer mockCacheApi){
-        mockCacheApi.stubFor(WireMock.get(WireMock.urlMatching("/offices/[1-9]"))
+        mockCacheApi.stubFor(WireMock.get(WireMock.urlMatching("/chat/users/[1-9]/rooms"))
                 .willReturn(WireMock.aResponse()
                         .withStatus(HttpStatus.OK)
                         .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
-                        .withBodyFile("payload/get-office-response.json")
+                        .withBodyFile("chat-room-response.json")
                 )
         );
     }
