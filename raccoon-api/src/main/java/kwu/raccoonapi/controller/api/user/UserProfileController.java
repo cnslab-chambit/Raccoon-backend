@@ -4,10 +4,7 @@ import kwu.raccoonapi.dto.ApiResponse;
 import kwu.raccoonapi.dto.user.request.UserAnimalUpdateRequest;
 import kwu.raccoonapi.dto.user.request.UserCoordinateUpdateRequest;
 import kwu.raccoonapi.dto.user.request.UserProfileUpdateRequest;
-import kwu.raccoonapi.dto.user.response.UserGenderResponse;
-import kwu.raccoonapi.dto.user.response.UserProfileResponse;
-import kwu.raccoonapi.dto.user.response.UserProfileDetailsResponse;
-import kwu.raccoonapi.dto.user.response.UserProfileUpdateResponse;
+import kwu.raccoonapi.dto.user.response.*;
 import kwu.raccoonapi.facade.user.UserProfileFacadeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,9 +38,9 @@ public class UserProfileController {
         return ApiResponse.ok(userProfileFacadeService.getProfile(userId));
     }
 
-    @GetMapping("/user/profile/all")
-    public ApiResponse<List<UserProfileResponse>> getAllProfiles(){
-        return ApiResponse.ok(userProfileFacadeService.getAllProfile());
+    @GetMapping("/user/profile/my")
+    public ApiResponse<MyProfileDetailsResponse> getProfile(){
+        return ApiResponse.ok(userProfileFacadeService.getMyProfile());
     }
 
     @GetMapping("/user/profile/gender")

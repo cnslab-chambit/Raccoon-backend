@@ -1,11 +1,12 @@
 package kwu.raccoonapi.facade.user.assembler;
 
-import kwu.raccoonapi.dto.user.response.UserProfileResponse;
+import kwu.raccoonapi.dto.user.response.MyProfileDetailsResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileDetailsResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileUpdateResponse;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
-import kwu.raccoondomain.persistence.domain.user.enums.Gender;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Collectors;
 
 @Component
 public class UserProfileAssembler {
@@ -16,23 +17,7 @@ public class UserProfileAssembler {
         return UserProfileDetailsResponse.of(profile,Integer.valueOf(dist.intValue()));
     }
 
-    public UserProfileResponse toAllUserProfileResponse(UserProfile userProfile){
-        return UserProfileResponse.of(
-                userProfile.getId(),
-                userProfile.getNickname(),
-                userProfile.getGender(),
-                userProfile.getAge(),
-                userProfile.getHeight(),
-                userProfile.getImages().get(0).getUrl(),
-                userProfile.getLocation(),
-                userProfile.getAnimalType(),
-                userProfile.getLongitude(),
-                userProfile.getLatitude(),
-                userProfile.getWantedAnimals(),
-                userProfile.getDrink(),
-                userProfile.getEdu(),
-                userProfile.getReligion()
-        );
+    public MyProfileDetailsResponse toMyProfileResponse(UserProfile myProfile) {
+        return MyProfileDetailsResponse.of(myProfile);
     }
-
 }

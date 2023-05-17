@@ -3,10 +3,7 @@ package kwu.raccoonapi.facade.user;
 import kwu.raccoonapi.dto.user.request.UserAnimalUpdateRequest;
 import kwu.raccoonapi.dto.user.request.UserCoordinateUpdateRequest;
 import kwu.raccoonapi.dto.user.request.UserProfileUpdateRequest;
-import kwu.raccoonapi.dto.user.response.UserGenderResponse;
-import kwu.raccoonapi.dto.user.response.UserProfileResponse;
-import kwu.raccoonapi.dto.user.response.UserProfileDetailsResponse;
-import kwu.raccoonapi.dto.user.response.UserProfileUpdateResponse;
+import kwu.raccoonapi.dto.user.response.*;
 import kwu.raccoonapi.facade.user.assembler.UserProfileAssembler;
 import kwu.raccoonapi.utils.SecurityUtils;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
@@ -25,6 +22,13 @@ import java.util.stream.Collectors;
 public class UserProfileFacadeService {
     private final UserProfileAssembler userProfileAssembler;
     private final UserProfileDomainService userProfileDomainService;
+
+    @Transactional(readOnly = true)
+    public MyProfileDetailsResponse getMyProfile() {
+        UserProfile myProfile = userProfileDomainService.getProfile(SecurityUtils.getUser().getId());
+        return userProfileAssembler.toMyProfileResponse(myProfile);
+    }
+
     @Transactional
     public UserProfileUpdateResponse updateProfile(UserProfileUpdateRequest request){
         Long userId = userProfileDomainService
@@ -53,17 +57,11 @@ public class UserProfileFacadeService {
         Double distance = userProfileDomainService.getDistance(otherUserProfile,userProfile);
         return userProfileAssembler.toUserProfileDetailsResponse(userProfile,distance);
     }
-    @Transactional(readOnly = true)
-    public List<UserProfileResponse> getAllProfile(){
-        List<UserProfile> allProfile = userProfileDomainService.findAllProfile();
-        return allProfile.stream()
-                .map(profile -> userProfileAssembler.toAllUserProfileResponse(profile))
-                .collect(Collectors.toList());
-    }
 
     @Transactional(readOnly = true)
     public UserGenderResponse getUserGender(){
         Gender gender=userProfileDomainService.getProfile(SecurityUtils.getUser().getId()).getGender();
         return UserGenderResponse.of(gender);
     }
+
 }
