@@ -1,5 +1,6 @@
 package kwu.raccoonapi.facade.user.assembler;
 
+import kwu.raccoonapi.dto.user.response.MyProfileDetailsResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileDetailsResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileUpdateResponse;
@@ -14,6 +15,10 @@ public class UserProfileAssembler {
     }
     public UserProfileDetailsResponse toUserProfileDetailsResponse(UserProfile profile,Double dist){
         return UserProfileDetailsResponse.of(profile,Integer.valueOf(dist.intValue()));
+    }
+
+    public MyProfileDetailsResponse toMyProfileResponse(UserProfile myProfile) {
+        return MyProfileDetailsResponse.of(myProfile);
     }
 
     public UserProfileResponse toAllUserProfileResponse(UserProfile userProfile){
@@ -34,5 +39,4 @@ public class UserProfileAssembler {
                 userProfile.getReligion()
         );
     }
-
 }
