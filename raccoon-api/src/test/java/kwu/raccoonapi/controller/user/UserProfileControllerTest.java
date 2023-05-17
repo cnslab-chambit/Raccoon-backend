@@ -5,7 +5,6 @@ import com.epages.restdocs.apispec.SimpleType;
 import kwu.raccoonapi.controller.api.user.UserProfileController;
 import kwu.raccoonapi.document.utils.ApiDocumentationTest;
 import kwu.raccoonapi.dto.user.response.UserProfileDetailsResponse;
-import kwu.raccoonapi.dto.user.response.UserProfileResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileUpdateResponse;
 import kwu.raccoonapi.facade.user.UserProfileFacadeService;
 import kwu.raccoondomain.persistence.domain.user.enums.AnimalType;

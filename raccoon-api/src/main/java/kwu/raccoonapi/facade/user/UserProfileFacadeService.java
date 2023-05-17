@@ -59,14 +59,6 @@ public class UserProfileFacadeService {
     }
 
     @Transactional(readOnly = true)
-    public List<UserProfileResponse> getAllProfile(){
-        List<UserProfile> allProfile = userProfileDomainService.findAllProfile();
-        return allProfile.stream()
-                .map(profile -> userProfileAssembler.toAllUserProfileResponse(profile))
-                .collect(Collectors.toList());
-    }
-
-    @Transactional(readOnly = true)
     public UserGenderResponse getUserGender(){
         Gender gender=userProfileDomainService.getProfile(SecurityUtils.getUser().getId()).getGender();
         return UserGenderResponse.of(gender);

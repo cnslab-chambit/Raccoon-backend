@@ -38,11 +38,6 @@ public class UserProfileController {
         return ApiResponse.ok(userProfileFacadeService.getProfile(userId));
     }
 
-    @GetMapping("/user/profile/all")
-    public ApiResponse<List<UserProfileResponse>> getAllProfiles(){
-        return ApiResponse.ok(userProfileFacadeService.getAllProfile());
-    }
-
     @GetMapping("/user/profile/my")
     public ApiResponse<MyProfileDetailsResponse> getProfile(){
         return ApiResponse.ok(userProfileFacadeService.getMyProfile());

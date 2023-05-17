@@ -2,7 +2,6 @@ package kwu.raccoonapi.facade.user;
 
 import kwu.raccoonapi.dto.user.request.UserLikeRequest;
 import kwu.raccoonapi.dto.user.response.UserLikeResponse;
-import kwu.raccoonapi.dto.user.response.UserProfileResponse;
 import kwu.raccoonapi.utils.SecurityUtils;
 import kwu.raccoondomain.persistence.domain.user.UserLike;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
