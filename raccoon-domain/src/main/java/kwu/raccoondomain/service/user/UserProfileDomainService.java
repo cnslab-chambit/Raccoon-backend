@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -55,9 +56,9 @@ public class UserProfileDomainService {
         UserProfile userProfile = user.getUserProfile();
         return userProfile;
     }
-    public List<UserProfile> findAllProfile(){
-        List<UserProfile> all = userProfileRepository.findAll();
-        return all;
+
+    public List<UserProfile> getProfiles(Collection<Long> userProfileIds){
+        return userProfileRepository.findAllById(userProfileIds);
     }
 
     public Double getDistance(UserProfile otherUserProfile, UserProfile userProfile){

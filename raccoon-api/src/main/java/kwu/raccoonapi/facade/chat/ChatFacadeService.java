@@ -5,6 +5,8 @@ import kwu.raccoonapi.dto.chat.response.ChatRoomBriefResponse;
 import kwu.raccoonapi.facade.chat.assembler.ChatAssembler;
 import kwu.raccoonapi.utils.SecurityUtils;
 import kwu.raccoondomain.dto.chat.ChatBriefDto;
+import kwu.raccoondomain.persistence.domain.user.User;
+import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import kwu.raccoondomain.service.chat.ChatDomainService;
 import kwu.raccoondomain.service.user.UserProfileDomainService;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,13 +24,15 @@ public class ChatFacadeService {
     private final ChatDomainService chatDomainService;
     private final UserProfileDomainService userProfileDomainService;
     private final ChatAssembler chatAssembler;
-    // #TODO 스트림으로 DB커넥션 ㅜㅈㄹ이기..
     public List<ChatRoomBriefResponse> getChatRooms(){
+        User sender = SecurityUtils.getUser();
+        List<ChatBriefDto> rooms = chatDomainService.findUserChatRooms(sender.getId());
+        Set<Long> oppositeUserIds = rooms.stream().map(ChatBriefDto::getOppositeUserId).collect(Collectors.toSet());
+        List<UserProfile> profiles = userProfileDomainService.getProfiles(oppositeUserIds);
 
-        List<ChatBriefDto> rooms = chatDomainService.findUserChatRooms(SecurityUtils.getUser().getId());
-
-        return rooms.stream().map(a-> ChatRoomBriefResponse.of(a,
-                userProfileDomainService.getProfile(a.getOppositeUserId()))).collect(Collectors.toList());
+        return rooms.stream().map(room->ChatRoomBriefResponse.of(room,
+                profiles.stream().filter(profile->profile.getId() == room.getOppositeUserId()).findAny().get()))
+                .collect(Collectors.toList());
     }
 
     public List<ChatMessageResponse> getChatMessages(Long roomId){

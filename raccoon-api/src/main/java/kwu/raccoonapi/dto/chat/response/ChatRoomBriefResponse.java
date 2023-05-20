@@ -14,8 +14,6 @@ public class ChatRoomBriefResponse {
     private ChatBriefDto chatBriefDto;
 
     private String oppositeNickname;
-    //private String lastMassage;
-    //private LocalDateTime lastTime;
     private String oppositeProfileImageUrl;
     private Location oppositeLocation;
 

@@ -66,7 +66,7 @@ public class StoryFacadeService {
         List<Story> stories = storyDomainService.paginate(cursorPageable);
         Map<Long, Long> storyLikeCountPerStory = storyLikeDomainService.getLikeCountPerStory(stories);
         return stories.stream()
-                .map(story -> storyAssembler.toAllStoryResponse(story,storyLikeCountPerStory.getOrDefault(story.getId(),0L)))
+                .map(story -> storyAssembler.toStoryThumbnailResponse(story,storyLikeCountPerStory.getOrDefault(story.getId(),0L)))
                 .collect(Collectors.toList());
     }
 
@@ -76,7 +76,7 @@ public class StoryFacadeService {
         List<Story> stories = storyDomainService.paginateMyStory(cursorPageable,userId);
         Map<Long, Long> storyLikeCountPerStory = storyLikeDomainService.getLikeCountPerStory(stories);
         return stories.stream()
-                .map(story -> storyAssembler.toAllStoryResponse(story,storyLikeCountPerStory.getOrDefault(story.getId(),0L)))
+                .map(story -> storyAssembler.toStoryThumbnailResponse(story,storyLikeCountPerStory.getOrDefault(story.getId(),0L)))
                 .collect(Collectors.toList());
     }
 

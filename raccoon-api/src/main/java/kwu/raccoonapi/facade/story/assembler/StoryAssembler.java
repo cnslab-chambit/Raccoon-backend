@@ -28,7 +28,7 @@ public class StoryAssembler {
         return StoryCreateResponse.of(story.getId());
     }
 
-    public StoryThumbnailResponse toAllStoryResponse(Story story,Long likeCount){
+    public StoryThumbnailResponse toStoryThumbnailResponse(Story story, Long likeCount){
         return StoryThumbnailResponse.of(
                 story.getId(),
                 story.getStoryImageUrl(),
