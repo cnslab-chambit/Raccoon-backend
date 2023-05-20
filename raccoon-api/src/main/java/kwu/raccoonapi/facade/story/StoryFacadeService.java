@@ -7,6 +7,7 @@ import kwu.raccoonapi.dto.story.response.StoryThumbnailResponse;
 import kwu.raccoonapi.dto.story.response.StoryCreateResponse;
 import kwu.raccoonapi.dto.story.response.StoryUpdateResponse;
 import kwu.raccoonapi.facade.story.assembler.StoryAssembler;
+import kwu.raccoonapi.facade.user.assembler.UserProfileAssembler;
 import kwu.raccoonapi.utils.SecurityUtils;
 import kwu.raccoondomain.persistence.domain.story.Story;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
@@ -32,6 +33,7 @@ public class StoryFacadeService {
     private final StoryAssembler storyAssembler;
     private final StoryLikeDomainService storyLikeDomainService;
     private final UserProfileDomainService userProfileDomainService;
+    private final UserProfileAssembler userProfileAssembler;
 
     @Transactional
     public StoryUpdateResponse updateStory(StoryUpdateRequest request){
@@ -56,7 +58,7 @@ public class StoryFacadeService {
     public StoryDetailResponse getStoryDetail(Long storyId){
         Story story = storyDomainService.getStoryById(storyId);
         UserProfile userProfile = userProfileDomainService.getProfile(SecurityUtils.getUser().getId());
-        Double distance = userProfileDomainService.getDistance(story.getUserProfile(), userProfile);
+        Double distance = userProfileDomainService.getDistance(userProfileAssembler.toCompareUserDto(story.getUserProfile().getId()));
         Boolean likeStatus = storyLikeDomainService.getLikeStatus(userProfile,story);
         return storyAssembler.toStoryDetailResponse(story,distance,likeStatus,story.getUserProfile());
     }

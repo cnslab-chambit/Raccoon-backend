@@ -1,7 +1,9 @@
 package kwu.raccoondomain.service.user;
 
+import kwu.raccooncommon.consts.CommonConsts;
 import kwu.raccooncommon.consts.ret.RetConsts;
 import kwu.raccooncommon.exception.RaccoonException;
+import kwu.raccoondomain.dto.user.CompareUserDto;
 import kwu.raccoondomain.dto.user.UserCoordinateUpdateDto;
 import kwu.raccoondomain.dto.user.UserProfileUpdateDto;
 import kwu.raccoondomain.persistence.domain.user.User;
@@ -61,13 +63,19 @@ public class UserProfileDomainService {
         return userProfileRepository.findAllById(userProfileIds);
     }
 
-    public Double getDistance(UserProfile otherUserProfile, UserProfile userProfile){
-        Double distance= null;
+    public Double getDistance(CompareUserDto dto){
+        Double distance;
+
+        List<UserProfile> profiles = getProfiles(List.of(dto.getMe(), dto.getOpp()));
+
+        UserProfile myProfile = profiles.get(CommonConsts.COMPARABLE_USER_COUNT.intValue()-2);
+        UserProfile oppositeProfile = profiles.get(CommonConsts.COMPARABLE_USER_COUNT.intValue()-1);
+
         try{
-            Double latitude1 =userProfile.getLatitude(); //위도(y)
-            Double longitude1= userProfile.getLongitude(); //경도(x)
-            Double latitude2= otherUserProfile.getLatitude();
-            Double longitude2=otherUserProfile.getLongitude();
+            Double latitude1 =myProfile.getLatitude(); //위도(y)
+            Double longitude1= myProfile.getLongitude(); //경도(x)
+            Double latitude2= oppositeProfile.getLatitude();
+            Double longitude2=oppositeProfile.getLongitude();
             Double dLatitude = Math.toRadians(latitude2 - latitude1);
             Double dLongitude = Math.toRadians(longitude2 - longitude1);
 

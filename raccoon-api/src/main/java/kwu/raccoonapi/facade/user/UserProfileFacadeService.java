@@ -13,9 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 
 @Service
 @RequiredArgsConstructor
@@ -52,9 +49,8 @@ public class UserProfileFacadeService {
 
     @Transactional(readOnly = true)
     public UserProfileDetailsResponse getProfile(Long userId){
-        UserProfile userProfile= userProfileDomainService.getProfile(userId);
-        UserProfile otherUserProfile = userProfileDomainService.getProfile(SecurityUtils.getUser().getId());
-        Double distance = userProfileDomainService.getDistance(otherUserProfile,userProfile);
+        UserProfile userProfile = userProfileDomainService.getProfile(userId);
+        Double distance = userProfileDomainService.getDistance(userProfileAssembler.toCompareUserDto(userId));
         return userProfileAssembler.toUserProfileDetailsResponse(userProfile,distance);
     }
 
