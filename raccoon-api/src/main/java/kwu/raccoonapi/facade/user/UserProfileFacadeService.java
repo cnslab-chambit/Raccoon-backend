@@ -21,7 +21,7 @@ public class UserProfileFacadeService {
     private final UserProfileDomainService userProfileDomainService;
 
     @Transactional(readOnly = true)
-    public MyProfileDetailsResponse getMyProfile() {
+    public UserProfileDetailsResponse getMyProfile() {
         UserProfile myProfile = userProfileDomainService.getProfile(SecurityUtils.getUser().getId());
         return userProfileAssembler.toMyProfileResponse(myProfile);
     }
