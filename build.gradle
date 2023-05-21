@@ -195,17 +195,17 @@ project(':raccoon-common'){
 	dependencies {
 	}
 }
-project(':raccoon-chatting'){
-	bootJar {
-		enabled = false
-	}
-	jar {
-		enabled = true
-	}
-	dependencies {
-		implementation project(path:':raccoon-event')
-	}
-}
+//project(':raccoon-chatting'){
+//	bootJar {
+//		enabled = false
+//	}
+//	jar {
+//		enabled = true
+//	}
+//	dependencies {
+//		implementation project(path:':raccoon-event')
+//	}
+//}
 project(':raccoon-event'){
 	bootJar {
 		enabled = false
