@@ -48,7 +48,12 @@ jobs:
         touch ./application-infra.properties
         echo "${{ secrets.PROPERTIES_INFRA }}" > ./application-infra.properties
       shell: bash
-  
+    - name: yml-event
+      run: |
+        cd raccoon-event/src/main/resources/
+        touch ./application-event.properties
+        echo "${{ secrets.PROPERTIES_EVENT }}" > ./application-event.properties
+      shell: bash
   
     ## gradle build
     - name: Build with Gradle
