@@ -1,10 +1,10 @@
-package kwu.raccoonpush;
+package raccoon.raccoonchatting;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RaccoonPushApplicationTests {
+class RaccoonChattingApplicationTests {
 
     @Test
     void contextLoads() {

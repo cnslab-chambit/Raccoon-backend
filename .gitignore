@@ -40,5 +40,7 @@ out/
 raccoon-api/src/main/resources/application-api.yml
 raccoon-domain/src/main/resources/application-domain.yml
 raccoon-infra/src/main/resources/application-infra.yml
+raccoon-chatting/src/main/resources/application-chatting.yml
+raccoon-event/src/main/resources/application-event.yml
 logs/
 gen/
