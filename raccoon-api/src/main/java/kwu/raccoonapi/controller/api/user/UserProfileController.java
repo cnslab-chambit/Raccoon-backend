@@ -39,7 +39,7 @@ public class UserProfileController {
     }
 
     @GetMapping("/user/profile/my")
-    public ApiResponse<MyProfileDetailsResponse> getProfile(){
+    public ApiResponse<UserProfileDetailsResponse> getProfile(){
         return ApiResponse.ok(userProfileFacadeService.getMyProfile());
     }
 

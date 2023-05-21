@@ -1,7 +1,6 @@
 package kwu.raccoonapi.facade.user.assembler;
 
 import kwu.raccoondomain.dto.user.CompareUserDto;
-import kwu.raccoonapi.dto.user.response.MyProfileDetailsResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileDetailsResponse;
 import kwu.raccoonapi.dto.user.response.UserProfileUpdateResponse;
 import kwu.raccoonapi.utils.SecurityUtils;
@@ -17,8 +16,8 @@ public class UserProfileAssembler {
         return UserProfileDetailsResponse.of(profile,Integer.valueOf(dist.intValue()));
     }
 
-    public MyProfileDetailsResponse toMyProfileResponse(UserProfile myProfile) {
-        return MyProfileDetailsResponse.of(myProfile);
+    public UserProfileDetailsResponse toMyProfileResponse(UserProfile myProfile) {
+        return UserProfileDetailsResponse.ofMy(myProfile);
     }
 
     public CompareUserDto toCompareUserDto(Long oppositeUserId){
