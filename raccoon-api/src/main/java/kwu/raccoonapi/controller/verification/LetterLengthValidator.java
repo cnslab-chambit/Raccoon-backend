@@ -7,7 +7,7 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = StoryValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Story {
+public @interface LetterLengthValidator {
     String message() default "Invalid story";
     Class<?>[] groups() default {};
     Class<?>[] payload() default {};

@@ -7,7 +7,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import ch.qos.logback.classic.Logger;
 
-public class StoryValidator implements ConstraintValidator<Story, String> {
+public class StoryValidator implements ConstraintValidator<LetterLengthValidator, String> {
 
     private int min;
     private int max;
@@ -15,7 +15,7 @@ public class StoryValidator implements ConstraintValidator<Story, String> {
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
     @Override
-    public void initialize(Story storyValidator) {
+    public void initialize(LetterLengthValidator storyValidator) {
         min=storyValidator.min();
         max=storyValidator.max();
         nullable=storyValidator.nullable();
