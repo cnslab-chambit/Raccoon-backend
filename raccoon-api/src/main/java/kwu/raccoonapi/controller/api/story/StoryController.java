@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,7 +30,7 @@ public class StoryController {
     }
 
     @PostMapping("/story")
-    public ApiResponse<StoryCreateResponse> createStory(@ModelAttribute StoryCreateRequest request){
+    public ApiResponse<StoryCreateResponse> createStory(@ModelAttribute @Valid StoryCreateRequest request){
         return ApiResponse.ok(storyFacadeService.create(request));
     }
     @DeleteMapping("/story/{storyId}")
