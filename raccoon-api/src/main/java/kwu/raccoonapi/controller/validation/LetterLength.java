@@ -1,4 +1,4 @@
-package kwu.raccoonapi.controller.verification;
+package kwu.raccoonapi.controller.validation;
 
 import javax.validation.Constraint;
 import java.lang.annotation.*;

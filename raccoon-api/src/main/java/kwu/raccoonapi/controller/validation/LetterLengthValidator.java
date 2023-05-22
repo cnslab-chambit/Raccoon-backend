@@ -1,7 +1,7 @@
-package kwu.raccoonapi.controller.verification;
+package kwu.raccoonapi.controller.validation;
 
+import kwu.raccooncommon.utils.RaccoonStringUtils;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -22,22 +22,12 @@ public class LetterLengthValidator implements ConstraintValidator<LetterLength, 
     }
 
     @Override
-    public boolean isValid(String story, ConstraintValidatorContext context) {
-        if (StringUtils.hasText(story)) {
-            if (story.length() < min || story.length() > max) {
-                addConstraintViolation(context,
-                        String.format("%d~%d자 이내로 입력해주세요.", min, max));
-                return false;
-            }
+    public boolean isValid(String value, ConstraintValidatorContext context) {
+        if(value == null){
+            return min == 0;
         }
-        else if(!nullable){
-            addConstraintViolation(
-                    context,
-                    "글을 작성해주세요."
-            );
-            return false;
-        }
-        return true;
+        int length = (int) RaccoonStringUtils.getLetterLength(value);
+        return length >= min && length <= max;
     }
 
     private void addConstraintViolation(ConstraintValidatorContext context, String msg) {
