@@ -10,6 +10,7 @@ import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import kwu.raccoondomain.persistence.repository.story.StoryQueryRepository;
 import kwu.raccoondomain.persistence.repository.story.StoryRepository;
 import kwu.raccoondomain.persistence.repository.utils.CursorPageable;
+import kwu.raccooninfra.service.rabbitmq.UserLikeService;
 import kwu.raccooninfra.service.s3.S3Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,7 @@ public class StoryDomainService {
     private final StoryRepository storyRepository;
     private final S3Service s3Service;
     private final StoryQueryRepository storyQueryRepository;
+    private final UserLikeService userLikeService;
     public Long updateStory(UserProfile userProfile, StoryUpdateDto storyUpdateDto){
         Story story=storyRepository.findById(storyUpdateDto.getStoryId()).orElseThrow(()->new RaccoonException(RetConsts.ERR602));
         if (story.getUserProfile()!=userProfile){

@@ -1,0 +1,82 @@
+plugins {
+    id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
+}
+
+group = 'kwu'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+apply plugin: 'com.ewerk.gradle.plugins.querydsl'
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    querydsl {
+        extendsFrom compileClasspath
+    }
+}
+
+ext {
+    queryDslVersion = "5.0.0"
+    axonVersion = "4.7.5"
+}
+
+dependencies {
+
+    implementation project(path:':raccoon-event')
+
+    implementation group:'org.axonframework',name: 'axon-spring-boot-starter',version: "$axonVersion"
+    implementation group:'org.axonframework',name: 'axon-configuration',version: "$axonVersion"
+
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'mysql:mysql-connector-java'
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    implementation 'org.apache.commons:commons-lang3:3.5'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
+
+
+    runtimeOnly 'com.h2database:h2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+}
+
+def querydslSrcDir = "$buildDir/generated/querydsl"
+
+querydsl {
+    jpa = true
+    querydslSourcesDir = querydslSrcDir
+}
+
+sourceSets {
+    main.java.srcDir querydslSrcDir
+}
+
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    querydsl.extendsFrom compileClasspath
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

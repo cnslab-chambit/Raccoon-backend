@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class UserLikePublisher {
     private final RabbitTemplate rabbitTemplate;
 
-    @Retryable(value = AmqpException.class, maxAttempts = 3)
+//    @Retryable(value = AmqpException.class, maxAttempts = 3)
     public void pubUserLikeMessage(Long senderId, Long receiverId){
         rabbitTemplate.convertAndSend(CommonConsts.USER_LIKE_EXCHANGE,
                 CommonConsts.USER_LIKE_ROUTING_KEY,new UserLikeMessage(senderId,receiverId),message -> {
@@ -24,12 +24,12 @@ public class UserLikePublisher {
             return message;
         });
     }
-    @Recover
-    public void recover(AmqpException ex, Long senderId, Long receiverId) {
-        log.error("user like message publishing 3회 실패, senderId: {}, receiverId: {}", senderId, receiverId);
-        // #TODO 여기서 domain 모듈에 접근해서 userLike 다시  살려주어ㅑ 하는데...
-        // #TODO 중간모듈 만들기 뭐하니깐 레디스를 중간모듈인셈 치고 레디스로 pub sub 하기
-        // #TODO DLX 처리하는 큐도 만들기
-        // #TODO HEADER에 DEAD LETTER
-    }
+//    @Recover
+//    public void recover(AmqpException ex, Long senderId, Long receiverId) {
+//        log.error("user like message publishing 3회 실패, senderId: {}, receiverId: {}", senderId, receiverId);
+//        // #TODO 여기서 domain 모듈에 접근해서 userLike 다시  살려주어ㅑ 하는데...
+//        // #TODO 중간모듈 만들기 뭐하니깐 레디스를 중간모듈인셈 치고 레디스로 pub sub 하기
+//        // #TODO DLX 처리하는 큐도 만들기
+//        // #TODO HEADER에 DEAD LETTER
+//    }
 }

@@ -2,6 +2,7 @@ package kwu.raccooninfra.config;
 
 import com.rabbitmq.client.AMQP;
 import kwu.raccooncommon.consts.CommonConsts;
+import org.axonframework.amqp.eventhandling.RoutingKeyResolver;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
@@ -42,4 +43,5 @@ public class RabbitConfiguration {
     MessageConverter messageConverter(){
         return new Jackson2JsonMessageConverter();
     }
+
 }

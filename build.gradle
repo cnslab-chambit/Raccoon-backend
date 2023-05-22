@@ -162,6 +162,9 @@ project(':raccoon-domain'){
 }
 
 project(':raccoon-infra'){
+	ext {
+		axonVersion = "4.7.5"
+	}
 	bootJar {
 		enabled = false
 	}
@@ -170,7 +173,14 @@ project(':raccoon-infra'){
 		enabled = true
 	}
 	dependencies {
+		implementation project(path:':raccoon-event')
 		implementation project(path:':raccoon-common')
+
+		implementation group:'org.axonframework',name: 'axon-spring-boot-starter',version: "$axonVersion"
+		implementation group:'org.axonframework',name: 'axon-configuration',version: "$axonVersion"
+		implementation group: 'org.axonframework.extensions.amqp', name: 'axon-amqp-spring-boot-starter', version: '4.7.1'
+		implementation group: 'org.axonframework', name: 'axon-amqp', version: '4.0-M2'
+
 		implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
 		implementation 'org.springframework.boot:spring-boot-starter-amqp'
@@ -193,17 +203,6 @@ project(':raccoon-common'){
 		enabled = true
 	}
 	dependencies {
-	}
-}
-project(':raccoon-chatting'){
-	bootJar {
-		enabled = false
-	}
-	jar {
-		enabled = true
-	}
-	dependencies {
-		implementation project(path:':raccoon-event')
 	}
 }
 project(':raccoon-event'){
