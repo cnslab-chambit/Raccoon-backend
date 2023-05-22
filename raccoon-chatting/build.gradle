@@ -20,11 +20,16 @@ configurations {
 
 ext {
     queryDslVersion = "5.0.0"
+    axonVersion = "4.7.5"
 }
 
 dependencies {
 
     implementation project(path:':raccoon-event')
+
+    implementation group:'org.axonframework',name: 'axon-spring-boot-starter',version: "$axonVersion"
+    implementation group:'org.axonframework',name: 'axon-configuration',version: "$axonVersion"
+
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
