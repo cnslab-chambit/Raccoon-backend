@@ -9,6 +9,7 @@ import kwu.raccoondomain.dto.user.UserProfileUpdateDto;
 import kwu.raccoondomain.persistence.domain.user.User;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import kwu.raccoondomain.persistence.domain.user.enums.AnimalType;
+import kwu.raccoondomain.persistence.repository.user.UserProfileCustomRepo;
 import kwu.raccoondomain.persistence.repository.user.UserProfileRepository;
 import kwu.raccoondomain.persistence.repository.user.UserRepository;
 import kwu.raccooninfra.service.s3.S3Service;
@@ -25,6 +26,7 @@ import java.util.List;
 public class UserProfileDomainService {
     private final UserRepository userRepository;
     private final UserProfileRepository userProfileRepository;
+    private final UserProfileCustomRepo userProfileCustomRepo;
     private final S3Service s3Service;
     private static final double EARTH_RADIUS=6371;
 
@@ -88,4 +90,9 @@ public class UserProfileDomainService {
         }
         return distance;
     }
+
+    public List<UserProfile> getRecommendations(UserProfile userProfile){
+        return userProfileCustomRepo.findRecommendation(userProfile);
+    }
+
 }

@@ -13,6 +13,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
@@ -60,4 +63,13 @@ public class UserProfileFacadeService {
         return UserGenderResponse.of(gender);
     }
 
+    @Transactional(readOnly = true)
+    public List<UserProfileDetailsResponse> getRecommendation(){
+        UserProfile userProfile = userProfileDomainService.getProfile(SecurityUtils.getUser().getId());
+        List<UserProfile> recommendations = userProfileDomainService.getRecommendations(userProfile);
+        return recommendations.stream().map(recommendation ->{
+            Double distance = userProfileDomainService.getDistance(userProfileAssembler.toCompareUserDto(recommendation.getId()));
+            return userProfileAssembler.toUserProfileDetailsResponse(recommendation,distance);
+        }).collect(Collectors.toList());
+    }
 }

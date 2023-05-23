@@ -172,6 +172,9 @@ project(':raccoon-infra'){
 	jar {
 		enabled = true
 	}
+//	test{
+//		useJUnitPlatform()
+//	}
 	dependencies {
 		implementation project(path:':raccoon-event')
 		implementation project(path:':raccoon-common')
