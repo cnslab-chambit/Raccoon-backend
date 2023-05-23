@@ -20,16 +20,16 @@ public class UserProfileDetailsResponse {
     private Long age;
     private Long height;
     private String job;
-    private Location location;
+    private String location;
     private String selfDescription;
     private Boolean smokingStatus;
     private Mbti mbti;
-    private AnimalType animalType;
+    private String animalType;
     private Integer dist; // 상대방 프로필 조회 시 거리 정보 추가
-    private Set<AnimalType> wantedAnimals;
+    private Set<String> wantedAnimals;
     private String drink;
     private String edu;
-    private Religion religion;
+    private String religion;
 
     public static UserProfileDetailsResponse of(UserProfile userProfile, Integer dist) {
         UserProfileDetailsResponse userProfileDetailsResponse = new UserProfileDetailsResponse();
@@ -43,16 +43,18 @@ public class UserProfileDetailsResponse {
         userProfileDetailsResponse.age = userProfile.getAge();
         userProfileDetailsResponse.height = userProfile.getHeight();
         userProfileDetailsResponse.job = userProfile.getJob();
-        userProfileDetailsResponse.location = userProfile.getLocation();
+        userProfileDetailsResponse.location = userProfile.getLocation().getState();
         userProfileDetailsResponse.selfDescription = userProfile.getSelfDescription();
         userProfileDetailsResponse.smokingStatus = userProfile.getSmokingStatus();
         userProfileDetailsResponse.mbti = userProfile.getMbti();
-        userProfileDetailsResponse.animalType = userProfile.getAnimalType();
+        userProfileDetailsResponse.animalType = userProfile.getAnimalType().getKor();
         userProfileDetailsResponse.dist = dist; // 거리 정보 추가
-        userProfileDetailsResponse.wantedAnimals = userProfile.getWantedAnimals();
+        userProfileDetailsResponse.wantedAnimals = userProfile.getWantedAnimals().stream().map(
+                s -> s.getKor()
+        ).collect(Collectors.toSet());
         userProfileDetailsResponse.drink = userProfile.getDrink();
         userProfileDetailsResponse.edu = userProfile.getEdu();
-        userProfileDetailsResponse.religion = userProfile.getReligion();
+        userProfileDetailsResponse.religion = userProfile.getReligion().getKor();
 
         return userProfileDetailsResponse;
     }
@@ -69,15 +71,17 @@ public class UserProfileDetailsResponse {
         userProfileDetailsResponse.age = userProfile.getAge();
         userProfileDetailsResponse.height = userProfile.getHeight();
         userProfileDetailsResponse.job = userProfile.getJob();
-        userProfileDetailsResponse.location = userProfile.getLocation();
+        userProfileDetailsResponse.location = userProfile.getLocation().getState();
         userProfileDetailsResponse.selfDescription = userProfile.getSelfDescription();
         userProfileDetailsResponse.smokingStatus = userProfile.getSmokingStatus();
         userProfileDetailsResponse.mbti = userProfile.getMbti();
-        userProfileDetailsResponse.animalType = userProfile.getAnimalType();
-        userProfileDetailsResponse.wantedAnimals = userProfile.getWantedAnimals();
+        userProfileDetailsResponse.animalType = userProfile.getAnimalType().getKor();
+        userProfileDetailsResponse.wantedAnimals = userProfile.getWantedAnimals().stream().map(
+                s->s.getKor()
+        ).collect(Collectors.toSet());
         userProfileDetailsResponse.drink = userProfile.getDrink();
         userProfileDetailsResponse.edu = userProfile.getEdu();
-        userProfileDetailsResponse.religion = userProfile.getReligion();
+        userProfileDetailsResponse.religion = userProfile.getReligion().getKor();
 
         return userProfileDetailsResponse;
     }
