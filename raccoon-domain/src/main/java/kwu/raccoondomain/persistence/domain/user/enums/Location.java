@@ -1,13 +1,16 @@
 package kwu.raccoondomain.persistence.domain.user.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Arrays;
 @Getter
 @RequiredArgsConstructor
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum Location {
     YONGSAN("용산구"),
     JONGNO("종로구"),
@@ -34,6 +37,7 @@ public enum Location {
     GANGNAM("강남구"),
     SONGPA("송파구"),
     GANDONG("강동구");
+    @JsonValue
     private final String state;
     @Override
     public String toString() {

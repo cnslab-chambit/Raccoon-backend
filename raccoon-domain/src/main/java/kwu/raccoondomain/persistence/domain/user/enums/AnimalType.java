@@ -1,5 +1,7 @@
 package kwu.raccoondomain.persistence.domain.user.enums;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -7,6 +9,7 @@ import java.util.Arrays;
 
 @Getter
 @RequiredArgsConstructor
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum AnimalType {
     //공통
     DOG("강아지상"),
@@ -20,6 +23,7 @@ public enum AnimalType {
     //남자
     DINOSAUR("공룡상"),
     BEAR("곰상");
+    @JsonValue
     private final String kor;
     @Override
     public String toString() {
