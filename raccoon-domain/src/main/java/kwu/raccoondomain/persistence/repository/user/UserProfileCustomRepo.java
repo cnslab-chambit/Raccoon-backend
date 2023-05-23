@@ -19,6 +19,7 @@ public class UserProfileCustomRepo {
 
     public List<UserProfile> findRecommendation(UserProfile request){
         return queryFactory.selectFrom(userProfile)
+                .where(userProfile.ne(request))
                 .orderBy(Expressions.stringTemplate("ST_Distance_Sphere({0},{1})",
                         Expressions.stringTemplate("POINT({0},{1})",
                                 request.getLongitude(),
