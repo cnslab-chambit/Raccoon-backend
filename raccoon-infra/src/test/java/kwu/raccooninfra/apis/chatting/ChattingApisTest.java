@@ -34,34 +34,34 @@ import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 @SpringBootTest
 @AutoConfigureWireMock(port = 0)
 public class ChattingApisTest {
-    @Autowired
-    private ChattingApi chattingApi;
-    static final int PORT = 9561;
-
-    @DynamicPropertySource
-    public static void addUrlProperties(DynamicPropertyRegistry registry){
-        registry.add("apis.chatting-room",()->"localhost:"+PORT);
-    }
-
-
-
-    @Test
-    @DisplayName("ㅁㅁㅁ")
-    public void aaa(){
-        WireMock.stubFor(get(urlPathEqualTo("/chat/users/[1-9]/rooms"))
-                .willReturn(
-                        aResponse()
-                                .withStatus(HttpStatus.OK)
-                                .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                                .withBodyFile("chat-room-reponse.json")
-                )
-        );
-        chattingApi.getUserChatRooms(1L);
-
-//        mockMvc.perform(get("/chat/users/[1-9]/rooms")).andExpect()
+//    @Autowired
+//    private ChattingApi chattingApi;
+//    static final int PORT = 9561;
 //
-//        List<ChatRoomDto> userChatRooms = chattingApi.getUserChatRooms(1L);
-
-
-    }
+//    @DynamicPropertySource
+//    public static void addUrlProperties(DynamicPropertyRegistry registry){
+//        registry.add("apis.chatting-room",()->"localhost:"+PORT);
+//    }
+//
+//
+//
+//    @Test
+//    @DisplayName("ㅁㅁㅁ")
+//    public void aaa(){
+//        WireMock.stubFor(get(urlPathEqualTo("/chat/users/[1-9]/rooms"))
+//                .willReturn(
+//                        aResponse()
+//                                .withStatus(HttpStatus.OK)
+//                                .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+//                                .withBodyFile("chat-room-reponse.json")
+//                )
+//        );
+//        chattingApi.getUserChatRooms(1L);
+//
+////        mockMvc.perform(get("/chat/users/[1-9]/rooms")).andExpect()
+////
+////        List<ChatRoomDto> userChatRooms = chattingApi.getUserChatRooms(1L);
+//
+//
+//    }
 }

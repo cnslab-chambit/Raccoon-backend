@@ -12,9 +12,9 @@ import java.util.List;
 @FeignClient(name = "raccoon-chatting",url = "${raccoon.chatting}",path = "/chat")
 public interface ChattingApi {
     @GetMapping("/users/{userId}/rooms")
-    List<ChatRoomDto> getUserChatRooms(@PathVariable Long userId);
+    List<ChatRoomDto> getUserChatRooms(@PathVariable(value = "userId") Long userId);
 
     @GetMapping("/users/{userId}/rooms/{roomId}/chats")
-    public List<ChatDto> getUserChatMessages(@PathVariable Long roomId,
-                                             @PathVariable Long userId);
+    List<ChatDto> getUserChatMessages(@PathVariable(value = "userId") Long roomId,
+                                             @PathVariable(value = "roomId") Long userId);
 }
