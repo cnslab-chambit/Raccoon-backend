@@ -15,6 +15,6 @@ public interface ChattingApi {
     List<ChatRoomDto> getUserChatRooms(@PathVariable(value = "userId") Long userId);
 
     @GetMapping("/users/{userId}/rooms/{roomId}/chats")
-    List<ChatDto> getUserChatMessages(@PathVariable(value = "userId") Long roomId,
-                                             @PathVariable(value = "roomId") Long userId);
+    List<ChatDto> getUserChatMessages(@PathVariable(value = "roomId") Long roomId,
+                                             @PathVariable(value = "userId") Long userId);
 }
