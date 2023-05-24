@@ -1,13 +1,17 @@
 package kwu.raccoondomain.persistence.repository.story;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.PathBuilder;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import kwu.raccoondomain.persistence.domain.story.QStory;
 import kwu.raccoondomain.persistence.domain.story.Story;
+import kwu.raccoondomain.persistence.repository.utils.CursorPageable;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.type.OrderedSetType;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
@@ -21,7 +25,30 @@ import static kwu.raccoondomain.persistence.domain.story.QStory.story;
 @RequiredArgsConstructor
 public class StoryQueryRepository {
     private final JPAQueryFactory queryFactory;
-    public List<Story> paginate(Pageable pageable){
+    public List<Story> paginate(CursorPageable<Long> cursorPageable){
+        List<Sort.Order> orders = new ArrayList<>();
+        BooleanBuilder builder = new BooleanBuilder();
+
+        switch (cursorPageable.getSortBy()){
+            case "latest":
+                orders.add(Sort.Order.desc("id"));
+                if(cursorPageable.getCursor()!=null){
+                    builder.and(story.id.lt(cursorPageable.getCursor()));
+                }
+            case "likeCount":
+                orders.add(Sort.Order.desc("likeCount"));
+                orders.add(Sort.Order.asc("id"));
+                if(cursorPageable.getLastCntValue()!=null&&cursorPageable.getCursor()!=null){
+                    builder.and(QStory.story.likeCount.eq(cursorPageable.getLastCntValue()).and(
+                            QStory.story.id.gt(cursorPageable.getLastCntValue())
+                    ));
+                    builder.or(QStory.story.likeCount.lt(cursorPageable.getLastCntValue()));
+                }
+            default:
+        }
+
+        Pageable pageable = PageRequest.of(cursorPageable.getCursor().intValue(),cursorPageable.getLimit().intValue(),Sort.by(orders));
+
         return queryFactory.select(story)
                 .from(story)
                 .orderBy(getOrderSpecifier(pageable.getSort()).stream().toArray(OrderSpecifier[]::new))
@@ -29,6 +56,7 @@ public class StoryQueryRepository {
                 .limit(pageable.getPageSize())
                 .fetch();
     }
+
 
     public List<Story> paginateMyStory(Pageable pageable, Long userId) {
         return queryFactory.select(story)

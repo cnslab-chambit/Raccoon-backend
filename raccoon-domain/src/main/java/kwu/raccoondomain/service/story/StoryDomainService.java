@@ -1,10 +1,12 @@
 package kwu.raccoondomain.service.story;
 
+import com.querydsl.core.BooleanBuilder;
 import io.lettuce.core.GeoArgs;
 import kwu.raccooncommon.consts.ret.RetConsts;
 import kwu.raccooncommon.exception.RaccoonException;
 import kwu.raccoondomain.dto.story.StoryCreateDto;
 import kwu.raccoondomain.dto.story.StoryUpdateDto;
+import kwu.raccoondomain.persistence.domain.story.QStory;
 import kwu.raccoondomain.persistence.domain.story.Story;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import kwu.raccoondomain.persistence.repository.story.StoryQueryRepository;
@@ -19,6 +21,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -69,9 +72,7 @@ public class StoryDomainService {
     }
 
     public List<Story> paginate(CursorPageable<Long> cursorPageable){
-        Sort sort = Sort.by(getOrder(cursorPageable.getOrder()), cursorPageable.getSortBy());
-        Pageable pageable = PageRequest.of(cursorPageable.getCursor().intValue(),cursorPageable.getLimit().intValue(),sort);
-        return storyQueryRepository.paginate(pageable);
+        return storyQueryRepository.paginate(cursorPageable);
     }
 
     public List<Story> paginateMyStory(CursorPageable<Long> cursorPageable, Long userId) {

@@ -49,9 +49,10 @@ public class StoryController {
         @RequestParam Long cursor,
         @RequestParam(required = false,defaultValue = CommonConsts.PAGE_DEFAULT) Long limit,
         @RequestParam(required = false,defaultValue = "id") String sortBy,
-        @RequestParam(required = false,defaultValue = "ASC") String order
+        @RequestParam(required = false,defaultValue = "ASC") String order,
+        @RequestParam(required = false,defaultValue = "0") Long lastCntValue
         ){
-        return ApiResponse.ok(storyFacadeService.paginate(CursorPageable.of(cursor,limit,sortBy,order)));
+        return ApiResponse.ok(storyFacadeService.paginate(CursorPageable.of(cursor,limit,sortBy,order,lastCntValue)));
     }
 
     // 내 게시글 최신 순으로 조회
@@ -64,3 +65,6 @@ public class StoryController {
         return ApiResponse.ok(storyFacadeService.paginateMyStory(CursorPageable.of(cursor,limit,sortBy,order)));
     }
 }
+
+
+

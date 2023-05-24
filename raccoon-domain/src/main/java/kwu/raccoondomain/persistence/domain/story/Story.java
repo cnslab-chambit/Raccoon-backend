@@ -7,6 +7,7 @@ import kwu.raccoondomain.persistence.domain.story.like.Like;
 import kwu.raccoondomain.persistence.domain.story.like.Likes;
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import lombok.*;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -57,13 +58,13 @@ public class Story {
     public void like(UserProfile userProfile){
         Like like = new Like(this,userProfile);
         likes.add(like);
-        likeCount -= 1;
+        likeCount += 1;
     }
 
     public void unlike(UserProfile userProfile){
         Like like = new Like(this,userProfile);
         likes.remove(like);
-        likeCount += 1;
+        likeCount -= 1;
     }
 
 }
