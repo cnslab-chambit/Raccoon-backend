@@ -5,10 +5,12 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 
+import java.util.Objects;
+
 import static kwu.raccooncommon.consts.CommonConsts.AUTH_HEADER;
 
 @FeignClient(name = "kakao-profile",url = "https://kapi.kakao.com")
 public interface KakaoProfileApi {
     @GetMapping(value = "/v2/user/me", consumes = "application/x-www-form-urlencoded;charset=utf-8")
-    KakaoProfileResponse getKakaoUser(@RequestHeader(name = AUTH_HEADER) String accessToken);
+    String getKakaoUser(@RequestHeader(name = AUTH_HEADER) String accessToken);
 }
