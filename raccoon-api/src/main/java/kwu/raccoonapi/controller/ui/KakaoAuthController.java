@@ -13,19 +13,13 @@ import java.io.IOException;
 
 @Controller
 public class KakaoAuthController {
-
     private String kakaoUrl;
-
     @Value("${kakao.client-id}")
     private String clientId;
-
     @Value("${kakao.redirect-url}")
     private String redirectUrl;
-
     private String responseType = "code";
-
     private String authRequestUrl;
-
     @PostConstruct
     private void initRequestUrl(){
         kakaoUrl = "https://kauth.kakao.com";
@@ -37,7 +31,6 @@ public class KakaoAuthController {
                 .build();
         authRequestUrl = uri.toString();
     }
-
     @GetMapping("/oauth/kakao")
     public void redirect(HttpServletResponse response) throws IOException{
         response.sendRedirect(authRequestUrl);

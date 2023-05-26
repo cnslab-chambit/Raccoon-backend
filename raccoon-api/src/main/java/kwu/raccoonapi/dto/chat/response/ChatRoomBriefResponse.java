@@ -10,13 +10,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChatRoomBriefResponse {
-
     private ChatBriefDto chatBriefDto;
-
     private String oppositeNickname;
     private String oppositeProfileImageUrl;
     private Location oppositeLocation;
-
     public static ChatRoomBriefResponse of(ChatBriefDto dto, UserProfile userProfile){
         ChatRoomBriefResponse res = new ChatRoomBriefResponse();
         res.chatBriefDto = dto;

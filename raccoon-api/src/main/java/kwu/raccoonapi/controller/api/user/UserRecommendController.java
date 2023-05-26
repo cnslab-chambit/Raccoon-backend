@@ -15,7 +15,6 @@ import java.util.List;
 @Slf4j
 public class UserRecommendController {
     private final UserProfileFacadeService userProfileFacadeService;
-
     @GetMapping("/user/recommend")
     public ApiResponse<List<UserProfileDetailsResponse>> getRecommendation(){
         return ApiResponse.ok(userProfileFacadeService.getRecommendation());

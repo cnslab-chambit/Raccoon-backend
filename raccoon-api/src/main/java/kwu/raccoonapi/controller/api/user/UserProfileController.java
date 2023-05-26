@@ -47,5 +47,4 @@ public class UserProfileController {
     public ApiResponse<UserGenderResponse> getUserGender(){
         return ApiResponse.ok(userProfileFacadeService.getUserGender());
     }
-
 }

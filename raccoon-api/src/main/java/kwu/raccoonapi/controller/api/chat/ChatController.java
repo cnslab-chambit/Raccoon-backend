@@ -17,7 +17,6 @@ import java.util.List;
 @Slf4j
 public class ChatController {
     private final ChatFacadeService chatFacadeService;
-
     @GetMapping("/user/rooms")
     public ApiResponse<List<ChatRoomBriefResponse>> getUserChatRooms(){
         return ApiResponse.ok(chatFacadeService.getChatRooms());

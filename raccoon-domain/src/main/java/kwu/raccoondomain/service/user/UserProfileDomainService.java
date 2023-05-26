@@ -66,17 +66,17 @@ public class UserProfileDomainService {
     }
 
     public Double getDistance(CompareUserDto dto){
-        System.out.println(dto.getMe()+"asd"+dto.getOpp());
-        if(dto.getMe()==dto.getOpp()) return 0.0;
         Double distance;
         List<UserProfile> profiles = getProfiles(List.of(dto.getMe(), dto.getOpp()));
-        System.out.println(profiles.size()+"사이즈에요");
+
+        if(profiles.size()<=1) return 0.0;
+
         UserProfile myProfile = profiles.get(CommonConsts.COMPARABLE_USER_COUNT.intValue()-2);
         UserProfile oppositeProfile = profiles.get(CommonConsts.COMPARABLE_USER_COUNT.intValue()-1);
 
         try{
-            Double latitude1 =myProfile.getLatitude(); //위도(y)
-            Double longitude1= myProfile.getLongitude(); //경도(x)
+            Double latitude1 =myProfile.getLatitude();
+            Double longitude1= myProfile.getLongitude();
             Double latitude2= oppositeProfile.getLatitude();
             Double longitude2=oppositeProfile.getLongitude();
             Double dLatitude = Math.toRadians(latitude2 - latitude1);
@@ -85,10 +85,10 @@ public class UserProfileDomainService {
             Double a = Math.sin(dLatitude/2)* Math.sin(dLatitude/2)+ Math.cos(Math.toRadians(latitude1))* Math.cos(Math.toRadians(latitude2))* Math.sin(dLongitude/2)* Math.sin(dLongitude/2);
             Double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
             distance =EARTH_RADIUS* c * 1000;
-
         }catch (Exception e) {
             throw new RaccoonException(RetConsts.ERR603);
         }
+
         return distance;
     }
 

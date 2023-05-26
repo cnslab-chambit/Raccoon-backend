@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Slf4j
 public class StoryLikeController {
-
     private final StoryLikeFacadeService storyLikeFacadeService;
-
     @PatchMapping("/story/like/{storyId}")
     public ApiResponse<StoryLikeToggleResponse> toggleStoryLike(@PathVariable Long storyId){
         return ApiResponse.ok(storyLikeFacadeService.toggleStoryLike(storyId));

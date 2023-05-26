@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 public class StoryLikeToggleResponse {
     private Boolean likeStatus;
     private Long likeCount;
-
     public static StoryLikeToggleResponse of(Long likeCount, Boolean likeStatus){
         StoryLikeToggleResponse storyLikeToggleResponse = new StoryLikeToggleResponse();
         storyLikeToggleResponse.likeCount= likeCount;

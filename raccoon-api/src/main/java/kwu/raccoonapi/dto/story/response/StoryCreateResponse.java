@@ -8,14 +8,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class StoryCreateResponse {
-
     private Long storyId;
-
     public static StoryCreateResponse of(Long storyId){
         StoryCreateResponse response = new StoryCreateResponse();
         response.storyId = storyId;
-
         return response;
     }
-
 }

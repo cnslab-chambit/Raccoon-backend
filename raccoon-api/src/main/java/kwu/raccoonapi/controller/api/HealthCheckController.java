@@ -11,7 +11,6 @@ public class HealthCheckController {
     public String check(){
         return "pong";
     }
-
     @GetMapping("/ping/user")
     public String userCheck(){
         UserPrincipal principal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

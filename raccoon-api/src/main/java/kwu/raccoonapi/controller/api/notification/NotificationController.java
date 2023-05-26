@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class NotificationController {
 
     private final NotificationFacadeService notificationFacadeService;
-
     @GetMapping("/notifications/unread")
     public ApiResponse<Long> getUnreadNotifications(){
         return ApiResponse.ok(notificationFacadeService.getUnreadNotifications());

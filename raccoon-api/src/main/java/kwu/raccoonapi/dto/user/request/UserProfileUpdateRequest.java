@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 @Data
 public class UserProfileUpdateRequest {
-    //TODO validation
     private List<MultipartFile> profileImages;
     private String nickname;
     private Long age;

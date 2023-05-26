@@ -11,7 +11,6 @@ public class StoryUpdateRequest {
     @LetterLength(min=10,max=200,nullable = false)
     private String contents;
     private MultipartFile storyImage;
-
     public StoryUpdateDto toStoryUpdateDto(){
         return StoryUpdateDto.of(
                 storyId,

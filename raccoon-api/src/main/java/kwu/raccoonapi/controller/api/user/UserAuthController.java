@@ -23,7 +23,6 @@ public class UserAuthController {
     public ApiResponse<?> signUpWithKakaoLocal(@RequestParam String code){
         return ApiResponse.ok(userFacadeService.signupWithOauth(code,VendorType.KAKAO));
     }
-
     @GetMapping("/login/oauth2/schema/kakao")
     public void signUpClientSchema(@RequestParam String code, HttpServletResponse response) throws IOException {
         response.sendRedirect("com.raccoon.sign://success?code="+code);
