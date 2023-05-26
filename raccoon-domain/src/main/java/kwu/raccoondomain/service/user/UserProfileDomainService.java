@@ -66,6 +66,7 @@ public class UserProfileDomainService {
     }
 
     public Double getDistance(CompareUserDto dto){
+        System.out.println(dto.getMe()+"asd"+dto.getOpp());
         if(dto.getMe()==dto.getOpp()) return 0.0;
         Double distance;
         List<UserProfile> profiles = getProfiles(List.of(dto.getMe(), dto.getOpp()));
