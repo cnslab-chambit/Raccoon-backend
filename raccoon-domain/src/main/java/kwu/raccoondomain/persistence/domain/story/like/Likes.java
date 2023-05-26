@@ -31,14 +31,14 @@ public class Likes {
 
     public void add(Like like){
         if(likes.contains(like)){
-            throw new RuntimeException("ads");
+            throw new RuntimeException("");
         }
         likes.add(like);
     }
 
     public void remove(Like like){
         if(!likes.contains(like)){
-            throw new RuntimeException("ㅁㅇㄴ");
+            throw new RuntimeException("");
         }
         likes.remove(like);
     }

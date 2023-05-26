@@ -6,6 +6,7 @@ import kwu.raccoondomain.persistence.domain.story.Story;
 import kwu.raccoondomain.persistence.domain.story.like.Like;
 
 import kwu.raccoondomain.persistence.domain.user.UserProfile;
+import kwu.raccoondomain.persistence.repository.utils.OrderByNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public class StoryLikeCustomRepositoryImpl implements StoryLikeCustomRepository 
                 .innerJoin(like.story,story)
                 .where(story.in(stories))
                 .groupBy(story.id)
+                .orderBy(OrderByNull.DEFAULT)
                 .transform(GroupBy.groupBy(story.id).as(like.count()));
     }
 }

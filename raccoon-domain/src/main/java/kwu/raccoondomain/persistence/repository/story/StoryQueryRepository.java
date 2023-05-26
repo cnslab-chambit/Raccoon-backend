@@ -4,13 +4,11 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.PathBuilder;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import kwu.raccoondomain.persistence.domain.story.QStory;
 import kwu.raccoondomain.persistence.domain.story.Story;
 import kwu.raccoondomain.persistence.repository.utils.CursorPageable;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.type.OrderedSetType;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -20,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static kwu.raccoondomain.persistence.domain.story.QStory.story;
+import static kwu.raccoondomain.persistence.domain.user.QUserProfile.userProfile;
 
 @Repository
 @RequiredArgsConstructor
@@ -51,6 +50,8 @@ public class StoryQueryRepository {
 
         return queryFactory.select(story)
                 .from(story)
+                .innerJoin(story.userProfile,userProfile)
+                .fetchJoin()
                 .orderBy(getOrderSpecifier(pageable.getSort()).stream().toArray(OrderSpecifier[]::new))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -61,6 +62,8 @@ public class StoryQueryRepository {
     public List<Story> paginateMyStory(Pageable pageable, Long userId) {
         return queryFactory.select(story)
                 .from(story)
+                .innerJoin(story.userProfile,userProfile)
+                .fetchJoin()
                 .where(story.userProfile.id.eq(userId))
                 .orderBy(getOrderSpecifier(pageable.getSort()).stream().toArray(OrderSpecifier[]::new))
                 .offset(pageable.getOffset())
