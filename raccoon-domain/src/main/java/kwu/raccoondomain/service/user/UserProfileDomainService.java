@@ -69,7 +69,7 @@ public class UserProfileDomainService {
         if(dto.getMe()==dto.getOpp()) return 0.0;
         Double distance;
         List<UserProfile> profiles = getProfiles(List.of(dto.getMe(), dto.getOpp()));
-
+        System.out.println(profiles.size()+"사이즈에요");
         UserProfile myProfile = profiles.get(CommonConsts.COMPARABLE_USER_COUNT.intValue()-2);
         UserProfile oppositeProfile = profiles.get(CommonConsts.COMPARABLE_USER_COUNT.intValue()-1);
 
