@@ -29,7 +29,10 @@ public class KakaoInfraService {
     private String clientSecret;
 
     public KakaoProfileResponse getKakaoAccount(String accessToken){
-        return kakaoProfileApi.getKakaoUser(BEARER.concat(" "+accessToken));
+        KakaoProfileResponse kakaoUser = kakaoProfileApi.getKakaoUser(BEARER.concat(" " + accessToken));
+        System.out.println(kakaoUser+"하하하");
+        System.out.println(kakaoUser.getGender()+"성별");
+        return kakaoUser;
     }
 
     public String getAccessToken(String code){
