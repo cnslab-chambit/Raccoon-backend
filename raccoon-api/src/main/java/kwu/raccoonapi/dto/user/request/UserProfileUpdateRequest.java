@@ -1,6 +1,7 @@
 package kwu.raccoonapi.dto.user.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import kwu.raccoonapi.controller.validation.NoSpecialCharacters;
 import kwu.raccoondomain.dto.user.UserProfileUpdateDto;
 import kwu.raccoondomain.persistence.domain.user.enums.*;
 import lombok.Data;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 @Data
 public class UserProfileUpdateRequest {
     private List<MultipartFile> profileImages;
+    @NoSpecialCharacters
     private String nickname;
     private Long age;
     private Long height;
