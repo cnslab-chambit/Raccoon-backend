@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,7 +20,7 @@ public class UserProfileController {
     private final UserProfileFacadeService userProfileFacadeService;
 
     @PatchMapping("/user/profile")
-    public ApiResponse<UserProfileUpdateResponse> updateProfile(@ModelAttribute UserProfileUpdateRequest request){
+    public ApiResponse<UserProfileUpdateResponse> updateProfile(@ModelAttribute @Valid UserProfileUpdateRequest request){
         return ApiResponse.ok(userProfileFacadeService.updateProfile(request));
     }
 
