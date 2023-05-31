@@ -11,14 +11,6 @@ public class UserAnimalUpdateRequest {
     private AnimalType animalType;
 
     public void setAnimalType(@JsonProperty("animalType") String animalType){
-        this.animalType = fromAnimal(animalType);
+        this.animalType = AnimalType.fromString(animalType);
     }
-
-    public static AnimalType fromAnimal(String animal){
-        return Arrays.stream(AnimalType.values())
-                .filter(t -> t.getKor().equals(animal))
-                .findAny()
-                .orElseThrow(() -> new IllegalArgumentException(animal  + " is illegal argument."));
-    }
-
 }

@@ -10,5 +10,5 @@ public class RaccoonAuthException extends AuthenticationException {
         super(retConsts.getDescription());
         this.retConsts = retConsts;
     }
-    private RetConsts retConsts;
+    private final RetConsts retConsts;
 }

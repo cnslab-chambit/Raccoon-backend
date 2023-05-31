@@ -24,7 +24,12 @@ public class UserDomainService {
     private final KakaoInfraService kakaoInfraService;
     private final UserRepository userRepository;
     private final RedisTemplate<String,Object> redisTemplate;
-
+    /*
+       TODO-review P5
+       다음과 같이 Enum을 활용하는 곳에서는 전략 패턴을 활용해도 좋습니다.
+       아래 kakaoInfraService를 못 보고 Enum 안에 만들었는데, 의존성이 있는 경우 클래스로 전략패턴을 구사하시는 게 더 좋습니다.
+       이런 방법도 있구나~ 참고만 해 주시면 될 거 같아요!
+    */
     public <T extends OauthResponse> T getOauthProfile(String code, VendorType vendorType){
         
         switch (vendorType){

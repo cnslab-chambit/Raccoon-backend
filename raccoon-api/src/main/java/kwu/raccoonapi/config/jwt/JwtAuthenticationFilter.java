@@ -26,7 +26,11 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
         this.jwtProvider = jwtProvider;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
     }
-
+    /*
+        TODO-review P5
+        Expiration, refresh token 이외에 발급자를 고유하게 식별할 수 있는 정보가 무엇이 있을까를 고민해 보면 좋을 거 같아요.
+        (client ip, browser session, etc..)
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         String jwt = jwtProvider.extractToken(request);

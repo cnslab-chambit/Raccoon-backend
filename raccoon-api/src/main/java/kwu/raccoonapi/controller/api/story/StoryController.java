@@ -38,6 +38,11 @@ public class StoryController {
     public ApiResponse<StoryDetailResponse> getStoryDetail(@PathVariable Long storyId){
         return ApiResponse.ok(storyFacadeService.getStoryDetail(storyId));
     }
+    /*
+                TODO-review P3
+                order와 같이 ASC, DESC 정해져 있는 고정 값인 경우는 Enum을 활용해 보면 어떨까요?
+                현재 상태는 잘못된 값에 대한 validator가 필요해 보이네요.
+             */
     @GetMapping("/story")
     public ApiResponse<List<StoryThumbnailResponse>> paginateStories(
         @RequestParam Long cursor,

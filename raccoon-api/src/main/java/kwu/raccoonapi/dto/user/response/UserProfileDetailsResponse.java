@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor(staticName = "of")
 @NoArgsConstructor()
 public class UserProfileDetailsResponse {
+    private Long userId;
     private String nickname;
     private List<String> profileImageUrls;
     private Gender gender;
@@ -34,6 +35,7 @@ public class UserProfileDetailsResponse {
     public static UserProfileDetailsResponse of(UserProfile userProfile, Integer dist) {
         UserProfileDetailsResponse userProfileDetailsResponse = new UserProfileDetailsResponse();
 
+        userProfileDetailsResponse.userId = userProfile.getId();
         userProfileDetailsResponse.profileImageUrls = userProfile.getImages()
                 .stream()
                 .map(imageFile -> imageFile.getUrl())

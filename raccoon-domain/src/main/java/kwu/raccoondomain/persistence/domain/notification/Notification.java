@@ -1,6 +1,7 @@
 package kwu.raccoondomain.persistence.domain.notification;
 
 import kwu.raccoondomain.persistence.domain.user.User;
+import kwu.raccoondomain.persistence.domain.user.UserProfile;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,8 +19,8 @@ public class Notification {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "user_id",nullable = false,unique = true)
-    private User user;
+    @JoinColumn(name = "user_profile_id",nullable = false,unique = true)
+    private UserProfile userProfile;
 
     @Column(name = "title",nullable = false)
     private String title;
