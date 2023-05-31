@@ -18,8 +18,8 @@ public class NotificationQueryRepository {
     public Long getUnreadNotificationCount(User user,Long lastReadNotificationId){
         BooleanBuilder where = new BooleanBuilder();
 
-        where.and(notification.user.eq(user));
-        where.and(notification.id.gt(lastReadNotificationId));
+//        where.and(notification.user.eq(user));
+//        where.and(notification.id.gt(lastReadNotificationId));
 
         return queryFactory.select(notification.count())
                 .from(notification)
