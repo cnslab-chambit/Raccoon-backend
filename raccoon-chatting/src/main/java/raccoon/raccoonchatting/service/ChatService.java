@@ -40,6 +40,7 @@ public class ChatService {
 
     public List<ChatRoomBriefDto> findUserRooms(Long userId){
         List<ChatRoomQueryDto> allUserChatRooms = chatRepo.findAllUserChatRooms(userId);
+        System.out.println(allUserChatRooms.size()+"마마");
         for (ChatRoomQueryDto allUserChatRoom : allUserChatRooms) {
             System.out.println(allUserChatRoom.getLastMessage()+"마마");
         }
