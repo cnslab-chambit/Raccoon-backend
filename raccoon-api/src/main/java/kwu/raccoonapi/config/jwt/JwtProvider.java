@@ -74,7 +74,6 @@ public class JwtProvider {
             return !claims.getBody().getExpiration().before(new Date());
         }
         catch (MalformedJwtException | UnsupportedJwtException | IllegalArgumentException ex) {
-            //TODO exception
             throw new RuntimeException();
         } catch (ExpiredJwtException ex) {
             throw ex;

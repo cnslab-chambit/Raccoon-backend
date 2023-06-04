@@ -7,12 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-/*
-        TODO-review P5
-        모든 엔티티가 hard-delete와 foreign key를 가져가는 거 같은데,
-        soft-delete와 foreign key가 없는 것에 장단점을 고민해 보시면 좋을 거 같아요.
-        foreign key, index에 대해 엔티티에 명시적으로 관리하는 것도 좋습니다.
-    */
 @Entity
 @Table(name = "image_file")
 @Getter

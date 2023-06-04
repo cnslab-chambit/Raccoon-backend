@@ -43,7 +43,6 @@ public class QueryStringArgumentResolver implements HandlerMethodArgumentResolve
 
             return a;
         }catch (Exception e){
-            //TODO exception
              throw new RuntimeException();
         }
     }

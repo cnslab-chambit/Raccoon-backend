@@ -27,14 +27,6 @@ public class UserLikeQueryRepository {
                 .limit(1)
                 .fetchOne();
     }
-    /*
-            TODO-review P2
-            BooleanExpression 활용이 좋네요!
-            하지만 npe 발생의 여지가 있을 거 같아요.
-            조금 더 활용해서 재사용성이 가능한 조건들을 모아보면 어떨까요?
-            https://sas-study.tistory.com/393
-         */
-    // 이미 sender 가 receiver 에게 좋아요를 보낸 적이 있는지 확인
     public boolean checkDuplicateLike(UserProfile sender, UserProfile receiver){
         BooleanBuilder where = new BooleanBuilder();
 
